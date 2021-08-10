@@ -28,6 +28,7 @@ public class Bicicletta {
 		return this.danneggiata;
 	}
 	
+	// Mi sa che va ristrutturato per l'uso in mezz'ore in quanto il noleggio non è in minuti precisi, o quanto meno non vengono calcolati quando consegni
 	public double calcolaCosto(int minuti, boolean studente) throws IllegalArgumentException {
 		if (minuti < 0) throw new IllegalArgumentException("I minuti di noleggio non possono essere negativi.");
 		
