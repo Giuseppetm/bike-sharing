@@ -9947,30 +9947,13 @@
 											"height": 13,
 											"text": "-dataInizio: LocalDate",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF7JfMKO+zBMug=",
-											"_parent": {
-												"$ref": "AAAAAAF7G+yp9W/47jU="
-											},
-											"model": {
-												"$ref": "AAAAAAF7JfMKK+y4fzg="
-											},
-											"font": "Arial;13;0",
-											"left": 53,
-											"top": 877,
-											"width": 348.64501953125,
-											"height": 13,
-											"text": "-noleggi: Collection<Noleggio>",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 48,
 									"top": 737,
 									"width": 358.64501953125,
-									"height": 158
+									"height": 143
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -9993,7 +9976,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 900,
+											"top": 885,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+attivaAbbonamento(): void",
@@ -10010,27 +9993,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 915,
+											"top": 900,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+getCartaDiCredito(): CartaDiCredito",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAF7Kzae3pcj/oo=",
-											"_parent": {
-												"$ref": "AAAAAAF7G+yp9W/5ksg="
-											},
-											"model": {
-												"$ref": "AAAAAAF7Kzaezpcgl1I="
-											},
-											"font": "Arial;13;0",
-											"left": 53,
-											"top": 930,
-											"width": 348.64501953125,
-											"height": 13,
-											"text": "+getNoleggi(): Collection<Noleggio>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -10044,7 +10010,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 945,
+											"top": 915,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+getDataAcquisto(): LocalDate",
@@ -10061,7 +10027,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 960,
+											"top": 930,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+getDataInizio(): LocalDate",
@@ -10078,7 +10044,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 975,
+											"top": 945,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+getAmmonizioni(): int",
@@ -10095,7 +10061,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 990,
+											"top": 960,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+aggiungiAmmonizione(): void",
@@ -10112,7 +10078,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 1005,
+											"top": 975,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+sospendiAbbonamento(): void",
@@ -10129,7 +10095,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 1020,
+											"top": 990,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+calcolaScadenzaAbbonamento(): LocalDate",
@@ -10146,7 +10112,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 1035,
+											"top": 1005,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+isPersonaleComune(): boolean",
@@ -10163,7 +10129,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 1050,
+											"top": 1020,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+isStudente(): boolean",
@@ -10180,7 +10146,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 53,
-											"top": 1065,
+											"top": 1035,
 											"width": 348.64501953125,
 											"height": 13,
 											"text": "+isSospeso(): boolean",
@@ -10189,9 +10155,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 48,
-									"top": 895,
+									"top": 880,
 									"width": 358.64501953125,
-									"height": 188
+									"height": 173
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -16291,16 +16257,6 @@
 							"name": "dataInizio",
 							"visibility": "private",
 							"type": "LocalDate"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF7JfMKK+y4fzg=",
-							"_parent": {
-								"$ref": "AAAAAAF7G+yp9G/wbDo="
-							},
-							"name": "noleggi",
-							"visibility": "private",
-							"type": "Collection<Noleggio>"
 						}
 					],
 					"operations": [
@@ -16340,25 +16296,6 @@
 									"type": {
 										"$ref": "AAAAAAF7G+h/AWaAdQI="
 									},
-									"direction": "return"
-								}
-							]
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAF7Kzaezpcgl1I=",
-							"_parent": {
-								"$ref": "AAAAAAF7G+yp9G/wbDo="
-							},
-							"name": "getNoleggi",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAF7Kza7Gpefe3A=",
-									"_parent": {
-										"$ref": "AAAAAAF7Kzaezpcgl1I="
-									},
-									"type": "Collection<Noleggio>",
 									"direction": "return"
 								}
 							]

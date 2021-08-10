@@ -20,17 +20,11 @@ public class Main {
         Bicicletta b1 = new Bicicletta("623", TipoBicicletta.NORMALE);
         Bicicletta b2 = new Bicicletta("121", TipoBicicletta.ELETTRICA);
         Bicicletta b3 = new Bicicletta("532", TipoBicicletta.ELETTRICA_SEGGIOLINO);
-
-        b1.setDanneggiata(true);
-        b3.setDanneggiata(true);
         
-        System.out.println(b1.toString());
-        System.out.println(b2.toString());
-        System.out.println(b3.toString() + "\n");
-        
-        b1.setDanneggiata(false);
-        b2.setDanneggiata(true);
-        b3.setDanneggiata(false);
+        // Questi vengono fatti dal totem
+        //b1.setDanneggiata(false);
+        //b2.setDanneggiata(true);
+        //b3.setDanneggiata(false);
         
         System.out.println(b1.toString());
         System.out.println(b2.toString());
@@ -116,6 +110,7 @@ public class Main {
         t1.restituisciBici(b1);
         t1.restituisciBici(b2);
         t1.restituisciBici(b3);
+        t1.comunicaDanni(b1);
         System.out.println(t1.toString());
         // System.out.println(t1.getMorse());
     }

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+// To-do: mi serve un metodo per prendere una bici tramite id? boh
 public class Totem {
 	private String id;
 	private String indirizzo;
@@ -14,7 +15,7 @@ public class Totem {
 		
 		this.id = id;
 		this.indirizzo = indirizzo;
-		this.morse = new ArrayList<Morsa>(); // In questo caso la lista di morse è inizialmente vuota
+		this.morse = new ArrayList<Morsa>();
 	}
 	
 	public Totem(String id, String indirizzo, List<Morsa> morse) throws NullPointerException {
@@ -64,10 +65,14 @@ public class Totem {
 		return morseTemp;
 	}
 	
+	public int getNumeroMorse() {
+		return this.morse.size();
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		s.append("Totem - Id: " + this.id + ", Indirizzo: " + this.indirizzo + "\n[Lista morse]:\n");
+		s.append("Totem - Id: " + this.id + ", Indirizzo: " + this.indirizzo + ", Numero di morse: " + this.getNumeroMorse() + "\n[Lista morse]:\n");
 		for (Morsa m : this.morse) {
 			s.append(m.toString() + "\n");
 		}
