@@ -12,7 +12,6 @@ public class Noleggio {
 	public Noleggio(Abbonamento abbonamento, Bicicletta bicicletta) throws NullPointerException {
 		if (abbonamento == null) throw new NullPointerException("L'abbonamento non può essere null.");
 		if (bicicletta == null) throw new NullPointerException("La bicicletta non può essere null.");
-		if (orarioInizioNoleggio == null) throw new NullPointerException("L'orario di inizio noleggio non può essere null.");
 		
 		this.abbonamento = abbonamento;
 		this.bicicletta = bicicletta;
@@ -40,15 +39,15 @@ public class Noleggio {
 		return this.orarioFineNoleggio;
 	}
 	
-	public long getDurataNoleggio() throws IllegalStateException {
+	public long getDurataNoleggio() throws IllegalStateException { // Magari li trasformo in minuti dividendo per 60?
 		if (this.orarioFineNoleggio == null) throw new IllegalStateException("Il noleggio non è ancora terminato (orarioFineNoleggio = null), di conseguenza non è possibile ottenerne la durata.");
-		return TimeUnit.MILLISECONDS.toSeconds(this.orarioInizioNoleggio.getTime() - this.orarioFineNoleggio.getTime());
+		return TimeUnit.MILLISECONDS.toSeconds(this.orarioFineNoleggio.getTime() - this.orarioInizioNoleggio.getTime());
 	}
 	
 	@Override
 	public String toString() {
 		String noleggio = "Noleggio - OrarioInizio: " + this.orarioInizioNoleggio + ", OrarioFine: " + this.orarioFineNoleggio;
-		noleggio += "\nAbbonamento collegato: " + this.abbonamento + "\nBicicletta associata: " + this.bicicletta;
+		noleggio += "\nAbbonamento collegato: " + this.abbonamento.getCodice() + ", " + this.abbonamento.getTipo() + "\nBicicletta associata: " + this.bicicletta.getId() + ", " + this.bicicletta.getTipo();
 		return noleggio;
 	}
 }

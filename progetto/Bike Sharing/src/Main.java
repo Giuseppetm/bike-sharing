@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import dominio.Abbonamento;
 import dominio.Bicicletta;
 import dominio.TipoBicicletta;
@@ -5,16 +8,18 @@ import dominio.Morsa;
 import dominio.TipoMorsa;
 import dominio.TipoAbbonamento;
 import dominio.CartaDiCredito;
+import dominio.Noleggio;
+import dominio.Totem;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("---Bike Sharing Testing Main---\n"); 
+        System.out.println("------------------------------------------ Bike Sharing Testing Main ------------------------------------------\n"); 
         
         /* BICICLETTE */
         separator("Biciclette");
-        Bicicletta b1 = new Bicicletta(TipoBicicletta.NORMALE);
-        Bicicletta b2 = new Bicicletta(TipoBicicletta.ELETTRICA);
-        Bicicletta b3 = new Bicicletta(TipoBicicletta.ELETTRICA_SEGGIOLINO);
+        Bicicletta b1 = new Bicicletta("623", TipoBicicletta.NORMALE);
+        Bicicletta b2 = new Bicicletta("121", TipoBicicletta.ELETTRICA);
+        Bicicletta b3 = new Bicicletta("532", TipoBicicletta.ELETTRICA_SEGGIOLINO);
 
         b1.setDanneggiata(true);
         b3.setDanneggiata(true);
@@ -83,6 +88,36 @@ public class Main {
         System.out.println(abb2.toString() + "\n");
         System.out.println(abb3.toString() + "\n");
         System.out.println(abb4.toString() + "\n");
+        
+        
+        /* NOLEGGI */
+        separator("Noleggi");
+        Noleggio n1 = new Noleggio(abb1, b1);
+        System.out.println(n1.toString());
+        //try { Thread.sleep(5000); } catch(Exception e) { e.printStackTrace(); }
+        n1.terminaNoleggio();
+        System.out.println("Durata noleggio: " + n1.getDurataNoleggio() + " secondi");
+        
+        Noleggio n2 = new Noleggio(abb2, b3);
+        System.out.println(n2.toString());
+        //try { Thread.sleep(3000); } catch(Exception e) { e.printStackTrace(); }
+        n2.terminaNoleggio();
+        System.out.println("Durata noleggio: " + n2.getDurataNoleggio() + " secondi");
+        
+        
+        /* TOTEM */
+        separator("Totem");
+        List<Morsa> morse = new ArrayList<Morsa>();
+        morse.add(m1);
+        morse.add(m2);
+        morse.add(m3);
+        
+        Totem t1 = new Totem("123912", "Via Dennissonis 66", morse);
+        t1.restituisciBici(b1);
+        t1.restituisciBici(b2);
+        t1.restituisciBici(b3);
+        System.out.println(t1.toString());
+        // System.out.println(t1.getMorse());
     }
     
     

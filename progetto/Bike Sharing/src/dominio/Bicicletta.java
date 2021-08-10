@@ -1,13 +1,14 @@
 package dominio;
 
+// To-do: mi serve generare gli id? O è una cosa che viene gestita nel db?
 // To-do: invariante (id univoci immagino)
 public class Bicicletta {
-	private String id; // To-do: mi serve generare gli id?
+	private String id; 
 	private TipoBicicletta tipo;
 	private boolean danneggiata;
 	
-	public Bicicletta(TipoBicicletta tipo) {
-		this.id = "666";
+	public Bicicletta(String id, TipoBicicletta tipo) {
+		this.id = id;
 		this.tipo = tipo;
 		this.danneggiata = false;
 	}
