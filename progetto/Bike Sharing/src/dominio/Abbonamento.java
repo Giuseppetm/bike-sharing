@@ -1,8 +1,8 @@
 package dominio;
 import java.time.LocalDate;
 
-// To-do: decidere come gestire il fatto che l'abbonamento deve essere valido fino alla fine dell'abbonamento (il problema è che la fine non è determinata all'inizio nel caso di giorn. e sett.
-// To-do: da gestire l'attivazione dell'abbonamento in caso di giornaliero e settimanale che va fatta al primo noleggio
+// To-do: da gestire l'attivazione dell'abbonamento in caso di giornaliero e settimanale che va fatta al primo noleggio.
+// To-do: dire all'utente al momento dell'abbonamento che ha tempo sino al ... per utilizzare l'abbonamento giornaliero o settimanale.
 
 public class Abbonamento {
 	private TipoAbbonamento tipo;
@@ -15,12 +15,12 @@ public class Abbonamento {
 	private boolean sospeso;
 	private boolean studente;
 	private LocalDate dataAcquisto;
+	private LocalDate dataScadenzaValidità;
 	private LocalDate dataInizio;
 	
 	public Abbonamento(String codice, String password, TipoAbbonamento tipo, CartaDiCredito carta, boolean studente) throws NullPointerException, IllegalArgumentException {
 		if (codice == null || password == null || carta == null) throw new NullPointerException("I parametri non possono essere null.");
-		//if (!CartaDiCredito.controllaScadenzaAbbonamento(this.calcolaScadenzaAbbonamento(), this.carta.getScadenza())) throw new IllegalArgumentException("La scadenza della carta di credito non può avvenire prima della fine dell'abbonamento.");
-		
+
 		this.codice = codice;
 		this.password = password;
 		this.tipo = tipo;
@@ -29,7 +29,8 @@ public class Abbonamento {
 		this.dataAcquisto = LocalDate.now();
 		this.sospeso = false;
 		
-		if (this.tipo == TipoAbbonamento.ANNUALE) this.attivaAbbonamento();
+		if (this.tipo == TipoAbbonamento.ANNUALE || this.tipo == TipoAbbonamento.PERSONALE_SERVIZIO) this.attivaAbbonamento(); // Nel caso del personale penso sia attivato di default dato che è nel db
+		this.dataScadenzaValidità = this.calcolaValiditàAbbonamento(tipo, this.carta.getScadenza());
 	}
 	
 	public String getCodice() {
@@ -87,18 +88,45 @@ public class Abbonamento {
 		return (this.tipo == TipoAbbonamento.PERSONALE_SERVIZIO);
 	}
 	
+	public LocalDate calcolaValiditàAbbonamento(TipoAbbonamento tipo, String scadenzaCarta) throws IllegalArgumentException {
+		// 1) Caso di abbonamento annuale: Se la carta di credito scade prima dell'anno prefissato allora non puoi creare l'abbonamento;
+		// 2) Caso di abbonamento giornaliero o settimanale: hai 3 mesi per usarlo, quindi la carta di credito non deve scadere prima dei 3 mesi.
+		String s[] = scadenzaCarta.split("/", 2);
+		int month = Integer.parseInt(s[0]);
+		int year = Integer.parseInt(s[1]);
+		LocalDate dataScadenzaCarta = LocalDate.of(year, month, 01);
+		
+		switch (tipo) {
+			case ANNUALE: // Nel caso di abbonamento annuale il giorno di scadenza di validità coincide con il giorno di fine abbonamento
+				if (dataScadenzaCarta.isBefore(LocalDate.now().plusYears(1))) throw new IllegalArgumentException("Stai tentando di creare un abbonamento annuale con una carta che scade tra meno di un anno.");
+				return LocalDate.now().plusYears(1);
+			case GIORNALIERO, SETTIMANALE:
+				if (dataScadenzaCarta.isBefore(LocalDate.now().plusMonths(3))) throw new IllegalArgumentException("Stai tentando di creare un abbonamento giornaliero o settimanale con una carta che scade tra meno di 3 mesi.");
+				return LocalDate.now().plusMonths(3);
+			case PERSONALE_SERVIZIO:
+				return this.dataInizio.plusYears(3);
+			default:
+				throw new UnknownError("E' successo qualcosa di brutto.");
+		}
+	}
+	
 	public LocalDate calcolaScadenzaAbbonamento() {
-		if (this.dataInizio == null) return null; // Se la carta non è ancora stata attivata restituisco null => (Non c'è ancora una data di scadenza quindi).
+		if (this.dataInizio == null) return this.dataScadenzaValidità; // Caso di abbonamento giornaliero o settimanale non ancora iniziato (comprato ma in attesa di partire).
 		if (this.tipo == TipoAbbonamento.GIORNALIERO) return this.dataInizio;
 		if (this.tipo == TipoAbbonamento.SETTIMANALE) return this.dataInizio.plusDays(7);
 		if (this.tipo == TipoAbbonamento.ANNUALE) return this.dataInizio.plusYears(1);
 		return this.dataInizio.plusYears(3); // Il personale del servizio deve rinnovare l'abbonamento ogni 3 anni.
 	}
 	
+	public boolean isScaduto() {
+		if(this.calcolaScadenzaAbbonamento().isBefore(LocalDate.now())) return true;
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		String abbonamento = "Abbonamento - Codice: " + this.codice + ", Password: " + this.password + ", Tipo: " + this.tipo + ", Ammonizioni: " + this.ammonizioni + ", Sospeso? " + this.sospeso + ", Studente? " + this.studente + ", Personale servizio? " + this.isPersonaleComune();
-		abbonamento += "\nData acquisto: " + this.dataAcquisto + ", Data inizio: " + this.dataInizio + ", Data di scadenza: " + this.calcolaScadenzaAbbonamento();
+		abbonamento += "\nData acquisto: " + this.dataAcquisto + ", Data inizio: " + this.dataInizio + ", Data di scadenza: " + this.calcolaScadenzaAbbonamento() + ", Data scadenza validità: " + this.dataScadenzaValidità;
 		abbonamento += "\nCarta di credito collegata: " + this.carta;
 		return abbonamento;
 	}

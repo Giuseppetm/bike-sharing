@@ -31,6 +31,7 @@ public class CartaDiCredito {
 		return this.cvv;
 	}
 	
+	/* Questa funzione controlla se il numero inserito riguardante la carta di credito Ë valido. */
 	static public boolean controllaValidit‡Numero(String numero) {
 		int[] ints = new int[numero.length()];
 		for (int i = 0; i < numero.length(); i++) {
@@ -52,6 +53,7 @@ public class CartaDiCredito {
 		else return false;
 	}
 	
+	/* Questa funzione verifica se la carta di credito Ë scaduta. */
 	static public boolean controllaValidit‡Scadenza(String scadenza) {
 		String s[] = scadenza.split("/", 2);
 		int month = Integer.parseInt(s[0]);
@@ -64,22 +66,10 @@ public class CartaDiCredito {
 	}
 	
 	static public boolean controllaValidit‡Cvv(String cvv) {
+		// To-do: aggiungi il check sul tipo che dev'essere intero
 		if (cvv.length() == 3) return true;
 		return false;
 	}
-	
-	/* La carta di credito deve essere valida fino allo scadere dell'abbonamento. */
-	/*
-	static public boolean controllaScadenzaAbbonamento(TipoAbbonamento, String scadenzaCarta) {
-		String s[] = scadenzaCarta.split("/", 2);
-		int month = Integer.parseInt(s[0]);
-		int year = Integer.parseInt(s[1]);
-		LocalDate dataScadenzaCarta = LocalDate.of(year, month, 01);
-		
-		if (dataScadenzaCarta.isBefore(scadenzaAbbonamento)) return false;
-		return true;
-	}
-	*/
 	
 	@Override
 	public String toString() {

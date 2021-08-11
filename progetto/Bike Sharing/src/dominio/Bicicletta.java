@@ -1,7 +1,8 @@
 package dominio;
 
-// To-do: mi serve generare gli id? O è una cosa che viene gestita nel db?
+// To-do: mi serve generare gli id? O è una cosa che viene gestita nel db? Alessia ha consigliato di generarli manualmente qui nella classe che possono risultare anche utili
 // To-do: invariante (id univoci immagino)
+
 public class Bicicletta {
 	private String id; 
 	private TipoBicicletta tipo;
@@ -29,7 +30,7 @@ public class Bicicletta {
 		return this.danneggiata;
 	}
 	
-	// Mi sa che va ristrutturato per l'uso in mezz'ore in quanto il noleggio non è in minuti precisi, o quanto meno non vengono calcolati quando consegni
+	// Da controllare, teoricamente tu noleggi e poi in base ai minuti ti viene addebitato il costo quindi è corretto credo
 	public double calcolaCosto(int minuti, boolean studente) throws IllegalArgumentException {
 		if (minuti < 0) throw new IllegalArgumentException("I minuti di noleggio non possono essere negativi.");
 		

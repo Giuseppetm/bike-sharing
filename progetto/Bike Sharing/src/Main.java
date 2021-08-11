@@ -65,8 +65,8 @@ public class Main {
         
         /* CARTE DI CREDITO, Valide: 12345678903555 , 012850003580200  */
         separator("Carte di credito");
-        CartaDiCredito c1 = new CartaDiCredito("012850003580200", "9/2021", "123");
-        CartaDiCredito c2 = new CartaDiCredito("12345678903555", "6/2022", "121");
+        CartaDiCredito c1 = new CartaDiCredito("012850003580200", "9/2022", "123");
+        CartaDiCredito c2 = new CartaDiCredito("12345678903555", "12/2021", "121");
         System.out.println(c1.toString());
         System.out.println(c2.toString());
         
@@ -77,6 +77,8 @@ public class Main {
         Abbonamento abb2 = new Abbonamento("Dennis23", "Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
         Abbonamento abb3 = new Abbonamento("MimmoPetrollini12", "MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c2, true);
         Abbonamento abb4 = new Abbonamento("GuidoGuidoso903", "GuidoGuinizzelli666", TipoAbbonamento.GIORNALIERO, c1, false);
+        
+        abb3.attivaAbbonamento();
         
         System.out.println(abb1.toString() + "\n");
         System.out.println(abb2.toString() + "\n");
