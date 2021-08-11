@@ -27,8 +27,6 @@ public class Abbonamento {
 		this.carta = carta;
 		this.studente = studente;
 		this.dataAcquisto = LocalDate.now();
-		
-		this.ammonizioni = 0;
 		this.sospeso = false;
 		
 		if (this.tipo == TipoAbbonamento.ANNUALE) this.attivaAbbonamento();
@@ -65,6 +63,7 @@ public class Abbonamento {
 	public void attivaAbbonamento() {
 		if (this.dataInizio != null) throw new IllegalStateException("L'abbonamento è stato già attivato.");
 		this.dataInizio = LocalDate.now();
+		this.ammonizioni = 0; // Ha più senso inizializzare qui le ammonizioni
 	}
 	
 	public void aggiungiAmmonizione() {
