@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// To-do: mi sa che bisogna aggiustare i try catch e dare altri throw che vengono poi gestiti al livello superiore
 public class ConnessioneDb {
 	private static ConnessioneDb connessioneDb;
 	private Connection connessione;
