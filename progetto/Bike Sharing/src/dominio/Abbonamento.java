@@ -1,5 +1,6 @@
 package dominio;
 import java.time.LocalDate;
+import java.util.UUID;
 
 // To-do: da gestire l'attivazione dell'abbonamento in caso di giornaliero e settimanale che va fatta al primo noleggio.
 // To-do: dire all'utente al momento dell'abbonamento che ha tempo sino al ... per utilizzare l'abbonamento giornaliero o settimanale.
@@ -18,10 +19,11 @@ public class Abbonamento {
 	private LocalDate dataScadenzaValidità;
 	private LocalDate dataInizio;
 	
-	public Abbonamento(String codice, String password, TipoAbbonamento tipo, CartaDiCredito carta, boolean studente) throws NullPointerException, IllegalArgumentException {
-		if (codice == null || password == null || carta == null) throw new NullPointerException("I parametri non possono essere null.");
+	public Abbonamento(String password, TipoAbbonamento tipo, CartaDiCredito carta, boolean studente) throws NullPointerException, IllegalArgumentException {
+		if (password == null || tipo == null || carta == null) throw new NullPointerException("I parametri non possono essere null.");
+		if (password.length() > 20) throw new IllegalArgumentException("La lunghezza della password non può essere maggiore di 20 caratteri.");
 
-		this.codice = codice;
+		this.codice = UUID.randomUUID().toString();
 		this.password = password;
 		this.tipo = tipo;
 		this.carta = carta;

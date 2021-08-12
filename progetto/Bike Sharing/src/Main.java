@@ -1,3 +1,6 @@
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,7 @@ import dominio.TipoAbbonamento;
 import dominio.CartaDiCredito;
 import dominio.Noleggio;
 import dominio.Totem;
+import dati.ConnessioneDb;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,9 +21,9 @@ public class Main {
         
         /* BICICLETTE */
         separator("Biciclette");
-        Bicicletta b1 = new Bicicletta("623", TipoBicicletta.NORMALE);
-        Bicicletta b2 = new Bicicletta("121", TipoBicicletta.ELETTRICA);
-        Bicicletta b3 = new Bicicletta("532", TipoBicicletta.ELETTRICA_SEGGIOLINO);
+        Bicicletta b1 = new Bicicletta(TipoBicicletta.NORMALE);
+        Bicicletta b2 = new Bicicletta(TipoBicicletta.ELETTRICA);
+        Bicicletta b3 = new Bicicletta(TipoBicicletta.ELETTRICA_SEGGIOLINO);
         
         // Questi vengono fatti dal totem
         //b1.setDanneggiata(false);
@@ -73,10 +77,10 @@ public class Main {
         
         /* ABBONAMENTI */
         separator("Abbonamenti");
-        Abbonamento abb1 = new Abbonamento("DENNISSONE666", "Dennis123", TipoAbbonamento.ANNUALE, c1, true);
-        Abbonamento abb2 = new Abbonamento("Dennis23", "Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
-        Abbonamento abb3 = new Abbonamento("MimmoPetrollini12", "MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c2, true);
-        Abbonamento abb4 = new Abbonamento("GuidoGuidoso903", "GuidoGuinizzelli666", TipoAbbonamento.GIORNALIERO, c1, false);
+        Abbonamento abb1 = new Abbonamento("Dennis123", TipoAbbonamento.ANNUALE, c1, true);
+        Abbonamento abb2 = new Abbonamento("Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
+        Abbonamento abb3 = new Abbonamento("MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c2, true);
+        Abbonamento abb4 = new Abbonamento("GuidoGuinizzelli666", TipoAbbonamento.GIORNALIERO, c1, false);
         
         abb3.attivaAbbonamento();
         
@@ -108,13 +112,35 @@ public class Main {
         morse.add(m2);
         morse.add(m3);
         
-        Totem t1 = new Totem("123912", "Via Dennissonis 66", morse);
-        t1.restituisciBici(b1);
-        t1.restituisciBici(b2);
-        t1.restituisciBici(b3);
+        Totem t1 = new Totem("Via Dennissonis 66", morse);
+        t1.restituisciBicicletta(b1);
+        t1.restituisciBicicletta(b2);
+        t1.restituisciBicicletta(b3);
         t1.comunicaDanni(b1);
         System.out.println(t1.toString());
         // System.out.println(t1.getMorse());
+        
+        
+        /* CONNESSIONE AL DB */
+        ConnessioneDb db = ConnessioneDb.getIstance();
+        db.connetti();
+        Connection connessione = db.getConnessione();
+        
+        try {
+        	Statement statement = connessione.createStatement();
+        	ResultSet resultSet;
+        	
+        	resultSet = statement.executeQuery("SELECT * FROM abbonamento");
+        	
+        	while (resultSet.next()) {
+                System.out.printf("Codice: %s, Password: %s, Tipo: %s\n", resultSet.getString("codice"), resultSet.getString("password"), resultSet.getString("tipo"));
+            }
+        	
+        } catch (Exception e) {
+        	System.out.println("Errore di connessione con il database.");
+        	e.printStackTrace();
+        }
+        
     }
     
     

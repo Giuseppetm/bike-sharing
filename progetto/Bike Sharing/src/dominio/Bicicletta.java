@@ -1,6 +1,7 @@
 package dominio;
+import java.util.UUID;
 
-// To-do: mi serve generare gli id? O è una cosa che viene gestita nel db? Alessia ha consigliato di generarli manualmente qui nella classe che possono risultare anche utili
+// Alessia ha consigliato di generare gli id manualmente nella classe che possono risultare anche utili
 // To-do: invariante (id univoci immagino)
 
 public class Bicicletta {
@@ -8,8 +9,8 @@ public class Bicicletta {
 	private TipoBicicletta tipo;
 	private boolean danneggiata;
 	
-	public Bicicletta(String id, TipoBicicletta tipo) {
-		this.id = id;
+	public Bicicletta(TipoBicicletta tipo) {
+		this.id = UUID.randomUUID().toString();
 		this.tipo = tipo;
 		this.danneggiata = false;
 	}
@@ -54,6 +55,6 @@ public class Bicicletta {
 	
 	@Override
 	public String toString() {
-		return "Bicicletta di tipo " + this.tipo + " con id " + this.id + "; danneggiata = " + this.danneggiata;
+		return "Bicicletta - ID: " + this.id + ", Tipo: " + this.tipo + "; danneggiata? " + this.danneggiata;
 	}
 }

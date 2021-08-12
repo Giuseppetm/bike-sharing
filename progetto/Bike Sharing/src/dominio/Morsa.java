@@ -1,17 +1,21 @@
 package dominio;
+import java.util.UUID;
 
 public class Morsa {
+	private String id;
 	private Bicicletta bicicletta;
 	private TipoMorsa tipo;
 	private StatoMorsa stato;
 	
 	public Morsa(TipoMorsa tipo) {
+		this.id = UUID.randomUUID().toString();
 		this.tipo = tipo;
 		this.bicicletta = null;
 		this.stato = StatoMorsa.DISPONIBILE;
 	}
 	
 	public Morsa(TipoMorsa tipo, Bicicletta bicicletta) {
+		this.id = UUID.randomUUID().toString();
 		this.tipo = tipo;
 		this.bicicletta = bicicletta;
 		this.stato = StatoMorsa.OCCUPATA;
@@ -45,6 +49,6 @@ public class Morsa {
 	
 	@Override
 	public String toString() {
-		return "Morsa - Tipo: " + this.tipo + "; Stato: " + this.stato + "; Bicicletta: " + this.bicicletta;
+		return "Morsa - ID: " + this.id + ", Tipo: " + this.tipo + "; Stato: " + this.stato + "; Bicicletta: " + this.bicicletta;
 	}
 }

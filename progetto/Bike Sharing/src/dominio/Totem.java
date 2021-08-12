@@ -1,4 +1,5 @@
 package dominio;
+import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -9,21 +10,19 @@ public class Totem {
 	private String indirizzo;
 	private List<Morsa> morse;
 	
-	public Totem(String id, String indirizzo) throws NullPointerException {
-		if (id == null) throw new NullPointerException("L'id del totem non può essere null.");
+	public Totem(String indirizzo) throws NullPointerException {
 		if (indirizzo == null) throw new NullPointerException("L'indirizzo del totem non può essere null.");
 		
-		this.id = id;
+		this.id = UUID.randomUUID().toString();
 		this.indirizzo = indirizzo;
 		this.morse = new ArrayList<Morsa>();
 	}
 	
-	public Totem(String id, String indirizzo, List<Morsa> morse) throws NullPointerException {
-		if (id == null) throw new NullPointerException("L'id del totem non può essere null.");
+	public Totem(String indirizzo, List<Morsa> morse) throws NullPointerException {
 		if (indirizzo == null) throw new NullPointerException("L'indirizzo del totem non può essere null.");
 		if (morse == null) throw new NullPointerException("La lista di morse riguardante il totem non può essere null.");
 		
-		this.id = id;
+		this.id = UUID.randomUUID().toString();
 		this.indirizzo = indirizzo;
 		this.morse = new ArrayList<Morsa>(morse);
 	}
@@ -34,7 +33,7 @@ public class Totem {
 		throw new NoSuchElementException("Non ci sono biciclette di tipo " + tipo + " disponibili in questa postazione.");
 	}
 	
-	public void restituisciBici(Bicicletta bicicletta) throws IllegalStateException {
+	public void restituisciBicicletta(Bicicletta bicicletta) throws IllegalStateException {
 		for (Morsa m : this.morse) {
 			if (!m.occupata()) {
 				try {
@@ -72,7 +71,7 @@ public class Totem {
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		s.append("Totem - Id: " + this.id + ", Indirizzo: " + this.indirizzo + ", Numero di morse: " + this.getNumeroMorse() + "\n[Lista morse]:\n");
+		s.append("Totem - ID: " + this.id + ", Indirizzo: " + this.indirizzo + ", Numero di morse: " + this.getNumeroMorse() + "\n[Lista morse relative a questo Totem]:\n");
 		for (Morsa m : this.morse) {
 			s.append(m.toString() + "\n");
 		}
