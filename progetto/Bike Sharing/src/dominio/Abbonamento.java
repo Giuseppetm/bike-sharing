@@ -45,7 +45,7 @@ public class Abbonamento {
 		this.dataAcquisto = dataAcquisto;
 		this.dataInizio = dataInizio;
 		this.dataScadenzaValidità = dataScadenzaValidità;
-		this.sospeso = false;
+		this.sospeso = sospeso;
 		this.ammonizioni = ammonizioni;
 	}
 	

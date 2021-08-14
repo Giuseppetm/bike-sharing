@@ -1,9 +1,6 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
-//import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import dominio.Abbonamento;
 import dominio.Bicicletta;
@@ -113,16 +110,24 @@ public class Main {
         
         /* TOTEM */
         separator("Totem");
-        List<Morsa> morse = new ArrayList<Morsa>();
-        morse.add(m1);
-        morse.add(m2);
-        morse.add(m3);
+        //List<Morsa> morse = new ArrayList<Morsa>();
+        //morse.add(m1);
+        //morse.add(m2);
+        //morse.add(m3);
         
-        Totem t1 = new Totem("Via Dennissonis 66", morse);
+        //Totem t1 = new Totem("Via Dennissonis 66", morse);
+        Totem t1 = new Totem("Via Dennissonis 66");
+        t1.aggiungiMorsa(m1);
+        t1.aggiungiMorsa(m2);
+        t1.aggiungiMorsa(m3);
         t1.restituisciBicicletta(b1);
         t1.restituisciBicicletta(b2);
         t1.restituisciBicicletta(b3);
         t1.comunicaDanni(b1);
+        t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
+        t1.aggiungiMorsaByTipo(TipoMorsa.NORMALE);
+        t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
+        t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
         System.out.println(t1.toString());
         // System.out.println(t1.getMorse());
         

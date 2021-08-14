@@ -47,6 +47,39 @@ public class Totem {
 		throw new IllegalStateException("Non c'è spazio per questa bicicletta di tipo " + bicicletta.getTipo() + " tra le morse di questa postazione.");
 	}
 	
+	public void aggiungiMorsa(Morsa morsa) {
+		this.morse.add(morsa);
+	}
+	
+	public void rimuoviMorsa(Morsa morsa) {
+		for (Morsa m : this.morse) {
+			if (!m.occupata() && m.getId() == morsa.getId()) {
+				try {
+					this.morse.remove(m);
+					return;
+				} catch (IllegalArgumentException e) {
+					continue;
+				}
+			}
+		}
+		throw new IllegalStateException("Impossibile eliminare questa morsa: pare che non sia in questa postazione.");
+	}
+	
+	public void aggiungiMorsaByTipo(TipoMorsa tipo) {
+		Morsa morsa = new Morsa(tipo);
+		this.morse.add(morsa);
+	}
+	
+	public void rimuoviMorsaByTipo(TipoMorsa tipo) throws IllegalStateException {
+		for (Morsa m : this.morse) {
+			if (!m.occupata() && m.getTipo() == tipo) {
+				morse.remove(m);
+				return;
+			}
+		}
+		throw new IllegalStateException("Impossibile rimuovere una morsa di questo tipo dalla postazione in quanto non ce ne sono al momento.");
+	}
+	
 	public void comunicaDanni(Bicicletta bicicletta) {
 		bicicletta.setDanneggiata(true);
 	}
