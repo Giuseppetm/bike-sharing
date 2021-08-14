@@ -137,38 +137,42 @@ public class Main {
         	e.printStackTrace();
         }
         
-        Connection connessione = db.getConnessione();
-        
         AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
-        // abbonamentoDao.registraAbbonamento(abb1);
-        // abbonamentoDao.registraAbbonamento(abb2);
-        // abbonamentoDao.registraAbbonamento(abb3);
-        // abbonamentoDao.registraAbbonamento(abb4);
+        //abbonamentoDao.registraAbbonamento(abb1);
+        //abbonamentoDao.registraAbbonamento(abb2);
+        //abbonamentoDao.registraAbbonamento(abb3);
+        //abbonamentoDao.registraAbbonamento(abb4);
         
 
         /* Stampa abbonamenti */
         System.out.println("---Lista abbonamenti presenti sul db---");
+        stampaAbbonamenti();
+        
+        
+        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("45d05b0e-412c-4975-8bdb-de5088c1dd17", "GuidoGuinizzelli666");
+        System.out.println("\n---Abbonamento retrieve dal login---\n" + abbLogin.toString());
+        
+        // Abbonamento abbLogin2 = abbonamentoDao.effettuaLogin("45d05b0e-412c-4975-8bdb-de5088c1dd17", "GuidoGuinizzelli666");
+        // System.out.println("\n---Abbonamento retrieve dal login n.2 BEFORE ATTIVAZIONE---\n" + abbLogin2.toString());
+        // abbonamentoDao.attivaAbbonamento(abbLogin2);
+        // System.out.println("\n---Abbonamento retrieve dal login n.2 AFTER ATTIVAZIONE---\n" + abbLogin2.toString());
+
+    }
+    
+    
+
+    public static void stampaAbbonamenti() {
+    	ConnessioneDb db = ConnessioneDb.getIstance();
+    	Connection connessione = db.getConnessione();
         try {
         	Statement statement = connessione.createStatement();
         	ResultSet resultSet = statement.executeQuery("SELECT * FROM abbonamento");
-        	
         	while (resultSet.next()) System.out.printf("Codice: %s, Password: %s, Tipo: %s, Data acquisto: %s, Data inizio: %s, Data scadenza validità: %s\n", resultSet.getString("codice"), resultSet.getString("password"), resultSet.getString("tipo"), resultSet.getString("dataacquisto"), resultSet.getString("datainizio"), resultSet.getString("datascadenzavalidità"));
         } catch (Exception e) {
         	System.out.println("Errore di connessione con il database.");
         	e.printStackTrace();
         }
-        
-        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("f071e4ac-1626-488b-b087-1cfa3d639318", "MimmoPetrolla32");
-        System.out.println("\n---Abbonamento retrieve dal login---\n" + abbLogin.toString());
-        
     }
-    
-    
-    
-    
-    
-    
-    
     
     public static void separator(String text) {
     	System.out.printf("\n------------------------------------------ TEST %s ------------------------------------------\n\n", text);

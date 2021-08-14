@@ -77,7 +77,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	public Abbonamento effettuaLogin(String codice, String password) throws NoSuchElementException {
 		// Select dove abbonamento.codice == codice e buildi il nuovo abbonamento, ma ti serve anche la carta di credito quindi ti serve anche un join
 		Abbonamento abbonamento = null;
-		System.out.println("Login abbonamento, codice: " + codice + ", password: " + password);
+		System.out.println("\nLogin abbonamento, codice: " + codice + ", password: " + password);
 		Connection connessione = this.connessioneDb.getConnessione();
 		
 		try {
@@ -100,7 +100,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 					resultSet.getBoolean(4), 
 					resultSet.getBoolean(5), 
 					resultSet.getDate(6).toLocalDate(), 
-					resultSet.getDate(7).toLocalDate(), 
+					resultSet.getDate(7) != null ? resultSet.getDate(7).toLocalDate() : null, 
 					resultSet.getDate(8).toLocalDate(), 
 					resultSet.getInt(9)
 				);
@@ -113,24 +113,45 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 		return abbonamento;
 	}
 	
+	/*
 	@Override
 	public Abbonamento aggiornaAbbonamento(Abbonamento abbonamento) throws IllegalArgumentException {
 		System.out.println("Aggiornamento abbonamento: " + abbonamento.toString());
 		return null;
 	}
+	*/
 
 	@Override
-	public void attivaAbbonamento(String codice) throws NoSuchElementException {
+	public void attivaAbbonamento(Abbonamento abbonamento) throws NoSuchElementException, IllegalArgumentException {
+		try {
+			abbonamento.attivaAbbonamento();
+		} catch (IllegalStateException e) {
+			throw new IllegalArgumentException("L'abbonamento è già attivo!");
+		}
+		
+		System.out.println("Attivamento abbonamento, codice: " + abbonamento.getCodice());
+		Connection connessione = this.connessioneDb.getConnessione();
+		
+		try {
+			String queryAttivaAbbonamento = "UPDATE abbonamento SET datainizio = ? WHERE codice = ?";
+			PreparedStatement statementAbbonamento = connessione.prepareStatement(queryAttivaAbbonamento);
+			statementAbbonamento.setDate(1, java.sql.Date.valueOf(abbonamento.getDataInizio()));
+			statementAbbonamento.setString(2, abbonamento.getCodice());
+			
+			statementAbbonamento.executeUpdate();
+			statementAbbonamento.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void ammonisciAbbonamento(Abbonamento abbonamento) throws NoSuchElementException {
 		
 	}
 	
 	@Override
-	public void ammonisciAbbonamento(String codice) throws NoSuchElementException {
-		
-	}
-	
-	@Override
-	public void sospendiAbbonamento(String codice) throws NoSuchElementException {
+	public void sospendiAbbonamento(Abbonamento abbonamento) throws NoSuchElementException, IllegalArgumentException {
 		
 	}
 }
