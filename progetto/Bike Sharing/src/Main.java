@@ -149,8 +149,11 @@ public class Main {
         stampaAbbonamenti();
         
         
-        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("45d05b0e-412c-4975-8bdb-de5088c1dd17", "GuidoGuinizzelli666");
+        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("482e875d-8814-4e86-9fff-1c07ea4e33cc", "Dennis123");
         System.out.println("\n---Abbonamento retrieve dal login---\n" + abbLogin.toString());
+        
+        // abbonamentoDao.ammonisciAbbonamento(abbLogin);
+        // abbonamentoDao.ammonisciAbbonamento(abbLogin);
         
         // Abbonamento abbLogin2 = abbonamentoDao.effettuaLogin("45d05b0e-412c-4975-8bdb-de5088c1dd17", "GuidoGuinizzelli666");
         // System.out.println("\n---Abbonamento retrieve dal login n.2 BEFORE ATTIVAZIONE---\n" + abbLogin2.toString());

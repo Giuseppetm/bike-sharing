@@ -15469,9 +15469,9 @@
 												"$ref": "AAAAAAF7OnD3Wm4Psy4="
 											},
 											"font": "Arial;13;0",
-											"left": 141,
+											"left": 29,
 											"top": 1621,
-											"width": 116.27001953125,
+											"width": 362.171875,
 											"height": 13,
 											"text": "«interface»"
 										},
@@ -15482,9 +15482,9 @@
 												"$ref": "AAAAAAF7OnD3Wm4Psy4="
 											},
 											"font": "Arial;13;1",
-											"left": 141,
+											"left": 29,
 											"top": 1636,
-											"width": 116.27001953125,
+											"width": 362.171875,
 											"height": 13,
 											"text": "AbbonamentoDAO"
 										},
@@ -15496,7 +15496,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -320,
+											"left": -544,
 											"top": 288,
 											"width": 172.64990234375,
 											"height": 13,
@@ -15510,16 +15510,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -320,
+											"left": -544,
 											"top": 288,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 136,
+									"left": 24,
 									"top": 1616,
-									"width": 126.27001953125,
+									"width": 372.171875,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7OnD3Wm4QEBs="
@@ -15544,9 +15544,9 @@
 										"$ref": "AAAAAAF7OnD3WW4M6xQ="
 									},
 									"font": "Arial;13;0",
-									"left": 136,
+									"left": 24,
 									"top": 1654,
-									"width": 126.27001953125,
+									"width": 372.171875,
 									"height": 10
 								},
 								{
@@ -15558,11 +15558,98 @@
 									"model": {
 										"$ref": "AAAAAAF7OnD3WW4M6xQ="
 									},
+									"subViews": [
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF7RTtbUuWIZ2c=",
+											"_parent": {
+												"$ref": "AAAAAAF7OnD3Wm4V61g="
+											},
+											"model": {
+												"$ref": "AAAAAAF7RTtbNOVqJQg="
+											},
+											"font": "Arial;13;0",
+											"left": 29,
+											"top": 1669,
+											"width": 362.171875,
+											"height": 13,
+											"text": "+registraAbbonamento(Abbonamento): void",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF7RTtm5eZ+kbI=",
+											"_parent": {
+												"$ref": "AAAAAAF7OnD3Wm4V61g="
+											},
+											"model": {
+												"$ref": "AAAAAAF7RTtm0eZgiKU="
+											},
+											"font": "Arial;13;0",
+											"left": 29,
+											"top": 1684,
+											"width": 362.171875,
+											"height": 13,
+											"text": "+effettuaLogin(codice: String, password: String): Abbonamento",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF7RTtqu+ca8gc=",
+											"_parent": {
+												"$ref": "AAAAAAF7OnD3Wm4V61g="
+											},
+											"model": {
+												"$ref": "AAAAAAF7RTtqqOb8Aik="
+											},
+											"font": "Arial;13;0",
+											"left": 29,
+											"top": 1699,
+											"width": 362.171875,
+											"height": 13,
+											"text": "+attivaAbbonamento(Abbonamento): void",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF7RTtsn+e2vCU=",
+											"_parent": {
+												"$ref": "AAAAAAF7OnD3Wm4V61g="
+											},
+											"model": {
+												"$ref": "AAAAAAF7RTtsjOeYWQ8="
+											},
+											"font": "Arial;13;0",
+											"left": 29,
+											"top": 1714,
+											"width": 362.171875,
+											"height": 13,
+											"text": "+ammonisciAbbonamento(Abbonamento): void",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF7RTt4O+hSkXw=",
+											"_parent": {
+												"$ref": "AAAAAAF7OnD3Wm4V61g="
+											},
+											"model": {
+												"$ref": "AAAAAAF7RTt4Keg06w0="
+											},
+											"font": "Arial;13;0",
+											"left": 29,
+											"top": 1729,
+											"width": 362.171875,
+											"height": 13,
+											"text": "+sospendiAbbonamento(Abbonamento): void",
+											"horizontalAlignment": 0
+										}
+									],
 									"font": "Arial;13;0",
-									"left": 136,
+									"left": 24,
 									"top": 1664,
-									"width": 126.27001953125,
-									"height": 10
+									"width": 372.171875,
+									"height": 83
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -15575,7 +15662,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -160,
+									"left": -272,
 									"top": 144,
 									"width": 10,
 									"height": 10
@@ -15591,7 +15678,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -160,
+									"left": -272,
 									"top": 144,
 									"width": 10,
 									"height": 10
@@ -15599,10 +15686,10 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 136,
+							"left": 24,
 							"top": 1616,
-							"width": 126.27001953125,
-							"height": 58,
+							"width": 372.171875,
+							"height": 131,
 							"nameCompartment": {
 								"$ref": "AAAAAAF7OnD3Wm4Psy4="
 							},
@@ -15816,8 +15903,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 214,
-									"top": 1564,
+									"left": 218,
+									"top": 1563,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -15837,8 +15924,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 229,
-									"top": 1564,
+									"left": 233,
+									"top": 1562,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -15858,8 +15945,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 185,
-									"top": 1563,
+									"left": 189,
+									"top": 1564,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -15877,7 +15964,7 @@
 								"$ref": "AAAAAAF7OnEiUnCKzZI="
 							},
 							"lineStyle": 1,
-							"points": "201:1525;199:1615",
+							"points": "203:1525;206:1615",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF7OnQa7X5uFRs="
@@ -18491,7 +18578,160 @@
 						"$ref": "AAAAAAF7G6glVy7pqAA="
 					},
 					"name": "AbbonamentoDAO",
-					"stereotype": "interface"
+					"stereotype": "interface",
+					"operations": [
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF7RTtbNOVqJQg=",
+							"_parent": {
+								"$ref": "AAAAAAF7OnD3WW4M6xQ="
+							},
+							"name": "registraAbbonamento",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTuW5OkrXG4=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtbNOVqJQg="
+									},
+									"name": "Abbonamento",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTuW5OksRiY=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtbNOVqJQg="
+									},
+									"type": "void",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF7RTtm0eZgiKU=",
+							"_parent": {
+								"$ref": "AAAAAAF7OnD3WW4M6xQ="
+							},
+							"name": "effettuaLogin",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTvkMOupk/Q=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtm0eZgiKU="
+									},
+									"name": "codice",
+									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTvkMOuqBS4=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtm0eZgiKU="
+									},
+									"name": "password",
+									"type": "String"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTvkMeur/Ms=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtm0eZgiKU="
+									},
+									"type": {
+										"$ref": "AAAAAAF7G+yp9G/wbDo="
+									},
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF7RTtqqOb8Aik=",
+							"_parent": {
+								"$ref": "AAAAAAF7OnD3WW4M6xQ="
+							},
+							"name": "attivaAbbonamento",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTwUS+4LXMg=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtqqOb8Aik="
+									},
+									"name": "Abbonamento",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTwUS+4MdLY=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtqqOb8Aik="
+									},
+									"type": "void",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF7RTtsjOeYWQ8=",
+							"_parent": {
+								"$ref": "AAAAAAF7OnD3WW4M6xQ="
+							},
+							"name": "ammonisciAbbonamento",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTwwqu7itFE=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtsjOeYWQ8="
+									},
+									"name": "Abbonamento",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTwwqu7j+ko=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTtsjOeYWQ8="
+									},
+									"type": "void",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF7RTt4Keg06w0=",
+							"_parent": {
+								"$ref": "AAAAAAF7OnD3WW4M6xQ="
+							},
+							"name": "sospendiAbbonamento",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTxLUfAT8pM=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTt4Keg06w0="
+									},
+									"name": "Abbonamento",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF7RTxLUfAUVO8=",
+									"_parent": {
+										"$ref": "AAAAAAF7RTt4Keg06w0="
+									},
+									"type": "void",
+									"direction": "return"
+								}
+							]
+						}
+					]
 				},
 				{
 					"_type": "UMLClass",

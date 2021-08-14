@@ -10,15 +10,6 @@ import dominio.Abbonamento;
 import dominio.CartaDiCredito;
 import dominio.TipoAbbonamento;
 
-/* Io pensavo di inizializzare la roba nelle classi delle gui del tipo: 
- * sei nella registrazione abbonamento, prendi tutti i parametri inseriti sulla gui e provi a inizializzare l'oggetto
- * se non mi dai eccezioni procedo all'inserimento nel db;
- * (quindi nel dao presumo di avere l'oggetto inizializzato già in modo corretto)
-*/
-
-// Per la questione aggiornamenti: faccio una cosa del tipo, attivo l'abbonamento e aggiorno l'oggetto Abbonamento e poi invoco l'aggiornamento che passa i dati aggiornati al db
-// nah forse non conviene, aggiorna solamente il campo indicato, in locale (l'oggetto) lo aggiorni manualmente con i metodi
-
 public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	private ConnessioneDb connessioneDb;
 	
@@ -48,7 +39,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 			else throw new IllegalArgumentException("Registrazione carta di credito dell'abbonamento fallita.");
 		}
 		
-		/* Registrazione abbonamento */ // (codice,password,tipo,studente,sospeso,dataacquisto,datainizio,datascadenzavalidità,ammonizioni,cartadicredito)
+		/* Registrazione abbonamento */
 		String queryRegistrazioneAbbonamento = "INSERT INTO abbonamento VALUES (?,?,?,?,?,?,?,?,?,?)";
 		
 		try {
@@ -74,8 +65,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	}
 	
 	@Override
-	public Abbonamento effettuaLogin(String codice, String password) throws NoSuchElementException {
-		// Select dove abbonamento.codice == codice e buildi il nuovo abbonamento, ma ti serve anche la carta di credito quindi ti serve anche un join
+	public Abbonamento effettuaLogin(String codice, String password) throws NoSuchElementException, IllegalStateException {
 		Abbonamento abbonamento = null;
 		System.out.println("\nLogin abbonamento, codice: " + codice + ", password: " + password);
 		Connection connessione = this.connessioneDb.getConnessione();
@@ -91,6 +81,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 			
 			ResultSet resultSet = statementAbbonamento.executeQuery();
 			if(resultSet.next()) {
+				if (resultSet.getBoolean(5)) throw new IllegalStateException("L'abbonamento è stato sospeso; impossibile effettuare il login.");
 				CartaDiCredito carta = new CartaDiCredito(resultSet.getString(10), resultSet.getString(11), resultSet.getString(12));
 				abbonamento = new Abbonamento(
 					resultSet.getString(1), 
@@ -112,17 +103,9 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 		
 		return abbonamento;
 	}
-	
-	/*
-	@Override
-	public Abbonamento aggiornaAbbonamento(Abbonamento abbonamento) throws IllegalArgumentException {
-		System.out.println("Aggiornamento abbonamento: " + abbonamento.toString());
-		return null;
-	}
-	*/
 
 	@Override
-	public void attivaAbbonamento(Abbonamento abbonamento) throws NoSuchElementException, IllegalArgumentException {
+	public void attivaAbbonamento(Abbonamento abbonamento) {
 		try {
 			abbonamento.attivaAbbonamento();
 		} catch (IllegalStateException e) {
@@ -146,12 +129,43 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	}
 	
 	@Override
-	public void ammonisciAbbonamento(Abbonamento abbonamento) throws NoSuchElementException {
+	public void ammonisciAbbonamento(Abbonamento abbonamento) {
+		System.out.println("Ammonizione abbonamento, codice: " + abbonamento.getCodice());
+		abbonamento.aggiungiAmmonizione();
 		
+		if (abbonamento.getAmmonizioni() == 3) this.sospendiAbbonamento(abbonamento);
+		
+		Connection connessione = this.connessioneDb.getConnessione();
+		
+		try {
+			String queryAmmonisciAbbonamento = "UPDATE abbonamento SET ammonizioni = ? WHERE codice = ?";
+			PreparedStatement statementAbbonamento = connessione.prepareStatement(queryAmmonisciAbbonamento);
+			statementAbbonamento.setInt(1, abbonamento.getAmmonizioni());
+			statementAbbonamento.setString(2, abbonamento.getCodice());
+			
+			statementAbbonamento.executeUpdate();
+			statementAbbonamento.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
-	public void sospendiAbbonamento(Abbonamento abbonamento) throws NoSuchElementException, IllegalArgumentException {
+	public void sospendiAbbonamento(Abbonamento abbonamento) {
+		System.out.println("Sospensione abbonamento, codice: " + abbonamento.getCodice());
+		abbonamento.sospendiAbbonamento();
+		Connection connessione = this.connessioneDb.getConnessione();
 		
+		try {
+			String querySospendiAbbonamento = "UPDATE abbonamento SET sospeso = ? WHERE codice = ?";
+			PreparedStatement statementAbbonamento = connessione.prepareStatement(querySospendiAbbonamento);
+			statementAbbonamento.setBoolean(1, abbonamento.isSospeso());
+			statementAbbonamento.setString(2, abbonamento.getCodice());
+			
+			statementAbbonamento.executeUpdate();
+			statementAbbonamento.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
