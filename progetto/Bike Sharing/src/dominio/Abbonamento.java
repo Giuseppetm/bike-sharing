@@ -35,6 +35,20 @@ public class Abbonamento {
 		this.dataScadenzaValidit‡ = this.calcolaValidit‡Abbonamento(tipo, this.carta.getScadenza());
 	}
 	
+	/* Costruttore per abbonamenti gi‡ inizializzati (caso di login) */
+	public Abbonamento(String codice, String password, TipoAbbonamento tipo, CartaDiCredito carta, boolean studente, boolean sospeso, LocalDate dataAcquisto, LocalDate dataInizio, LocalDate dataScadenzaValidit‡, int ammonizioni) {
+		this.codice = codice;
+		this.password = password;
+		this.tipo = tipo;
+		this.carta = carta;
+		this.studente = studente;
+		this.dataAcquisto = dataAcquisto;
+		this.dataInizio = dataInizio;
+		this.dataScadenzaValidit‡ = dataScadenzaValidit‡;
+		this.sospeso = false;
+		this.ammonizioni = ammonizioni;
+	}
+	
 	public String getCodice() {
 		return this.codice;
 	}
@@ -53,6 +67,10 @@ public class Abbonamento {
 	
 	public LocalDate getDataInizio() {
 		return this.dataInizio;
+	}
+	
+	public LocalDate getDataScadenzaValidit‡() {
+		return this.dataScadenzaValidit‡;
 	}
 	
 	public int getAmmonizioni() {

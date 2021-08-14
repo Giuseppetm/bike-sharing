@@ -39,8 +39,16 @@ public class Morsa {
 		this.stato = StatoMorsa.OCCUPATA;
 	}
 	
+	public String getId() {
+		return this.id;
+	}
+ 	
 	public Bicicletta getBicicletta() {
 		return this.bicicletta;
+	}
+	
+	public TipoMorsa getTipo() {
+		return this.tipo;
 	}
 	
 	public boolean occupata() {

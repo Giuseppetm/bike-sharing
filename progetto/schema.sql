@@ -26,8 +26,8 @@ CREATE TABLE morsa (
 
 CREATE TABLE cartadicredito(
     numero VARCHAR(16) NOT NULL,-- La lunghezza del numero della carta di credito varia da 13 a 16 caratteri
-    scadenza DATE,
-    cvv INTEGER,
+    scadenza VARCHAR(10),
+    cvv VARCHAR(3),
     PRIMARY KEY(numero)
 );
 
@@ -75,5 +75,12 @@ CREATE TABLE noleggio (
 
 --------------------
 
-INSERT INTO cartadicredito VALUES ('numerocarta1', '01-10-2023', 232);
+INSERT INTO cartadicredito VALUES ('numerocarta1', '10-2023', '232');
 INSERT INTO abbonamento VALUES ('idabbonamento1', 'dennissonis535', 'ANNUALE', true, false, '12-11-2021', '15-12-2021', '10-11-2022', 0, 'numerocarta1');
+
+
+
+set search_path = bike_sharing;
+
+delete from cartadicredito;
+delete from abbonamento;

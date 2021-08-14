@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
+//import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import dominio.TipoAbbonamento;
 import dominio.CartaDiCredito;
 import dominio.Noleggio;
 import dominio.Totem;
+import dati.AbbonamentoDAOPostgres;
 import dati.ConnessioneDb;
 
 public class Main {
@@ -71,16 +73,20 @@ public class Main {
         separator("Carte di credito");
         CartaDiCredito c1 = new CartaDiCredito("012850003580200", "9/2022", "123");
         CartaDiCredito c2 = new CartaDiCredito("12345678903555", "12/2021", "121");
+        CartaDiCredito c3 = new CartaDiCredito("4475794209397914", "12/2023", "721");
+        CartaDiCredito c4 = new CartaDiCredito("4291790808416693", "12/2021", "118");
         System.out.println(c1.toString());
         System.out.println(c2.toString());
+        System.out.println(c3.toString());
+        System.out.println(c4.toString());
         
         
         /* ABBONAMENTI */
         separator("Abbonamenti");
         Abbonamento abb1 = new Abbonamento("Dennis123", TipoAbbonamento.ANNUALE, c1, true);
         Abbonamento abb2 = new Abbonamento("Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
-        Abbonamento abb3 = new Abbonamento("MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c2, true);
-        Abbonamento abb4 = new Abbonamento("GuidoGuinizzelli666", TipoAbbonamento.GIORNALIERO, c1, false);
+        Abbonamento abb3 = new Abbonamento("MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c3, true);
+        Abbonamento abb4 = new Abbonamento("GuidoGuinizzelli666", TipoAbbonamento.GIORNALIERO, c4, false);
         
         abb3.attivaAbbonamento();
         
@@ -122,24 +128,38 @@ public class Main {
         
         
         /* CONNESSIONE AL DB */
+        separator("Connessioni al database");
         ConnessioneDb db = ConnessioneDb.getIstance();
-        db.connetti();
+        try {
+        	db.connetti();
+        	System.out.println("@@@ Connesso al database PostgreSQL! @@@\n");
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
         Connection connessione = db.getConnessione();
         
+        AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
+        // abbonamentoDao.registraAbbonamento(abb1);
+        // abbonamentoDao.registraAbbonamento(abb2);
+        // abbonamentoDao.registraAbbonamento(abb3);
+        // abbonamentoDao.registraAbbonamento(abb4);
+        
+
+        /* Stampa abbonamenti */
+        System.out.println("---Lista abbonamenti presenti sul db---");
         try {
         	Statement statement = connessione.createStatement();
-        	ResultSet resultSet;
+        	ResultSet resultSet = statement.executeQuery("SELECT * FROM abbonamento");
         	
-        	resultSet = statement.executeQuery("SELECT * FROM abbonamento");
-        	
-        	while (resultSet.next()) {
-                System.out.printf("Codice: %s, Password: %s, Tipo: %s\n", resultSet.getString("codice"), resultSet.getString("password"), resultSet.getString("tipo"));
-            }
-        	
+        	while (resultSet.next()) System.out.printf("Codice: %s, Password: %s, Tipo: %s, Data acquisto: %s, Data inizio: %s, Data scadenza validità: %s\n", resultSet.getString("codice"), resultSet.getString("password"), resultSet.getString("tipo"), resultSet.getString("dataacquisto"), resultSet.getString("datainizio"), resultSet.getString("datascadenzavalidità"));
         } catch (Exception e) {
         	System.out.println("Errore di connessione con il database.");
         	e.printStackTrace();
         }
+        
+        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("f071e4ac-1626-488b-b087-1cfa3d639318", "MimmoPetrolla32");
+        System.out.println("\n---Abbonamento retrieve dal login---\n" + abbLogin.toString());
         
     }
     

@@ -65,10 +65,15 @@ public class CartaDiCredito {
 		return true;
 	}
 	
+	/* Questa funzione verifica se il cvv Ë di 3 cifre ed Ë effettivamente un intero. */
 	static public boolean controllaValidit‡Cvv(String cvv) {
-		// To-do: aggiungi il check sul tipo che dev'essere intero
-		if (cvv.length() == 3) return true;
-		return false;
+		if (cvv.length() != 3) return false;
+		try {
+			Integer.parseInt(cvv);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
