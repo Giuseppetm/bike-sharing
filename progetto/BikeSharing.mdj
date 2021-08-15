@@ -14208,8 +14208,8 @@
 								"$ref": "AAAAAAF7G6glWC7qoxs="
 							},
 							"font": "Arial;13;0",
-							"left": 72,
-							"top": 968,
+							"left": 88,
+							"top": 1080,
 							"width": 289,
 							"height": 129,
 							"text": "ricorda che l'abbonamento va attivato (attivaAbbonamento()) subito quando è annuale, ma solo quando si prenota la prima volta la bici quando è giornaliero o settimanale. quindi attento a quando chiami quel metodo"
