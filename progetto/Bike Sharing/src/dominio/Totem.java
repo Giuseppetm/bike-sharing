@@ -51,7 +51,7 @@ public class Totem {
 		this.morse.add(morsa);
 	}
 	
-	public void rimuoviMorsa(Morsa morsa) {
+	public void rimuoviMorsa(Morsa morsa) throws IllegalStateException {
 		for (Morsa m : this.morse) {
 			if (!m.occupata() && m.getId() == morsa.getId()) {
 				try {
@@ -62,7 +62,7 @@ public class Totem {
 				}
 			}
 		}
-		throw new IllegalStateException("Impossibile eliminare questa morsa: pare che non sia in questa postazione.");
+		throw new IllegalStateException("Impossibile eliminare questa morsa: pare che non sia in questa postazione oppure è occupata.");
 	}
 	
 	public void aggiungiMorsaByTipo(TipoMorsa tipo) {
