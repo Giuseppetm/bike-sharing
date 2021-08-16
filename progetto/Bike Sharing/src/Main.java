@@ -233,6 +233,7 @@ public class Main {
         System.out.println(datiStatisticiDao.getNumeroBicicletteDanneggiate());
         System.out.println(datiStatisticiDao.getNumeroNoleggiEffettuati());
         System.out.println(datiStatisticiDao.getNumeroTotem());
+        System.out.println(datiStatisticiDao.getTotemPiùUtilizzato());
         */
     }
     

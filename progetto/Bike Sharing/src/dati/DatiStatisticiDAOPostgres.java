@@ -12,6 +12,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		this.connessioneDb = ConnessioneDb.getIstance();
 	}
 	
+	@Override
 	public int getNumeroAbbonamenti() {
 		Connection connessione = this.connessioneDb.getConnessione();
 		System.out.println("Calcolo numero abbonamenti..");
@@ -29,6 +30,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		return numeroAbbonamenti;
 	}
 	
+	@Override
 	public int getNumeroAbbonamentiAttivi() {
 		Connection connessione = this.connessioneDb.getConnessione();
 		System.out.println("Calcolo numero abbonamenti attivi..");
@@ -46,6 +48,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		return numeroAbbonamentiAttivi;
 	}
 	
+	@Override
 	public int getNumeroAbbonamentiSospesi() {
 		Connection connessione = this.connessioneDb.getConnessione();
 		System.out.println("Calcolo numero abbonamenti sospesi..");
@@ -63,6 +66,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		return numeroAbbonamentiSospesi;
 	}
 	
+	@Override
 	public int getNumeroBicicletteDanneggiate() {
 		Connection connessione = this.connessioneDb.getConnessione();
 		System.out.println("Calcolo numero biciclette danneggiate..");
@@ -80,6 +84,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		return numeroBicicletteDanneggiate;
 	}
 
+	@Override
 	public int getNumeroNoleggiEffettuati() {
 		Connection connessione = this.connessioneDb.getConnessione();
 		System.out.println("Calcolo numero noleggi effettuati..");
@@ -97,7 +102,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		return numeroNoleggiEffettuati;
 	}
 	
-	// Per vedere quanti totem ci sono nel sistema
+	@Override
 	public int getNumeroTotem() {
 		Connection connessione = this.connessioneDb.getConnessione();
 		System.out.println("Calcolo numero di totem presenti nel sistema..");
@@ -115,8 +120,22 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		return numeroTotem;
 	}
 	
-	// Totem con più noleggi associati, basta restituire l'indirizzo
+	@Override
 	public String getTotemPiùUtilizzato() {
-		return "Il totem di dennissone il farinone.";
+		Connection connessione = this.connessioneDb.getConnessione();
+		System.out.println("Calcolo totem più utilizzato nel sistema..");
+		String indirizzoTotem = null;
+
+		try {
+			Statement statement = connessione.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT COUNT(*), totem.id, totem.indirizzo FROM totem JOIN noleggio ON noleggio.totem = totem.id GROUP BY totem.id");
+			while (resultSet.next())
+				indirizzoTotem = resultSet.getString(3);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// if (indirizzoTotem == null) throw new IllegalStateException("Non ci sono ancora noleggi oppure totem, quindi non è possibile calcolare qual è il totem");
+		return indirizzoTotem;
 	}
 }
