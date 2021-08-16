@@ -175,7 +175,7 @@ public class Main {
         }
         
         
-        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("482e875d-8814-4e86-9fff-1c07ea4e33cc", "Dennis123");
+        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("3fbf2122-1853-4c20-8501-209b4ecf268e", "GiuseppeOfField214");
         System.out.println("\n---Abbonamento retrieve dal login---\n" + abbLogin.toString());
         
         // abbonamentoDao.ammonisciAbbonamento(abbLogin);
@@ -215,11 +215,25 @@ public class Main {
         //biciclettaDao.rimuoviBicicletta(totems.get(1), TipoBicicletta.ELETTRICA);
         
         
+        
+        
+        /* Noleggi */
+        
+        
+        
+        
+        
         /* Dati statistici */
+        /*
         System.out.println("---Calcolo dati statistici---");
         DatiStatisticiDAOPostgres datiStatisticiDao = new DatiStatisticiDAOPostgres();
         System.out.println(datiStatisticiDao.getNumeroAbbonamenti());
         System.out.println(datiStatisticiDao.getNumeroAbbonamentiAttivi());
+        System.out.println(datiStatisticiDao.getNumeroAbbonamentiSospesi());
+        System.out.println(datiStatisticiDao.getNumeroBicicletteDanneggiate());
+        System.out.println(datiStatisticiDao.getNumeroNoleggiEffettuati());
+        System.out.println(datiStatisticiDao.getNumeroTotem());
+        */
     }
     
     public static void separator(String text) {
