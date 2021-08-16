@@ -9759,7 +9759,7 @@
 											"top": 346,
 											"width": 253.49365234375,
 											"height": 13,
-											"text": "+restituisciBicicletta(Bicicletta): void",
+											"text": "+restituisciBicicletta(Bicicletta): Morsa",
 											"horizontalAlignment": 0
 										},
 										{
@@ -18071,8 +18071,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF7G+Hu+F2Zd+Y="
 									},
-									"name": "Bicicletta",
-									"type": ""
+									"name": "Bicicletta"
 								},
 								{
 									"_type": "UMLParameter",
@@ -18080,7 +18079,9 @@
 									"_parent": {
 										"$ref": "AAAAAAF7G+Hu+F2Zd+Y="
 									},
-									"type": "void",
+									"type": {
+										"$ref": "AAAAAAF7G736sDFmMUU="
+									},
 									"direction": "return"
 								}
 							]

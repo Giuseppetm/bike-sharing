@@ -21,7 +21,7 @@ public class TotemDAOPostgres implements TotemDAO {
 	
 	@Override /* Avere tutti i riferimenti del totem potrebbe essere molto utile */
 	public List<Totem> getListaTotem() throws NoSuchElementException {
-		System.out.println("Prelevo lista dei totem..");
+		System.out.println("Prelevo lista dei totem..\n");
 		List<Totem> totems = new ArrayList<Totem>();
 		
 		MorsaDAOPostgres morsaDao = new MorsaDAOPostgres();

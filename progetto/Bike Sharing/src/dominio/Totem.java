@@ -46,12 +46,12 @@ public class Totem {
 		throw new NoSuchElementException("Non ci sono biciclette di tipo " + tipo + " disponibili in questa postazione.");
 	}
 	
-	public void restituisciBicicletta(Bicicletta bicicletta) throws IllegalStateException {
+	public Morsa restituisciBicicletta(Bicicletta bicicletta) throws IllegalStateException {
 		for (Morsa m : this.morse) {
 			if (!m.occupata()) {
 				try {
 					m.chiudi(bicicletta);
-					return;
+					return m;
 				} catch (IllegalArgumentException e) {
 					continue;
 				}

@@ -10,6 +10,7 @@ import dominio.CartaDiCredito;
 import dominio.Noleggio;
 import dominio.Totem;
 import dati.AbbonamentoDAOPostgres;
+import dati.BiciclettaDAOPostgres;
 import dati.ConnessioneDb;
 import dati.MorsaDAOPostgres;
 import dati.TotemDAOPostgres;
@@ -123,6 +124,8 @@ public class Main {
 	        System.out.println(t1.getMorse());
         */
         
+        Totem t2 = new Totem("Via De Guidonis 32");
+        
         /*
         Totem t1 = new Totem("Via Dennissonis 66");
         t1.aggiungiMorsa(m1);
@@ -185,6 +188,7 @@ public class Main {
         TotemDAOPostgres totemDao = new TotemDAOPostgres();
         //totemDao.aggiungiTotem(t1);
         //totemDao.rimuoviTotem(t1);
+        //totemDao.aggiungiTotem(t2);
         
     	List<Totem> totems = totemDao.getListaTotem();
     	for (Totem totem : totems) System.out.println("Totem: " + totem.toString());
@@ -196,6 +200,12 @@ public class Main {
         
         //morsaDao.rimuoviMorsa(totems.get(0), TipoMorsa.NORMALE);
         //morsaDao.rimuoviMorsa(totems.get(0), TipoMorsa.ELETTRICA);
+        
+        //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.NORMALE);
+        //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.NORMALE);
+        //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.ELETTRICA);
+        BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
+        //biciclettaDao.aggiungiBicicletta(totems.get(0), TipoBicicletta.NORMALE);
 
     }
     
