@@ -11,6 +11,7 @@ import dominio.Noleggio;
 import dominio.Totem;
 import dati.AbbonamentoDAOPostgres;
 import dati.ConnessioneDb;
+import dati.MorsaDAOPostgres;
 import dati.TotemDAOPostgres;
 
 public class Main {
@@ -42,6 +43,7 @@ public class Main {
         
         /* MORSE */
         separator("Morse");
+        /*
         Morsa m1 = new Morsa(TipoMorsa.ELETTRICA);
         m1.chiudi(b2);
         
@@ -62,6 +64,7 @@ public class Main {
         System.out.println(m1.toString());
         System.out.println(m2.toString());
         System.out.println(m3.toString());
+        */
         
         
         
@@ -79,6 +82,7 @@ public class Main {
         
         /* ABBONAMENTI */
         separator("Abbonamenti");
+
         Abbonamento abb1 = new Abbonamento("Dennis123", TipoAbbonamento.ANNUALE, c1, true);
         Abbonamento abb2 = new Abbonamento("Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
         Abbonamento abb3 = new Abbonamento("MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c3, true);
@@ -90,6 +94,7 @@ public class Main {
         System.out.println(abb2.toString() + "\n");
         System.out.println(abb3.toString() + "\n");
         System.out.println(abb4.toString() + "\n");
+        
         
         
         /* NOLEGGI */
@@ -118,6 +123,7 @@ public class Main {
 	        System.out.println(t1.getMorse());
         */
         
+        /*
         Totem t1 = new Totem("Via Dennissonis 66");
         t1.aggiungiMorsa(m1);
         t1.aggiungiMorsa(m2);
@@ -131,6 +137,7 @@ public class Main {
         t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
         t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
         System.out.println(t1.toString());
+        */
 
         
         /* CONNESSIONE AL DB */
@@ -176,24 +183,19 @@ public class Main {
         /* Stampa totem */
         System.out.println("\n---Lista totem presenti sul db---");
         TotemDAOPostgres totemDao = new TotemDAOPostgres();
+        //totemDao.aggiungiTotem(t1);
+        //totemDao.rimuoviTotem(t1);
         
-        totemDao.aggiungiTotem(t1);
+    	List<Totem> totems = totemDao.getListaTotem();
+    	for (Totem totem : totems) System.out.println("Totem: " + totem.toString());
         
-        try {
-        	List<String> totemIDs = totemDao.getListaTotemID();
-        	for (String id : totemIDs) System.out.println("ID Totem: " + id);
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
+        MorsaDAOPostgres morsaDao = new MorsaDAOPostgres();
+        //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.ELETTRICA);
+        //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.NORMALE);
+        //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.ELETTRICA);
         
-        totemDao.rimuoviTotem(t1);
-        
-        try {
-        	List<String> totemIDs = totemDao.getListaTotemID();
-        	for (String id : totemIDs) System.out.println("ID Totem: " + id);
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
+        //morsaDao.rimuoviMorsa(totems.get(0), TipoMorsa.NORMALE);
+        //morsaDao.rimuoviMorsa(totems.get(0), TipoMorsa.ELETTRICA);
 
     }
     

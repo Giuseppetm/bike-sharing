@@ -26,11 +26,18 @@ public class Totem {
 		this.morse = new ArrayList<Morsa>(morse);
 	}
 	
-	/* Costruttore per totem già inizializzati */
+	/* Costruttore per totem già inizializzato con lista di morse */
 	public Totem(String id, String indirizzo, List<Morsa> morse) {
 		this.id = id;
 		this.indirizzo = indirizzo;
 		this.morse = new ArrayList<Morsa>(morse);
+	}
+	
+	/* Costruttore per totem già inizializzato senza lista di morse */
+	public Totem(String id, String indirizzo) {
+		this.id = id;
+		this.indirizzo = indirizzo;
+		this.morse = new ArrayList<Morsa>();
 	}
 	
 	public Bicicletta noleggiaBicicletta(TipoBicicletta tipo) throws NoSuchElementException {
@@ -76,11 +83,11 @@ public class Totem {
 		this.morse.add(morsa);
 	}
 	
-	public void rimuoviMorsaByTipo(TipoMorsa tipo) throws IllegalStateException {
+	public Morsa rimuoviMorsaByTipo(TipoMorsa tipo) throws IllegalStateException {
 		for (Morsa m : this.morse) {
 			if (!m.occupata() && m.getTipo() == tipo) {
 				morse.remove(m);
-				return;
+				return m;
 			}
 		}
 		throw new IllegalStateException("Impossibile rimuovere una morsa di questo tipo dalla postazione in quanto non ce ne sono al momento.");

@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import dominio.Morsa;
-import dominio.TipoBicicletta;
-import dominio.TipoMorsa;
 import dominio.Totem;
 
 public class TotemDAOPostgres implements TotemDAO {
@@ -21,26 +19,29 @@ public class TotemDAOPostgres implements TotemDAO {
 		this.connessioneDb = ConnessioneDb.getIstance();
 	}
 	
-	/* Avere tutti i riferimenti del totem qui è molto utile */
-	@Override
+	@Override /* Avere tutti i riferimenti del totem potrebbe essere molto utile */
 	public List<Totem> getListaTotem() throws NoSuchElementException {
 		System.out.println("Prelevo lista dei totem..");
 		List<Totem> totems = new ArrayList<Totem>();
-		List<Morsa> morse = new ArrayList<Morsa>();
+		
+		MorsaDAOPostgres morsaDao = new MorsaDAOPostgres();
 
 		Connection connessione = this.connessioneDb.getConnessione();
 		
 		try {
         	Statement statement = connessione.createStatement();
-        	ResultSet resultSet = statement.executeQuery("SELECT T.id, T.indirizzo FROM totem AS T");
+        	ResultSet resultSet = statement.executeQuery("SELECT id, indirizzo FROM totem");
         	
-        	// Qui posso prelevare la lista di morse con un metodo apposito che lavora sulla tabella morsa! Dove lo metti il metodo? Qui in totemdao va bene?
-        	
-        	Totem totem = new Totem(resultSet.getString(1), resultSet.getString(2), morse);
+        	while (resultSet.next()) {
+        		List<Morsa> morse = morsaDao.getMorse(new Totem(resultSet.getString(1), resultSet.getString(2)));
+            	
+            	Totem totem = new Totem(resultSet.getString(1), resultSet.getString(2), morse);
+            	totems.add(totem);
+        	}
+    
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		
 		if (totems.isEmpty()) throw new NoSuchElementException("Non ci sono ancora totem inizializzati.");
 		return totems;
@@ -88,11 +89,13 @@ public class TotemDAOPostgres implements TotemDAO {
 	
 	@Override
 	public void rimuoviTotem(Totem totem) {
-		// To-do: rimuovere tutte le morse e biciclette collegate al totem in questione
 		System.out.println("Rimuovo postazione con totem; id: " + totem.getId() + ", indirizzo: " + totem.getIndirizzo());
 		Connection connessione = this.connessioneDb.getConnessione();
 		
+		MorsaDAOPostgres morsaDao = new MorsaDAOPostgres();
+		
 		try {
+			morsaDao.rimuoviMorse(totem);
 			PreparedStatement statement = connessione.prepareStatement("DELETE FROM totem WHERE id = ?");
         	statement.setString(1, totem.getId());
         	
@@ -101,25 +104,5 @@ public class TotemDAOPostgres implements TotemDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	@Override
-	public void aggiungiMorsa(Totem totem, TipoMorsa tipoMorsa) {
-		// Qui non credo ci siano problemi, aggiungi una morsa e pace
-	}
-	
-	@Override
-	public void rimuoviMorsa(Totem totem, TipoMorsa tipoMorsa) {
-		// Attenzione a gestire il try catch per capire se ci sono morse di quel tipo da rimuovere
-	}
-	
-	@Override
-	public void aggiungiBicicletta(Totem totem, TipoBicicletta tipoBicicletta) {
-		// Qui devi capire se c'è spazio, idem careful alle eccezioni
-	}
-	
-	@Override
-	public void rimuoviBicicletta(Totem totem, TipoBicicletta tipoBicicletta) {
-		// Qui devi controllare se c'è il tipo di bicicletta per rimuoverla
 	}
 }

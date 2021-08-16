@@ -9708,7 +9708,7 @@
 											"top": 301,
 											"width": 253.49365234375,
 											"height": 13,
-											"text": "+rimuoviMorsaByTipo(TipoMorsa): void",
+											"text": "+rimuoviMorsaByTipo(TipoMorsa): Morsa",
 											"horizontalAlignment": 0
 										},
 										{
@@ -17993,8 +17993,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF7RWW+tlzZAnU="
 									},
-									"name": "TipoMorsa",
-									"type": ""
+									"name": "TipoMorsa"
 								},
 								{
 									"_type": "UMLParameter",
@@ -18002,7 +18001,9 @@
 									"_parent": {
 										"$ref": "AAAAAAF7RWW+tlzZAnU="
 									},
-									"type": "void",
+									"type": {
+										"$ref": "AAAAAAF7G736sDFmMUU="
+									},
 									"direction": "return"
 								}
 							]

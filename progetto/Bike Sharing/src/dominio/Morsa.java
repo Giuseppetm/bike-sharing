@@ -26,6 +26,7 @@ public class Morsa {
 		this.id = id;
 		this.tipo = tipo;
 		this.bicicletta = bicicletta;
+		this.stato = bicicletta == null ? StatoMorsa.DISPONIBILE : StatoMorsa.OCCUPATA;
 	}
 	
 	public Bicicletta apri() {

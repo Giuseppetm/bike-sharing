@@ -15,6 +15,13 @@ public class Bicicletta {
 		this.danneggiata = false;
 	}
 	
+	/* Costruttore per biciclette già inizializzate */
+	public Bicicletta(String id, TipoBicicletta tipo, boolean danneggiata) {
+		this.id = id;
+		this.tipo = tipo;
+		this.danneggiata = danneggiata;
+	}
+	
 	public String getId() {
 		return this.id;
 	}
