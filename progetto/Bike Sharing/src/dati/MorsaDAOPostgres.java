@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import dominio.Bicicletta;
 import dominio.Morsa;
@@ -21,7 +22,7 @@ public class MorsaDAOPostgres implements MorsaDAO {
 	}
 	
 	@Override
-	public List<Morsa> getMorse(Totem totem) {
+	public List<Morsa> getMorse(Totem totem) throws NoSuchElementException {
 		// Qui devo fare un join con la bicicletta per inizializzare anche loro nelle morse
 		Connection connessione = this.connessioneDb.getConnessione();
 		List<Morsa> morse = new ArrayList<Morsa>();
@@ -40,6 +41,8 @@ public class MorsaDAOPostgres implements MorsaDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		if (morse.isEmpty()) throw new NoSuchElementException("Non ci sono ancora morse inizializzate su questa postazione con totem.");
 		
 		return morse;
 	}

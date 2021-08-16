@@ -79,12 +79,28 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
 	
 	@Override
 	public void comunicaDanni(Bicicletta bicicletta) {
-		// To-do: magari un operatore può anche riparare le bici? Nella gestione del sistema aggiungo qualcosa per la riparazione, sarebbe carino
 		System.out.println("Segnalo danni sulla bicicletta con id " + bicicletta.getId());
 		Connection connessione = this.connessioneDb.getConnessione();
 		
 		try {
 			PreparedStatement statement = connessione.prepareStatement("UPDATE bicicletta SET danneggiata = true WHERE id = ?");
+			statement.setString(1, bicicletta.getId());
+			
+			statement.executeUpdate();
+			statement.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* Metodo utilizzabile solo dal personale di servizio */
+	@Override
+	public void riparaBicicletta(Bicicletta bicicletta) {
+		System.out.println("Riparo la bicicletta con id " + bicicletta.getId());
+		Connection connessione = this.connessioneDb.getConnessione();
+		
+		try {
+			PreparedStatement statement = connessione.prepareStatement("UPDATE bicicletta SET danneggiata = false WHERE id = ?");
 			statement.setString(1, bicicletta.getId());
 			
 			statement.executeUpdate();

@@ -12,4 +12,6 @@ public interface BiciclettaDAO {
 	public void rimuoviBicicletta(Totem totem, TipoBicicletta tipoBicicletta) throws NoSuchElementException;
 	
 	public void comunicaDanni(Bicicletta bicicletta);
+	
+	public void riparaBicicletta(Bicicletta bicicletta);
 }
