@@ -3,6 +3,7 @@ package dati;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 import dominio.Bicicletta;
 import dominio.Morsa;
@@ -34,7 +35,7 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
         	statement.executeUpdate();
         	statement.close();
         	
-        	// Ho aggiunto la bicicletta ma la morsa a cui è collegata nel db non risulta associata, bisogna aggiornare la chiave esternaù
+        	// Ho aggiunto la bicicletta ma la morsa a cui è collegata nel db non risulta associata, bisogna aggiornare la chiave esterna
         	statement = connessione.prepareStatement("UPDATE morsa SET bicicletta = ? WHERE id = ?");
         	statement.setString(1, bicicletta.getId());
         	statement.setString(2, morsaUtilizzata.getId());
@@ -49,9 +50,31 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
 	}
 	
 	@Override
-	public void rimuoviBicicletta(Totem totem, TipoBicicletta tipoBicicletta) {
+	public void rimuoviBicicletta(Totem totem, TipoBicicletta tipoBicicletta) throws NoSuchElementException {
 		// Qui devi controllare se c'è il tipo di bicicletta per rimuoverla
+		System.out.println("Rimuovo una bicicletta di tipo " + tipoBicicletta + " dalla postazione con totem avente id: " + totem.getId());
+		Connection connessione = this.connessioneDb.getConnessione();
 		
+		try {
+			// Questo ovviamente non è un noleggio, mi serve solamente per prendere la bici ma non risulterà tale
+			Bicicletta bicicletta = totem.noleggiaBicicletta(tipoBicicletta);
+
+			PreparedStatement statement = connessione.prepareStatement("UPDATE morsa SET bicicletta = NULL WHERE bicicletta = ?");
+			statement.setString(1, bicicletta.getId());
+			
+			statement.executeUpdate();
+			statement.close();
+			
+			statement = connessione.prepareStatement("DELETE FROM bicicletta WHERE id = ?");
+			statement.setString(1, bicicletta.getId());
+			
+			statement.executeUpdate();
+			statement.close();
+		} catch (NoSuchElementException e) {
+			throw new NoSuchElementException("Non ci sono biciclette di tipo " + tipoBicicletta + " da rimuovere in questa postazione con totem.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

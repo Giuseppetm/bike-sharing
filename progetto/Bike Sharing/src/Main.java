@@ -124,10 +124,10 @@ public class Main {
 	        System.out.println(t1.getMorse());
         */
         
+        Totem t1 = new Totem("Via Dennissonis 66");
         Totem t2 = new Totem("Via De Guidonis 32");
         
         /*
-        Totem t1 = new Totem("Via Dennissonis 66");
         t1.aggiungiMorsa(m1);
         t1.aggiungiMorsa(m2);
         t1.aggiungiMorsa(m3);
@@ -205,8 +205,10 @@ public class Main {
         //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.NORMALE);
         //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.ELETTRICA);
         BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
-        //biciclettaDao.aggiungiBicicletta(totems.get(0), TipoBicicletta.NORMALE);
+        //biciclettaDao.aggiungiBicicletta(totems.get(0), TipoBicicletta.ELETTRICA);
+        //biciclettaDao.aggiungiBicicletta(totems.get(1), TipoBicicletta.NORMALE);
 
+        //biciclettaDao.rimuoviBicicletta(totems.get(1), TipoBicicletta.ELETTRICA);
     }
     
     public static void separator(String text) {

@@ -20,7 +20,7 @@ CREATE TABLE morsa (
     bicicletta VARCHAR(36),
     totem VARCHAR(36),
     PRIMARY KEY(id),
-    FOREIGN KEY(bicicletta) REFERENCES bicicletta(id),
+    FOREIGN KEY(bicicletta) REFERENCES bicicletta(id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(totem) REFERENCES totem(id)
 );
 
@@ -84,3 +84,5 @@ set search_path = bike_sharing;
 
 delete from cartadicredito;
 delete from abbonamento;
+
+ALTER TABLE morsa ADD FOREIGN KEY (bicicletta) REFERENCES bicicletta(id) ON UPDATE CASCADE ON DELETE CASCADE;

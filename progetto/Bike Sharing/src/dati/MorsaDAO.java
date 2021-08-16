@@ -9,7 +9,7 @@ import dominio.Totem;
 public interface MorsaDAO {
 	public List<Morsa> getMorse(Totem totem);
 	
-	public void rimuoviMorse(Totem totem);
+	public void rimuoviMorse(Totem totem); // Rimuove tutte le morse associate ad un totem e le relative biciclette
 	
 	public void aggiungiMorsa(Totem totem, TipoMorsa tipoMorsa);
 	

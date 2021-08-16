@@ -71,7 +71,7 @@ public class MorsaDAOPostgres implements MorsaDAO {
 		try {
 			PreparedStatement statement = connessione.prepareStatement("INSERT INTO morsa VALUES(?,?,?,?,?)");
 			statement.setString(1, morsa.getId());
-			statement.setInt(2, totem.getNumeroMorse()); // Da verificare se così la posizione funziona correttamente
+			statement.setInt(2, totem.getNumeroMorse()); // Da verificare se così la posizione funziona correttamente; update: sembra andare
 			statement.setString(3, morsa.getTipo().toString());
 			statement.setNull(4, java.sql.Types.NULL);
 			statement.setString(5, totem.getId());

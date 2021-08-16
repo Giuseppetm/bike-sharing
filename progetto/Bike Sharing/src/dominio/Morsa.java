@@ -29,11 +29,12 @@ public class Morsa {
 		this.stato = bicicletta == null ? StatoMorsa.DISPONIBILE : StatoMorsa.OCCUPATA;
 	}
 	
-	public Bicicletta apri() {
-		if (this.stato == StatoMorsa.DISPONIBILE) return null;
+	public Bicicletta apri() throws IllegalStateException {
+		if (this.stato == StatoMorsa.DISPONIBILE) throw new IllegalStateException("Non posso aprire una morsa senza bicicletta.");
 		Bicicletta b = this.bicicletta;
 		this.stato = StatoMorsa.DISPONIBILE;
 		this.bicicletta = null;
+		System.out.println(b);
 		return b;
 	}
 	
@@ -51,7 +52,8 @@ public class Morsa {
 		return this.id;
 	}
  	
-	public Bicicletta getBicicletta() {
+	public Bicicletta getBicicletta() throws IllegalStateException {
+		if (this.bicicletta == null) throw new IllegalStateException("La bicicletta non è stata inizializzata in questa morsa.");
 		return this.bicicletta;
 	}
 	
