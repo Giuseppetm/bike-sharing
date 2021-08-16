@@ -1,6 +1,4 @@
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.List;
 
 import dominio.Abbonamento;
 import dominio.Bicicletta;
@@ -13,6 +11,7 @@ import dominio.Noleggio;
 import dominio.Totem;
 import dati.AbbonamentoDAOPostgres;
 import dati.ConnessioneDb;
+import dati.TotemDAOPostgres;
 
 public class Main {
     public static void main(String[] args) {
@@ -110,12 +109,15 @@ public class Main {
         
         /* TOTEM */
         separator("Totem");
-        //List<Morsa> morse = new ArrayList<Morsa>();
-        //morse.add(m1);
-        //morse.add(m2);
-        //morse.add(m3);
+        /*
+	        List<Morsa> morse = new ArrayList<Morsa>();
+	        morse.add(m1);
+	        morse.add(m2);
+	        morse.add(m3);
+	        Totem t1 = new Totem("Via Dennissonis 66", morse);
+	        System.out.println(t1.getMorse());
+        */
         
-        //Totem t1 = new Totem("Via Dennissonis 66", morse);
         Totem t1 = new Totem("Via Dennissonis 66");
         t1.aggiungiMorsa(m1);
         t1.aggiungiMorsa(m2);
@@ -129,8 +131,7 @@ public class Main {
         t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
         t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
         System.out.println(t1.toString());
-        // System.out.println(t1.getMorse());
-        
+
         
         /* CONNESSIONE AL DB */
         separator("Connessioni al database");
@@ -151,7 +152,13 @@ public class Main {
 
         /* Stampa abbonamenti */
         System.out.println("---Lista abbonamenti presenti sul db---");
-        stampaAbbonamenti();
+        try {
+        	List<Abbonamento> abbonamenti = abbonamentoDao.getListaAbbonamenti();
+        	for (Abbonamento abb : abbonamenti)
+        		System.out.println(abb.toString() + "\n");
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
         
         
         Abbonamento abbLogin = abbonamentoDao.effettuaLogin("482e875d-8814-4e86-9fff-1c07ea4e33cc", "Dennis123");
@@ -164,22 +171,30 @@ public class Main {
         // System.out.println("\n---Abbonamento retrieve dal login n.2 BEFORE ATTIVAZIONE---\n" + abbLogin2.toString());
         // abbonamentoDao.attivaAbbonamento(abbLogin2);
         // System.out.println("\n---Abbonamento retrieve dal login n.2 AFTER ATTIVAZIONE---\n" + abbLogin2.toString());
-
-    }
-    
-    
-
-    public static void stampaAbbonamenti() {
-    	ConnessioneDb db = ConnessioneDb.getIstance();
-    	Connection connessione = db.getConnessione();
+        
+        
+        /* Stampa totem */
+        System.out.println("\n---Lista totem presenti sul db---");
+        TotemDAOPostgres totemDao = new TotemDAOPostgres();
+        
+        totemDao.aggiungiTotem(t1);
+        
         try {
-        	Statement statement = connessione.createStatement();
-        	ResultSet resultSet = statement.executeQuery("SELECT * FROM abbonamento");
-        	while (resultSet.next()) System.out.printf("Codice: %s, Password: %s, Tipo: %s, Data acquisto: %s, Data inizio: %s, Data scadenza validità: %s\n", resultSet.getString("codice"), resultSet.getString("password"), resultSet.getString("tipo"), resultSet.getString("dataacquisto"), resultSet.getString("datainizio"), resultSet.getString("datascadenzavalidità"));
+        	List<String> totemIDs = totemDao.getListaTotemID();
+        	for (String id : totemIDs) System.out.println("ID Totem: " + id);
         } catch (Exception e) {
-        	System.out.println("Errore di connessione con il database.");
         	e.printStackTrace();
         }
+        
+        totemDao.rimuoviTotem(t1);
+        
+        try {
+        	List<String> totemIDs = totemDao.getListaTotemID();
+        	for (String id : totemIDs) System.out.println("ID Totem: " + id);
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+
     }
     
     public static void separator(String text) {

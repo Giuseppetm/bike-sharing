@@ -1,21 +1,27 @@
 package dati;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
-import dominio.Bicicletta;
-import dominio.Morsa;
 import dominio.Totem;
-
-/*
- * Riguardo il totem, mi servono diversi metodi che interagiscono col db.
- * 1) Uno che mi recupera tutte le morse del totem presumo collegate anche con le bici, quindi mi serve un join probabilmente
- * 2) Uno che mi permette di aggiungere una morsa e rimuoverla
- * 3) 
- * 
- */
+import dominio.TipoMorsa;
+import dominio.TipoBicicletta;
 
 public interface TotemDAO {
-	public List<Morsa> getMorse(Totem totem);
+	// Questo mi serve per visualizzare tutte le postazioni disponibili poi, e per effettuare operazioni su uno in particolare
+	public List<Totem> getListaTotem() throws NoSuchElementException; 
 	
+	public List<String> getListaTotemID() throws NoSuchElementException;
 	
+	public void aggiungiTotem(Totem totem);
+	
+	public void rimuoviTotem(Totem totem);
+	
+	public void aggiungiMorsa(Totem totem, TipoMorsa tipoMorsa);
+	
+	public void rimuoviMorsa(Totem totem, TipoMorsa tipoMorsa);
+	
+	public void aggiungiBicicletta(Totem totem, TipoBicicletta tipoBicicletta);
+	
+	public void rimuoviBicicletta(Totem totem, TipoBicicletta tipoBicicletta);
 }

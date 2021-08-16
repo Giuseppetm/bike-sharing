@@ -1,5 +1,5 @@
 package dati;
 
-public class NoleggioDAOPostgres {
+public class NoleggioDAOPostgres implements NoleggioDAO {
 	
 }

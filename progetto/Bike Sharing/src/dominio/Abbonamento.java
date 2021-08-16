@@ -92,7 +92,7 @@ public class Abbonamento {
 	}
 	
 	public void sospendiAbbonamento() {
-		if (this.sospeso) throw new IllegalStateException("L'abbonamento è stato già annullato.");
+		if (this.sospeso) throw new IllegalStateException("L'abbonamento è stato già sospeso.");
 		this.sospeso = true;
 	}
 	

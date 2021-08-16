@@ -21,6 +21,13 @@ public class Morsa {
 		this.stato = StatoMorsa.OCCUPATA;
 	}
 	
+	/* Costruttore per morse già inizializzate */
+	public Morsa(String id, TipoMorsa tipo, Bicicletta bicicletta) {
+		this.id = id;
+		this.tipo = tipo;
+		this.bicicletta = bicicletta;
+	}
+	
 	public Bicicletta apri() {
 		if (this.stato == StatoMorsa.DISPONIBILE) return null;
 		Bicicletta b = this.bicicletta;

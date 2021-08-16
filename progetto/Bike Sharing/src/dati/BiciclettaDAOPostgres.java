@@ -1,5 +1,5 @@
 package dati;
 
-public class BiciclettaDAOPostgres {
+public class BiciclettaDAOPostgres implements BiciclettaDAO {
 	
 }

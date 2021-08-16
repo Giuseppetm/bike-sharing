@@ -3,6 +3,9 @@ package dati;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.sql.Connection;
 
@@ -15,6 +18,43 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	
 	public AbbonamentoDAOPostgres() {
 		this.connessioneDb = ConnessioneDb.getIstance();
+	}
+	
+	@Override
+	public List<Abbonamento> getListaAbbonamenti() throws NoSuchElementException {
+		System.out.println("Prelevo la lista di abbonamenti...");
+		Connection connessione = this.connessioneDb.getConnessione();
+		
+		List<Abbonamento> abbonamenti = new ArrayList<Abbonamento>();
+		
+        try {
+        	Statement statement = connessione.createStatement();
+        	ResultSet resultSet = statement.executeQuery("SELECT abb.codice, abb.password, abb.tipo, abb.studente, abb.sospeso, abb.dataacquisto, abb.datainizio, abb.datascadenzavalidità, abb.ammonizioni, carta.numero, carta.scadenza, carta.cvv "
+					+ "FROM abbonamento AS abb JOIN cartadicredito AS carta ON abb.cartadicredito = carta.numero");
+        	
+        	while (resultSet.next()) {
+        		CartaDiCredito carta = new CartaDiCredito(resultSet.getString(10), resultSet.getString(11), resultSet.getString(12));
+        		Abbonamento abbonamento = new Abbonamento(
+    					resultSet.getString(1), 
+    					resultSet.getString(2), 
+    					TipoAbbonamento.valueOf(resultSet.getString(3)), 
+    					carta, 
+    					resultSet.getBoolean(4), 
+    					resultSet.getBoolean(5), 
+    					resultSet.getDate(6).toLocalDate(), 
+    					resultSet.getDate(7) != null ? resultSet.getDate(7).toLocalDate() : null, 
+    					resultSet.getDate(8).toLocalDate(), 
+    					resultSet.getInt(9)
+    				);
+        		abbonamenti.add(abbonamento);
+        	}
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        if (abbonamenti.isEmpty()) throw new NoSuchElementException("Non ci sono abbonamenti al momento.");
+        
+        return abbonamenti;
 	}
 	
 	@Override
@@ -105,11 +145,11 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	}
 
 	@Override
-	public void attivaAbbonamento(Abbonamento abbonamento) {
+	public void attivaAbbonamento(Abbonamento abbonamento) throws IllegalStateException {
 		try {
 			abbonamento.attivaAbbonamento();
 		} catch (IllegalStateException e) {
-			throw new IllegalArgumentException("L'abbonamento è già attivo!");
+			throw new IllegalStateException("L'abbonamento è già attivo!");
 		}
 		
 		System.out.println("Attivamento abbonamento, codice: " + abbonamento.getCodice());
@@ -129,11 +169,16 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	}
 	
 	@Override
-	public void ammonisciAbbonamento(Abbonamento abbonamento) {
+	public void ammonisciAbbonamento(Abbonamento abbonamento) throws IllegalStateException {
 		System.out.println("Ammonizione abbonamento, codice: " + abbonamento.getCodice());
 		abbonamento.aggiungiAmmonizione();
 		
-		if (abbonamento.getAmmonizioni() == 3) this.sospendiAbbonamento(abbonamento);
+		if (abbonamento.getAmmonizioni() == 3) 
+			try { 
+				this.sospendiAbbonamento(abbonamento); 
+			} catch (IllegalStateException e) {
+				throw new IllegalStateException("L'abbonamento è già attivo, impossibile procedere.");
+			}
 		
 		Connection connessione = this.connessioneDb.getConnessione();
 		
@@ -151,9 +196,14 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 	}
 	
 	@Override
-	public void sospendiAbbonamento(Abbonamento abbonamento) {
+	public void sospendiAbbonamento(Abbonamento abbonamento) throws IllegalStateException {
 		System.out.println("Sospensione abbonamento, codice: " + abbonamento.getCodice());
-		abbonamento.sospendiAbbonamento();
+		try {
+			abbonamento.sospendiAbbonamento();			
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("L'abbonamento è già stato sospeso, impossibile procedere.");
+		}
+		
 		Connection connessione = this.connessioneDb.getConnessione();
 		
 		try {

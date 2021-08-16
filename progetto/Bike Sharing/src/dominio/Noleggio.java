@@ -22,6 +22,15 @@ public class Noleggio {
 		this.orarioFineNoleggio = null; // L'orario di fine viene settato quando viene chiamato il metodo apposito per la fine del noleggio
 	}
 	
+	/* Costruttore per noleggi già inizializzati */
+	public Noleggio(String id, Abbonamento abbonamento, Bicicletta bicicletta, Timestamp orarioInizioNoleggio, Timestamp orarioFineNoleggio) {
+		this.id = id;
+		this.abbonamento = abbonamento;
+		this.bicicletta = bicicletta;
+		this.orarioInizioNoleggio = orarioInizioNoleggio;
+		this.orarioFineNoleggio = orarioFineNoleggio;
+	}
+	
 	public Abbonamento getAbbonamento() {
 		return this.abbonamento;
 	}
