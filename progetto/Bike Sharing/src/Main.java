@@ -12,6 +12,7 @@ import dominio.Totem;
 import dati.AbbonamentoDAOPostgres;
 import dati.BiciclettaDAOPostgres;
 import dati.ConnessioneDb;
+import dati.DatiStatisticiDAOPostgres;
 import dati.MorsaDAOPostgres;
 import dati.TotemDAOPostgres;
 
@@ -75,6 +76,7 @@ public class Main {
         CartaDiCredito c2 = new CartaDiCredito("12345678903555", "12/2021", "121");
         CartaDiCredito c3 = new CartaDiCredito("4475794209397914", "12/2023", "721");
         CartaDiCredito c4 = new CartaDiCredito("4291790808416693", "12/2021", "118");
+        CartaDiCredito c5 = new CartaDiCredito("4870709574110347", "12/2021", "523");
         System.out.println(c1.toString());
         System.out.println(c2.toString());
         System.out.println(c3.toString());
@@ -88,6 +90,7 @@ public class Main {
         Abbonamento abb2 = new Abbonamento("Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
         Abbonamento abb3 = new Abbonamento("MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c3, true);
         Abbonamento abb4 = new Abbonamento("GuidoGuinizzelli666", TipoAbbonamento.GIORNALIERO, c4, false);
+        Abbonamento abb5 = new Abbonamento("GiuseppeOfField214", TipoAbbonamento.GIORNALIERO, c5, false);
         
         abb3.attivaAbbonamento();
         
@@ -158,6 +161,7 @@ public class Main {
         //abbonamentoDao.registraAbbonamento(abb2);
         //abbonamentoDao.registraAbbonamento(abb3);
         //abbonamentoDao.registraAbbonamento(abb4);
+        //abbonamentoDao.registraAbbonamento(abb5);
         
 
         /* Stampa abbonamenti */
@@ -209,6 +213,13 @@ public class Main {
         //biciclettaDao.aggiungiBicicletta(totems.get(1), TipoBicicletta.NORMALE);
 
         //biciclettaDao.rimuoviBicicletta(totems.get(1), TipoBicicletta.ELETTRICA);
+        
+        
+        /* Dati statistici */
+        System.out.println("---Calcolo dati statistici---");
+        DatiStatisticiDAOPostgres datiStatisticiDao = new DatiStatisticiDAOPostgres();
+        System.out.println(datiStatisticiDao.getNumeroAbbonamenti());
+        System.out.println(datiStatisticiDao.getNumeroAbbonamentiAttivi());
     }
     
     public static void separator(String text) {
