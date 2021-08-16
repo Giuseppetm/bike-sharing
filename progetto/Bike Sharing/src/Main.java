@@ -214,7 +214,8 @@ public class Main {
 
         //biciclettaDao.rimuoviBicicletta(totems.get(1), TipoBicicletta.ELETTRICA);
         
-        
+        //biciclettaDao.comunicaDanni(new Bicicletta("43500881-3f1d-48ac-b183-760ab3e7532d", TipoBicicletta.NORMALE, false));
+        //biciclettaDao.riparaBicicletta(new Bicicletta("43500881-3f1d-48ac-b183-760ab3e7532d", TipoBicicletta.NORMALE, false));
         
         
         /* Noleggi */

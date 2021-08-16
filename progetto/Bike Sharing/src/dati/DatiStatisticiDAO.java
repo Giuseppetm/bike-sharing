@@ -11,7 +11,7 @@ public interface DatiStatisticiDAO {
 
 	public int getNumeroNoleggiEffettuati();
 	
-	public int getNumeroTotem(); // Per vedere quanti totem ci sono nel sistema
+	public int getNumeroTotem();
 	
-	public String getTotemPiùUtilizzato(); // Totem con più noleggi associati, basta restituire l'indirizzo
+	public String getTotemPiùUtilizzato();
 }
