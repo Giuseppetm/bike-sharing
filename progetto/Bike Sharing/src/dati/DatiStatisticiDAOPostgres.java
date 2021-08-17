@@ -135,7 +135,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 			e.printStackTrace();
 		}
 
-		// if (indirizzoTotem == null) throw new IllegalStateException("Non ci sono ancora noleggi oppure totem, quindi non è possibile calcolare qual è il totem");
+		if (indirizzoTotem == null) throw new IllegalStateException("Non ci sono ancora noleggi oppure totem, quindi non è possibile calcolare qual è il totem con maggiori noleggi effettuati.");
 		return indirizzoTotem;
 	}
 }

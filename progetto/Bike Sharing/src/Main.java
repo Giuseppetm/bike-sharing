@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import dominio.Abbonamento;
@@ -14,6 +15,7 @@ import dati.BiciclettaDAOPostgres;
 import dati.ConnessioneDb;
 import dati.DatiStatisticiDAOPostgres;
 import dati.MorsaDAOPostgres;
+import dati.NoleggioDAOPostgres;
 import dati.TotemDAOPostgres;
 
 public class Main {
@@ -21,30 +23,36 @@ public class Main {
         System.out.println("------------------------------------------ Bike Sharing Testing Main ------------------------------------------\n"); 
         
         /* BICICLETTE */
-        separator("Biciclette");
+        //separator("Biciclette");
+        /*
         Bicicletta b1 = new Bicicletta(TipoBicicletta.NORMALE);
         Bicicletta b2 = new Bicicletta(TipoBicicletta.ELETTRICA);
         Bicicletta b3 = new Bicicletta(TipoBicicletta.ELETTRICA_SEGGIOLINO);
+        */
         
         // Questi vengono fatti dal totem
         //b1.setDanneggiata(false);
         //b2.setDanneggiata(true);
         //b3.setDanneggiata(false);
         
+        /*
         System.out.println(b1.toString());
         System.out.println(b2.toString());
         System.out.println(b3.toString());
+        */
         
         /* Costi biciclette */
-        separator("Costi biciclette");
+        //separator("Costi biciclette");
+        /*
         System.out.println(b1.calcolaCosto(91, false) + "€");
         System.out.println(b1.calcolaCosto(190, true) + "€");
         System.out.println(b2.calcolaCosto(42, true) + "€");
         System.out.println(b3.calcolaCosto(156, true) + "€");
+        */
         
         
         /* MORSE */
-        separator("Morse");
+        //separator("Morse");
         /*
         Morsa m1 = new Morsa(TipoMorsa.ELETTRICA);
         m1.chiudi(b2);
@@ -71,7 +79,8 @@ public class Main {
         
         
         /* CARTE DI CREDITO, Valide: 12345678903555 , 012850003580200  */
-        separator("Carte di credito");
+        //separator("Carte di credito");
+        /*
         CartaDiCredito c1 = new CartaDiCredito("012850003580200", "9/2022", "123");
         CartaDiCredito c2 = new CartaDiCredito("12345678903555", "12/2021", "121");
         CartaDiCredito c3 = new CartaDiCredito("4475794209397914", "12/2023", "721");
@@ -81,11 +90,12 @@ public class Main {
         System.out.println(c2.toString());
         System.out.println(c3.toString());
         System.out.println(c4.toString());
+        */
         
         
         /* ABBONAMENTI */
-        separator("Abbonamenti");
-
+        //separator("Abbonamenti");
+        /*
         Abbonamento abb1 = new Abbonamento("Dennis123", TipoAbbonamento.ANNUALE, c1, true);
         Abbonamento abb2 = new Abbonamento("Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
         Abbonamento abb3 = new Abbonamento("MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c3, true);
@@ -98,22 +108,8 @@ public class Main {
         System.out.println(abb2.toString() + "\n");
         System.out.println(abb3.toString() + "\n");
         System.out.println(abb4.toString() + "\n");
+        */
         
-        
-        
-        /* NOLEGGI */
-        separator("Noleggi");
-        Noleggio n1 = new Noleggio(abb1, b1);
-        System.out.println(n1.toString());
-        //try { Thread.sleep(5000); } catch(Exception e) { e.printStackTrace(); }
-        n1.terminaNoleggio();
-        System.out.println("Durata noleggio: " + n1.getDurataNoleggio() + " secondi");
-        
-        Noleggio n2 = new Noleggio(abb2, b3);
-        System.out.println(n2.toString());
-        //try { Thread.sleep(3000); } catch(Exception e) { e.printStackTrace(); }
-        n2.terminaNoleggio();
-        System.out.println("Durata noleggio: " + n2.getDurataNoleggio() + " secondi");
         
         
         /* TOTEM */
@@ -129,6 +125,8 @@ public class Main {
         
         Totem t1 = new Totem("Via Dennissonis 66");
         Totem t2 = new Totem("Via De Guidonis 32");
+        System.out.println(t1.toString());
+        System.out.println(t2.toString());
         
         /*
         t1.aggiungiMorsa(m1);
@@ -142,7 +140,23 @@ public class Main {
         t1.aggiungiMorsaByTipo(TipoMorsa.NORMALE);
         t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
         t1.aggiungiMorsaByTipo(TipoMorsa.ELETTRICA);
-        System.out.println(t1.toString());
+        */
+        
+        
+        /* NOLEGGI */
+        //separator("Noleggi");
+        /*
+        Noleggio n1 = new Noleggio(abb1, b1, t1);
+        System.out.println(n1.toString());
+        //try { Thread.sleep(5000); } catch(Exception e) { e.printStackTrace(); }
+        n1.terminaNoleggio();
+        System.out.println("Durata noleggio: " + n1.getDurataNoleggio() + " minuti\n");
+        
+        Noleggio n2 = new Noleggio(abb2, b3, t2);
+        System.out.println(n2.toString());
+        //try { Thread.sleep(3000); } catch(Exception e) { e.printStackTrace(); }
+        n2.terminaNoleggio();
+        System.out.println("Durata noleggio: " + n2.getDurataNoleggio() + " minuti\n");
         */
 
         
@@ -166,8 +180,9 @@ public class Main {
 
         /* Stampa abbonamenti */
         System.out.println("---Lista abbonamenti presenti sul db---");
+        List<Abbonamento> abbonamenti = new ArrayList<Abbonamento>();
         try {
-        	List<Abbonamento> abbonamenti = abbonamentoDao.getListaAbbonamenti();
+        	 abbonamenti = abbonamentoDao.getListaAbbonamenti();
         	for (Abbonamento abb : abbonamenti)
         		System.out.println(abb.toString() + "\n");
         } catch (Exception e) {
@@ -200,16 +215,17 @@ public class Main {
         MorsaDAOPostgres morsaDao = new MorsaDAOPostgres();
         //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.ELETTRICA);
         //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.NORMALE);
-        //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.ELETTRICA);
         
         //morsaDao.rimuoviMorsa(totems.get(0), TipoMorsa.NORMALE);
         //morsaDao.rimuoviMorsa(totems.get(0), TipoMorsa.ELETTRICA);
         
         //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.NORMALE);
-        //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.NORMALE);
         //morsaDao.aggiungiMorsa(totems.get(1), TipoMorsa.ELETTRICA);
+        
         BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
+        
         //biciclettaDao.aggiungiBicicletta(totems.get(0), TipoBicicletta.ELETTRICA);
+        //biciclettaDao.aggiungiBicicletta(totems.get(0), TipoBicicletta.NORMALE);
         //biciclettaDao.aggiungiBicicletta(totems.get(1), TipoBicicletta.NORMALE);
 
         //biciclettaDao.rimuoviBicicletta(totems.get(1), TipoBicicletta.ELETTRICA);
@@ -218,7 +234,24 @@ public class Main {
         //biciclettaDao.riparaBicicletta(new Bicicletta("43500881-3f1d-48ac-b183-760ab3e7532d", TipoBicicletta.NORMALE, false));
         
         
+        
+        
         /* Noleggi */
+        NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
+        
+        Noleggio n1 = new Noleggio(abbLogin, biciclettaDao.noleggiaBicicletta(totems.get(0), TipoBicicletta.ELETTRICA) , totems.get(0));
+        noleggioDao.iniziaNoleggio(n1);
+        //Noleggio noleggioInCorso = noleggioDao.getNoleggioInCorso(abbLogin);
+        //noleggioDao.finisciNoleggio(noleggioInCorso);
+        
+        List<Noleggio> noleggi = noleggioDao.getListaNoleggi(abbLogin);
+        System.out.printf("\n---Lista noleggi dell'abbonamento %s---\n", abbLogin.getCodice());
+        System.out.println(noleggi);
+        
+        
+        
+        
+        
         
         
         
@@ -234,7 +267,7 @@ public class Main {
         System.out.println(datiStatisticiDao.getNumeroBicicletteDanneggiate());
         System.out.println(datiStatisticiDao.getNumeroNoleggiEffettuati());
         System.out.println(datiStatisticiDao.getNumeroTotem());
-        System.out.println(datiStatisticiDao.getTotemPiùUtilizzato());
+        try { System.out.println(datiStatisticiDao.getTotemPiùUtilizzato()); } catch(Exception e) {}
         */
     }
     

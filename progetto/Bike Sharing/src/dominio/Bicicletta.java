@@ -30,8 +30,12 @@ public class Bicicletta {
 		return this.tipo;
 	}
 	
-	public void setDanneggiata(boolean stato) {
-		this.danneggiata = stato;
+	public void setDanneggiata() {
+		this.danneggiata = true;
+	}
+	
+	public void riparaBicicletta() {
+		this.danneggiata = false;
 	}
 	
 	public boolean isDanneggiata() {

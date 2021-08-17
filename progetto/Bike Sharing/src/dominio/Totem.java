@@ -94,7 +94,7 @@ public class Totem {
 	}
 	
 	public void comunicaDanni(Bicicletta bicicletta) {
-		bicicletta.setDanneggiata(true);
+		bicicletta.setDanneggiata();
 	}
 	
 	public String getId() {
