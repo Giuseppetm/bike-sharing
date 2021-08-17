@@ -33,12 +33,14 @@ public class TotemDAOPostgres implements TotemDAO {
         	ResultSet resultSet = statement.executeQuery("SELECT id, indirizzo FROM totem");
         	
         	while (resultSet.next()) {
-        		List<Morsa> morse = morsaDao.getMorse(new Totem(resultSet.getString(1), resultSet.getString(2)));
+        		List<Morsa> morse = new ArrayList<Morsa>();
+        		try {
+        			morse = morsaDao.getMorse(new Totem(resultSet.getString(1), resultSet.getString(2)));
+        		} catch (NoSuchElementException e) { /* Just skip and create totem with empty morse */}
             	
             	Totem totem = new Totem(resultSet.getString(1), resultSet.getString(2), morse);
             	totems.add(totem);
         	}
-    
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

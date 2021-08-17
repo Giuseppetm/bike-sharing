@@ -209,8 +209,11 @@ public class Main {
         //totemDao.rimuoviTotem(t1);
         //totemDao.aggiungiTotem(t2);
         
-    	List<Totem> totems = totemDao.getListaTotem();
-    	System.out.println("Totem: " + totems.get(0).toString());
+    	List<Totem> totems = new ArrayList<Totem>();
+    	try {
+    		totems = totemDao.getListaTotem();
+    	} catch (Exception e) {e.printStackTrace();}
+    	for (Totem t : totems) System.out.println(t);
         
         MorsaDAOPostgres morsaDao = new MorsaDAOPostgres();
         //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.ELETTRICA);
