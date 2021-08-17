@@ -53,6 +53,7 @@ public class Noleggio {
 	
 	public void terminaNoleggio() {
 		this.orarioFineNoleggio = new Timestamp(System.currentTimeMillis());
+		if (this.getDurataNoleggio() >= 1440) this.abbonamento.applicaPenale();
 	}
 	
 	public Timestamp getOrarioInizioNoleggio() {

@@ -240,7 +240,7 @@ public class Main {
         NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
         
         
-        noleggioDao.iniziaNoleggio(abbLogin, totems.get(0), TipoBicicletta.ELETTRICA);
+        //noleggioDao.iniziaNoleggio(abbLogin, totems.get(0), TipoBicicletta.ELETTRICA);
         //noleggioDao.finisciNoleggio(abbLogin, totems.get(0)); // La cosa figa è che puoi consegnarlo ad un altro totem volendo
         
         /*
@@ -258,7 +258,6 @@ public class Main {
         
         
         /* Dati statistici */
-        /*
         System.out.println("---Calcolo dati statistici---");
         DatiStatisticiDAOPostgres datiStatisticiDao = new DatiStatisticiDAOPostgres();
         System.out.println(datiStatisticiDao.getNumeroAbbonamenti());
@@ -268,7 +267,6 @@ public class Main {
         System.out.println(datiStatisticiDao.getNumeroNoleggiEffettuati());
         System.out.println(datiStatisticiDao.getNumeroTotem());
         try { System.out.println(datiStatisticiDao.getTotemPiùUtilizzato()); } catch(Exception e) {}
-        */
     }
     
     public static void separator(String text) {

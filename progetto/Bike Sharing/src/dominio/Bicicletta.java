@@ -1,7 +1,6 @@
 package dominio;
 import java.util.UUID;
 
-// Alessia ha consigliato di generare gli id manualmente nella classe che possono risultare anche utili
 // To-do: invariante (id univoci immagino)
 
 public class Bicicletta {

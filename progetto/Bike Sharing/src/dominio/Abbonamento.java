@@ -96,6 +96,10 @@ public class Abbonamento {
 		this.sospeso = true;
 	}
 	
+	public void applicaPenale() {
+		this.carta.effettuaPagamento(150);
+	}
+	
 	public boolean isSospeso() {
 		return this.sospeso;
 	}

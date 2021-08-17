@@ -31,6 +31,10 @@ public class CartaDiCredito {
 		return this.cvv;
 	}
 	
+	public void effettuaPagamento(double denaro) {
+		System.out.println("Pagati " + denaro + " tramite carta con numero " + this.numero);
+	}
+	
 	/* Questa funzione controlla se il numero inserito riguardante la carta di credito Ë valido. */
 	static public boolean controllaValidit‡Numero(String numero) {
 		int[] ints = new int[numero.length()];
