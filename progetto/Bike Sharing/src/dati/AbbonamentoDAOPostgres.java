@@ -149,7 +149,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 		try {
 			abbonamento.attivaAbbonamento();
 		} catch (IllegalStateException e) {
-			throw new IllegalStateException("L'abbonamento è già attivo!");
+			throw e;
 		}
 		
 		System.out.println("Attivamento abbonamento, codice: " + abbonamento.getCodice());
@@ -177,7 +177,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 			try { 
 				this.sospendiAbbonamento(abbonamento); 
 			} catch (IllegalStateException e) {
-				throw new IllegalStateException("L'abbonamento è già attivo, impossibile procedere.");
+				throw e;
 			}
 		
 		Connection connessione = this.connessioneDb.getConnessione();
@@ -201,7 +201,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 		try {
 			abbonamento.sospendiAbbonamento();			
 		} catch (IllegalStateException e) {
-			throw new IllegalStateException("L'abbonamento è già stato sospeso, impossibile procedere.");
+			throw e;
 		}
 		
 		Connection connessione = this.connessioneDb.getConnessione();
