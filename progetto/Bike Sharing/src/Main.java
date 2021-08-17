@@ -210,7 +210,7 @@ public class Main {
         //totemDao.aggiungiTotem(t2);
         
     	List<Totem> totems = totemDao.getListaTotem();
-    	for (Totem totem : totems) System.out.println("Totem: " + totem.toString());
+    	System.out.println("Totem: " + totems.get(0).toString());
         
         MorsaDAOPostgres morsaDao = new MorsaDAOPostgres();
         //morsaDao.aggiungiMorsa(totems.get(0), TipoMorsa.ELETTRICA);
@@ -239,15 +239,15 @@ public class Main {
         /* Noleggi */
         NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
         
-        Noleggio n1 = new Noleggio(abbLogin, biciclettaDao.noleggiaBicicletta(totems.get(0), TipoBicicletta.ELETTRICA) , totems.get(0));
-        noleggioDao.iniziaNoleggio(n1);
-        //Noleggio noleggioInCorso = noleggioDao.getNoleggioInCorso(abbLogin);
-        //noleggioDao.finisciNoleggio(noleggioInCorso);
         
+        noleggioDao.iniziaNoleggio(abbLogin, totems.get(0), TipoBicicletta.ELETTRICA);
+        //noleggioDao.finisciNoleggio(abbLogin, totems.get(0)); // La cosa figa è che puoi consegnarlo ad un altro totem volendo
+        
+        /*
         List<Noleggio> noleggi = noleggioDao.getListaNoleggi(abbLogin);
         System.out.printf("\n---Lista noleggi dell'abbonamento %s---\n", abbLogin.getCodice());
-        System.out.println(noleggi);
-        
+        for (Noleggio noleggio : noleggi) System.out.println(noleggio + "\n");
+        */
         
         
         

@@ -5,13 +5,15 @@ import java.util.NoSuchElementException;
 
 import dominio.Abbonamento;
 import dominio.Noleggio;
+import dominio.TipoBicicletta;
+import dominio.Totem;
 
 public interface NoleggioDAO {
 	public List<Noleggio> getListaNoleggi(Abbonamento abbonamento) throws NoSuchElementException;
 	
-	public void iniziaNoleggio(Noleggio noleggio) throws IllegalStateException;
+	public void iniziaNoleggio(Abbonamento abbonamento, Totem totem, TipoBicicletta tipoBicicletta) throws IllegalStateException;
 	
-	public void finisciNoleggio(Noleggio noleggio) throws IllegalStateException;
+	public void finisciNoleggio(Abbonamento abbonamento, Totem totem) throws IllegalStateException;
 	
 	public Noleggio getNoleggioInCorso(Abbonamento abbonamento) throws NoSuchElementException;
 	

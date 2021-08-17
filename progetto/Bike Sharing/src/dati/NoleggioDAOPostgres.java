@@ -56,16 +56,19 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
         
         return noleggi;
 	}
-
+	
 	@Override
-	public void iniziaNoleggio(Noleggio noleggio) throws IllegalStateException {
-		System.out.println("Aggiungo un nuovo noleggio legato all'abbonamento con codice: " + noleggio.getAbbonamento().getCodice());
+	public void iniziaNoleggio(Abbonamento abbonamento, Totem totem, TipoBicicletta tipoBicicletta) throws IllegalStateException {
+		System.out.println("Aggiungo un nuovo noleggio legato all'abbonamento con codice: " + abbonamento.getCodice());
 		Connection connessione = this.connessioneDb.getConnessione();
+		BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
 		
-		if (this.hasNoleggioInCorso(noleggio.getAbbonamento())) throw new IllegalStateException("Impossibile creare l'abbonamento: c'è n'è già uno in corso.");
-		if (!this.passatiCinqueMinuti(noleggio.getAbbonamento())) throw new IllegalStateException("Impossibile creare l'abbonamento: non sono ancora passati 5 minuti dall'ultimo effettuato.");
+		if (this.hasNoleggioInCorso(abbonamento)) throw new IllegalStateException("Impossibile creare l'abbonamento: c'è n'è già uno in corso.");
+		if (!this.passatiCinqueMinuti(abbonamento)) throw new IllegalStateException("Impossibile creare l'abbonamento: non sono ancora passati 5 minuti dall'ultimo effettuato.");
 		
 		try {
+			Bicicletta bicicletta = biciclettaDao.noleggiaBicicletta(totem, tipoBicicletta);
+			Noleggio noleggio = new Noleggio(abbonamento, bicicletta, totem);
 			PreparedStatement statement = connessione.prepareStatement("INSERT INTO noleggio VALUES(?,?,?,?,?,?)");
         	statement.setString(1, noleggio.getId());
         	statement.setTimestamp(2, noleggio.getOrarioInizioNoleggio());
@@ -83,32 +86,37 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
 	}
 
 	@Override
-	public void finisciNoleggio(Noleggio noleggio) throws IllegalStateException {
-		System.out.println("Registro la fine del noleggio legato all'abbonamento con codice: " + noleggio.getAbbonamento().getCodice());
+	public void finisciNoleggio(Abbonamento abbonamento, Totem totem) throws IllegalStateException {
+		System.out.println("Registro la fine del noleggio legato all'abbonamento con codice: " + abbonamento.getCodice());
 		Connection connessione = this.connessioneDb.getConnessione();
+		BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
 		
-		noleggio.terminaNoleggio();
+		Noleggio noleggioInCorso = this.getNoleggioInCorso(abbonamento);
+		noleggioInCorso.terminaNoleggio();
 		int noleggiAggiornati = 0;
 		
 		try {
+			biciclettaDao.restituisciBicicletta(totem, noleggioInCorso.getBicicletta());
 			PreparedStatement statement = connessione.prepareStatement("UPDATE noleggio SET orariofinenoleggio = ? WHERE abbonamento = ? AND orariofinenoleggio IS NULL");
-        	statement.setTimestamp(1, noleggio.getOrarioFineNoleggio());
-        	statement.setString(2, noleggio.getAbbonamento().getCodice());
+        	statement.setTimestamp(1, noleggioInCorso.getOrarioFineNoleggio());
+        	statement.setString(2, noleggioInCorso.getAbbonamento().getCodice());
         	
         	noleggiAggiornati = statement.executeUpdate();
         	statement.close();
+		} catch (IllegalStateException e) {
+			throw e;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		if (noleggiAggiornati > 1) throw new IllegalStateException("Errore di fine noleggio: l'abbonamento " + noleggio.getAbbonamento().getCodice() + " ha più di un noleggio in corso.");
-		else if (noleggiAggiornati < 1) throw new IllegalStateException("Errore di fine noleggio: l'abbonamento " + noleggio.getAbbonamento().getCodice() + " non ha noleggi in corso.");
+		if (noleggiAggiornati > 1) throw new IllegalStateException("Errore di fine noleggio: l'abbonamento " + abbonamento.getCodice() + " ha più di un noleggio in corso.");
+		else if (noleggiAggiornati < 1) throw new IllegalStateException("Errore di fine noleggio: l'abbonamento " + abbonamento.getCodice() + " non ha noleggi in corso.");
 		
 		/* Eventuale ammonizione all'abbonamento */
-		long durataNoleggio = noleggio.getDurataNoleggio();
+		long durataNoleggio = noleggioInCorso.getDurataNoleggio();
 		AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
 		
-		if (durataNoleggio > 120) abbonamentoDao.ammonisciAbbonamento(noleggio.getAbbonamento()); // Qui viene gestita anche l'eventuale sospensione
+		if (durataNoleggio > 120) abbonamentoDao.ammonisciAbbonamento(abbonamento); // Qui viene gestita anche l'eventuale sospensione
 	}
 	
 	@Override
@@ -160,19 +168,18 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
 	public boolean passatiCinqueMinuti(Abbonamento abbonamento) {
 		System.out.println("Calcolo se ci sono stati noleggi negli ultimi cinque minuti legati all'abbonamento con codice: " + abbonamento.getCodice());
 		Connection connessione = this.connessioneDb.getConnessione();
-		boolean passatiCinqueMinuti = false;
 		
 		try {
-			PreparedStatement statement = connessione.prepareStatement("SELECT id FROM noleggio WHERE abbonamento = ? AND orariofinenoleggio IS NOT NULL AND orariofinenoleggio >= (NOW() - INTERVAL '5 minutes')");
+			PreparedStatement statement = connessione.prepareStatement("SELECT * FROM noleggio WHERE abbonamento = ? AND orariofinenoleggio >= (NOW() - INTERVAL '5 minutes') AND orariofinenoleggio IS NOT NULL");
 			statement.setString(1, abbonamento.getCodice());
 			
 			ResultSet resultSet = statement.executeQuery();
 			
-			if (resultSet.next()) passatiCinqueMinuti = true;
+			if (resultSet.next()) return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return passatiCinqueMinuti;
+		return true;
 	}
 }
