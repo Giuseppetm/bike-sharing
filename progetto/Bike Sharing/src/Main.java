@@ -190,7 +190,7 @@ public class Main {
         }
         
         
-        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("dd3a0289-960e-44e1-9bcb-3d7a1721b36f", "MimmolasPetrollas023");
+        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("482e875d-8814-4e86-9fff-1c07ea4e33cc", "Dennis123");
         System.out.println("\n---Abbonamento retrieve dal login---\n" + abbLogin.toString());
         
         // abbonamentoDao.ammonisciAbbonamento(abbLogin);
@@ -244,7 +244,7 @@ public class Main {
         
         
         //noleggioDao.iniziaNoleggio(abbLogin, totems.get(0), TipoBicicletta.ELETTRICA);
-        //noleggioDao.finisciNoleggio(abbLogin, totems.get(0)); // La cosa figa è che puoi consegnarlo ad un altro totem volendo
+        noleggioDao.finisciNoleggio(abbLogin, totems.get(0)); // La cosa figa è che puoi consegnarlo ad un altro totem volendo
         
         /*
         List<Noleggio> noleggi = noleggioDao.getListaNoleggi(abbLogin);

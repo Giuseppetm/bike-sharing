@@ -79,10 +79,7 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
 		if (this.isPrimoNoleggio(abbonamento)) {
 			try {
 				abbonamentoDao.attivaAbbonamento(abbonamento);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw e;
-			}
+			} catch (Exception e) { /* Caso in cui l'abbonamento è annuale o personale_servizio => Non ho bisogno di gestire l'eccezione e vado avanti */ }
 		}
 		
 		try {
