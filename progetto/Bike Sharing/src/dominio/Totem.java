@@ -114,10 +114,16 @@ public class Totem {
 		return this.morse.size();
 	}
 	
+	public int getNumeroMorseOccupate() {
+		int i = 0;
+		for (Morsa m : this.morse) try { m.getBicicletta(); } catch (Exception e) { i++; }
+		return this.morse.size() - i;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		s.append("Totem - ID: " + this.id + ", Indirizzo: " + this.indirizzo + ", Numero di morse: " + this.getNumeroMorse() + "\n[Lista morse relative a questo Totem]:\n");
+		s.append("Totem - ID: " + this.id + ", Indirizzo: " + this.indirizzo + ", Numero di morse: " + this.getNumeroMorse() + ", Numero di morse occupate: " + this.getNumeroMorseOccupate() + "\n[Lista morse relative a questo Totem]:\n");
 		for (Morsa m : this.morse) {
 			s.append(m.toString() + "\n");
 		}
