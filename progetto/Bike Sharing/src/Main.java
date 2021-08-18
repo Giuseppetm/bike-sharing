@@ -80,8 +80,8 @@ public class Main {
         
         /* CARTE DI CREDITO, Valide: 12345678903555 , 012850003580200  */
         //separator("Carte di credito");
+        CartaDiCredito c1 = new CartaDiCredito("4079029256061430", "9/2024", "242");
         /*
-        CartaDiCredito c1 = new CartaDiCredito("012850003580200", "9/2022", "123");
         CartaDiCredito c2 = new CartaDiCredito("12345678903555", "12/2021", "121");
         CartaDiCredito c3 = new CartaDiCredito("4475794209397914", "12/2023", "721");
         CartaDiCredito c4 = new CartaDiCredito("4291790808416693", "12/2021", "118");
@@ -95,8 +95,8 @@ public class Main {
         
         /* ABBONAMENTI */
         //separator("Abbonamenti");
+        Abbonamento abb1 = new Abbonamento("MimmolasPetrollas023", TipoAbbonamento.SETTIMANALE, c1, true);
         /*
-        Abbonamento abb1 = new Abbonamento("Dennis123", TipoAbbonamento.ANNUALE, c1, true);
         Abbonamento abb2 = new Abbonamento("Dennis12345", TipoAbbonamento.PERSONALE_SERVIZIO, c2, false);
         Abbonamento abb3 = new Abbonamento("MimmoPetrolla32", TipoAbbonamento.SETTIMANALE, c3, true);
         Abbonamento abb4 = new Abbonamento("GuidoGuinizzelli666", TipoAbbonamento.GIORNALIERO, c4, false);
@@ -190,7 +190,7 @@ public class Main {
         }
         
         
-        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("3fbf2122-1853-4c20-8501-209b4ecf268e", "GiuseppeOfField214");
+        Abbonamento abbLogin = abbonamentoDao.effettuaLogin("dd3a0289-960e-44e1-9bcb-3d7a1721b36f", "MimmolasPetrollas023");
         System.out.println("\n---Abbonamento retrieve dal login---\n" + abbLogin.toString());
         
         // abbonamentoDao.ammonisciAbbonamento(abbLogin);

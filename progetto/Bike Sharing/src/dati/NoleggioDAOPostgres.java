@@ -62,13 +62,30 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
 		System.out.println("Aggiungo un nuovo noleggio legato all'abbonamento con codice: " + abbonamento.getCodice());
 		Connection connessione = this.connessioneDb.getConnessione();
 		BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
+		AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
+		Bicicletta bicicletta = null;
+		Noleggio noleggio = null;
 		
-		if (this.hasNoleggioInCorso(abbonamento)) throw new IllegalStateException("Impossibile creare l'abbonamento: c'è n'è già uno in corso.");
-		if (!this.passatiCinqueMinuti(abbonamento)) throw new IllegalStateException("Impossibile creare l'abbonamento: non sono ancora passati 5 minuti dall'ultimo effettuato.");
+		if (this.hasNoleggioInCorso(abbonamento)) throw new IllegalStateException("Impossibile creare il noleggio: c'è n'è già uno in corso.");
+		if (!this.passatiCinqueMinuti(abbonamento)) throw new IllegalStateException("Impossibile creare il noleggio: non sono ancora passati 5 minuti dall'ultimo effettuato.");
 		
 		try {
-			Bicicletta bicicletta = biciclettaDao.noleggiaBicicletta(totem, tipoBicicletta);
-			Noleggio noleggio = new Noleggio(abbonamento, bicicletta, totem);
+			bicicletta = biciclettaDao.noleggiaBicicletta(totem, tipoBicicletta);
+			noleggio = new Noleggio(abbonamento, bicicletta, totem);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		if (this.isPrimoNoleggio(abbonamento)) {
+			try {
+				abbonamentoDao.attivaAbbonamento(abbonamento);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		}
+		
+		try {
 			PreparedStatement statement = connessione.prepareStatement("INSERT INTO noleggio VALUES(?,?,?,?,?,?)");
         	statement.setString(1, noleggio.getId());
         	statement.setTimestamp(2, noleggio.getOrarioInizioNoleggio());
@@ -171,6 +188,25 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
 		
 		try {
 			PreparedStatement statement = connessione.prepareStatement("SELECT * FROM noleggio WHERE abbonamento = ? AND orariofinenoleggio >= (NOW() - INTERVAL '5 minutes') AND orariofinenoleggio IS NOT NULL");
+			statement.setString(1, abbonamento.getCodice());
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public boolean isPrimoNoleggio(Abbonamento abbonamento) {
+		System.out.println("Calcolo se è il primo noleggio collegato all'abbonamento con codice: " + abbonamento.getCodice());
+		Connection connessione = this.connessioneDb.getConnessione();
+		
+		try {
+			PreparedStatement statement = connessione.prepareStatement("SELECT id FROM noleggio WHERE abbonamento = ?");
 			statement.setString(1, abbonamento.getCodice());
 			
 			ResultSet resultSet = statement.executeQuery();

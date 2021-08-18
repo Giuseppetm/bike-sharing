@@ -2,7 +2,6 @@ package dominio;
 import java.time.LocalDate;
 import java.util.UUID;
 
-// To-do: da gestire l'attivazione dell'abbonamento in caso di giornaliero e settimanale che va fatta al primo noleggio.
 // To-do: dire all'utente al momento dell'abbonamento che ha tempo sino al ... per utilizzare l'abbonamento giornaliero o settimanale.
 
 public class Abbonamento {
@@ -112,6 +111,16 @@ public class Abbonamento {
 		return (this.tipo == TipoAbbonamento.PERSONALE_SERVIZIO);
 	}
 	
+	public boolean isScaduto() {
+		if(this.calcolaScadenzaAbbonamento().isBefore(LocalDate.now())) return true;
+		return false;
+	}
+	
+	public boolean isAttivato() {
+		if (this.dataInizio == null) return false;
+		return true;
+	}
+	
 	public LocalDate calcolaValidit‡Abbonamento(TipoAbbonamento tipo, String scadenzaCarta) throws IllegalArgumentException {
 		// 1) Caso di abbonamento annuale: Se la carta di credito scade prima dell'anno prefissato allora non puoi creare l'abbonamento;
 		// 2) Caso di abbonamento giornaliero o settimanale: hai 3 mesi per usarlo, quindi la carta di credito non deve scadere prima dei 3 mesi.
@@ -130,7 +139,7 @@ public class Abbonamento {
 			case PERSONALE_SERVIZIO:
 				return this.dataInizio.plusYears(3);
 			default:
-				throw new UnknownError("E' successo qualcosa di brutto.");
+				throw new UnknownError("E' successo qualcosa di inaspettato.");
 		}
 	}
 	
@@ -140,11 +149,6 @@ public class Abbonamento {
 		if (this.tipo == TipoAbbonamento.SETTIMANALE) return this.dataInizio.plusDays(7);
 		if (this.tipo == TipoAbbonamento.ANNUALE) return this.dataInizio.plusYears(1);
 		return this.dataInizio.plusYears(3); // Il personale del servizio deve rinnovare l'abbonamento ogni 3 anni.
-	}
-	
-	public boolean isScaduto() {
-		if(this.calcolaScadenzaAbbonamento().isBefore(LocalDate.now())) return true;
-		return false;
 	}
 	
 	@Override

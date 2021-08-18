@@ -20,4 +20,6 @@ public interface NoleggioDAO {
 	public boolean hasNoleggioInCorso(Abbonamento abbonamento);
 	
 	public boolean passatiCinqueMinuti(Abbonamento abbonamento); // Per calcolare se ci sono stati noleggi negli ultimi cinque minuti
+	
+	public boolean isPrimoNoleggio(Abbonamento abbonamento); // Per calcolare se è il primo noleggio dell'abbonamento e quindi va attivato quest'ultimo
 }

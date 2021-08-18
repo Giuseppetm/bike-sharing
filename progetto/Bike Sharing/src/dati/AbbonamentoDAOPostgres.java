@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -141,16 +142,14 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 			e.printStackTrace();
 		}
 		
+		if (abbonamento.calcolaScadenzaAbbonamento().isBefore(LocalDate.now())) throw new IllegalStateException("L'abbonamento è scaduto; impossibile effettuare il login.");
+		
 		return abbonamento;
 	}
 
 	@Override
 	public void attivaAbbonamento(Abbonamento abbonamento) throws IllegalStateException {
-		try {
-			abbonamento.attivaAbbonamento();
-		} catch (IllegalStateException e) {
-			throw e;
-		}
+		try { abbonamento.attivaAbbonamento(); } catch (IllegalStateException e) { return; };
 		
 		System.out.println("Attivamento abbonamento, codice: " + abbonamento.getCodice());
 		Connection connessione = this.connessioneDb.getConnessione();
