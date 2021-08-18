@@ -244,7 +244,7 @@ public class Main {
         
         
         //noleggioDao.iniziaNoleggio(abbLogin, totems.get(0), TipoBicicletta.ELETTRICA);
-        noleggioDao.finisciNoleggio(abbLogin, totems.get(0)); // La cosa figa è che puoi consegnarlo ad un altro totem volendo
+        //noleggioDao.finisciNoleggio(abbLogin, totems.get(0)); // La cosa figa è che puoi consegnarlo ad un altro totem volendo
         
         /*
         List<Noleggio> noleggi = noleggioDao.getListaNoleggi(abbLogin);
@@ -255,11 +255,9 @@ public class Main {
         
         
         
+        //abbLogin.effettuaPagamento(20);
         
-        
-        
-        
-        
+    
         /* Dati statistici */
         /*
         System.out.println("---Calcolo dati statistici---");

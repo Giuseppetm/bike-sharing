@@ -1,8 +1,9 @@
 package dominio;
+
+import servizi.Ateneo;
+
 import java.time.LocalDate;
 import java.util.UUID;
-
-// To-do: dire all'utente al momento dell'abbonamento che ha tempo sino al ... per utilizzare l'abbonamento giornaliero o settimanale.
 
 public class Abbonamento {
 	private TipoAbbonamento tipo;
@@ -26,7 +27,7 @@ public class Abbonamento {
 		this.password = password;
 		this.tipo = tipo;
 		this.carta = carta;
-		this.studente = studente;
+		if (studente && Ateneo.verificaStatusStudente()) this.studente = true; else { this.studente = false; }
 		this.dataAcquisto = LocalDate.now();
 		this.sospeso = false;
 		
@@ -97,6 +98,10 @@ public class Abbonamento {
 	
 	public void applicaPenale() {
 		this.carta.effettuaPagamento(150);
+	}
+	
+	public void effettuaPagamento(double denaro) {
+		this.carta.effettuaPagamento(denaro);
 	}
 	
 	public boolean isSospeso() {

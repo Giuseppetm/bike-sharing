@@ -1,4 +1,7 @@
 package dominio;
+
+import servizi.Banca;
+
 import java.time.LocalDate;
 
 public class CartaDiCredito {
@@ -32,6 +35,7 @@ public class CartaDiCredito {
 	}
 	
 	public void effettuaPagamento(double denaro) {
+		Banca.effettuaPagamento(this, denaro);
 		System.out.println("Pagati " + denaro + " tramite carta con numero " + this.numero);
 	}
 	
