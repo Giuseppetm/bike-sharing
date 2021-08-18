@@ -36,7 +36,7 @@ public class CartaDiCredito {
 	
 	public void effettuaPagamento(double denaro) {
 		Banca.effettuaPagamento(this, denaro);
-		System.out.println("Pagati " + denaro + " tramite carta con numero " + this.numero);
+		System.out.println("Pagati " + denaro + "€ tramite carta con numero " + this.numero);
 	}
 	
 	/* Questa funzione controlla se il numero inserito riguardante la carta di credito è valido. */
