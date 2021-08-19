@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import dominio.Bicicletta;
@@ -139,7 +141,6 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
 		}
 	}
 	
-	/* Metodo utilizzabile solo dal personale di servizio */
 	@Override
 	public void riparaBicicletta(Bicicletta bicicletta) throws IllegalStateException {
 		System.out.println("Riparo la bicicletta con id " + bicicletta.getId());
@@ -176,5 +177,33 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
 		}
 		
 		throw new NoSuchElementException("La bicicletta in questione non si trova in questa postazione con totem.");
+	}
+	
+	@Override
+	public List<Bicicletta> getBicicletteDanneggiate() throws NoSuchElementException {
+		System.out.println("Costruisco la lista di biciclette danneggiate..");
+		Connection connessione = this.connessioneDb.getConnessione();
+		
+		List<Bicicletta> bicicletteDanneggiate = new ArrayList<Bicicletta>();
+		
+        try {
+			PreparedStatement statement = connessione.prepareStatement("SELECT id, tipo, danneggiata FROM bicicletta WHERE danneggiata = true");
+			ResultSet resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				Bicicletta bicicletta = new Bicicletta(
+						resultSet.getString(1),
+						TipoBicicletta.valueOf(resultSet.getString(2)),
+						resultSet.getBoolean(3)
+				);
+				bicicletteDanneggiate.add(bicicletta);
+			}
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        if (bicicletteDanneggiate.isEmpty()) throw new NoSuchElementException("Non ci sono biciclette danneggiate al momento.");
+        
+        return bicicletteDanneggiate;
 	}
 }

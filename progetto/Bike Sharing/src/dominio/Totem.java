@@ -129,6 +129,10 @@ public class Totem {
 	
 	@Override
 	public String toString() {
+		return this.indirizzo;
+	}
+	
+	public String toStringComplete() {
 		StringBuilder s = new StringBuilder();
 		s.append("Totem - ID: " + this.id + ", Indirizzo: " + this.indirizzo + ", Numero di morse: " + this.getNumeroMorse() + ", Numero di morse occupate: " + this.getNumeroMorseOccupate() + "\n[Lista morse relative a questo Totem]:\n");
 		for (Morsa m : this.morse) {

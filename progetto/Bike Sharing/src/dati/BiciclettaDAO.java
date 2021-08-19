@@ -1,5 +1,6 @@
 package dati;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import dominio.Bicicletta;
@@ -17,8 +18,11 @@ public interface BiciclettaDAO {
 	
 	public void comunicaDanni(Bicicletta bicicletta);
 	
+	/* Metodo utilizzabile solo dal personale di servizio */
 	public void riparaBicicletta(Bicicletta bicicletta) throws IllegalStateException;
 	
 	/* Serve a calcolare la posizione della bicicletta che verrà poi noleggiata. */
 	public int getPosizioneNellaPostazione(Totem totem, Bicicletta bicicletta) throws IllegalStateException;
+	
+	public List<Bicicletta> getBicicletteDanneggiate() throws NoSuchElementException;
 }

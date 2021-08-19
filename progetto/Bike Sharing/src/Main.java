@@ -125,8 +125,8 @@ public class Main {
         
         Totem t1 = new Totem("Via Dennissonis 66");
         Totem t2 = new Totem("Via De Guidonis 32");
-        System.out.println(t1.toString());
-        System.out.println(t2.toString());
+        System.out.println(t1.toStringComplete());
+        System.out.println(t2.toStringComplete());
         
         /*
         t1.aggiungiMorsa(m1);
@@ -254,7 +254,6 @@ public class Main {
         for (Noleggio noleggio : noleggi) System.out.println(noleggio + "\n");
         */
         
-        System.out.println(biciclettaDao.getPosizioneNellaPostazione(totems.get(0), TipoBicicletta.NORMALE));
         
         
         
