@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import dati.AbbonamentoDAOPostgres;
 import dominio.Abbonamento;
@@ -56,15 +57,15 @@ public class RegistrazioneGUIController {
 		Abbonamento abbonamento = null;
 		CartaDiCredito carta = null;
 		
-		// To-do: verifica se ci vuole il == null o il isBlank() nei choiceBox
-		if (numeroCartaTextField.getText().isBlank() || meseScadenzaCartaChoiceBox.getValue() == null || annoScadenzaCartaChoiceBox.getValue() == null) {
+		if (tipoAbbonamentoChoiceBox.getValue() == null || passwordField.getText().isBlank()) {
     		Alert a = new Alert(AlertType.ERROR);
-    		a.setContentText("Compila tutti i campi riguardanti i dati della carta di credito.");
+    		a.setContentText("Compila tutti i campi riguardanti i dati dell'abbonamento.");
     		a.show();
     		return;
 		}
 		
-		if ( tipoAbbonamentoChoiceBox.getValue() == null) {
+		// To-do: verifica se ci vuole il == null o il isBlank() nei choiceBox
+		if (numeroCartaTextField.getText().isBlank() || meseScadenzaCartaChoiceBox.getValue() == null || annoScadenzaCartaChoiceBox.getValue() == null) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText("Compila tutti i campi riguardanti i dati della carta di credito.");
     		a.show();
@@ -74,7 +75,7 @@ public class RegistrazioneGUIController {
 		try {
 			carta = new CartaDiCredito(
 				numeroCartaTextField.getText(),
-				(meseScadenzaCartaChoiceBox + "/" + annoScadenzaCartaChoiceBox),
+				(meseScadenzaCartaChoiceBox.getValue() + "/" + annoScadenzaCartaChoiceBox.getValue()),
 				cvvCartaTextField.getText()
 			);
 		} catch (Exception e) {
@@ -86,7 +87,9 @@ public class RegistrazioneGUIController {
 		
 		try {
 			abbonamento = new Abbonamento(
-				...
+				passwordField.getText(),
+				tipoAbbonamentoChoiceBox.getValue(),
+				carta,
 				studenteCheckBox.isSelected()
 			);
 		} catch (Exception e) {
@@ -98,11 +101,24 @@ public class RegistrazioneGUIController {
 		
 		try {
 			abbonamentoDao.registraAbbonamento(abbonamento);
+	    	Alert a = new Alert(AlertType.INFORMATION);
+			a.setContentText("Il nuovo abbonamento è stato creato con successo. Ecco il tuo codice utente, che dovrai ricordare per effettuare il login nel sistema: " + abbonamento.getCodice());
+			a.showAndWait();
 		} catch (Exception e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());
     		a.show();
     		return;
+		}
+		
+    	try {
+			Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+			Scene scene = new Scene(mainChoiceParent);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -117,5 +133,11 @@ public class RegistrazioneGUIController {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void initialize() {
+		tipoAbbonamentoChoiceBox.getItems().setAll(TipoAbbonamento.values());
+    	for(int i = 1; i <= 12; i++) meseScadenzaCartaChoiceBox.getItems().add(String.format("%02d", i));
+    	for(int i = LocalDate.now().getYear(); i < LocalDate.now().getYear() + 10; i++) annoScadenzaCartaChoiceBox.getItems().add(Integer.toString(i));
 	}
 }

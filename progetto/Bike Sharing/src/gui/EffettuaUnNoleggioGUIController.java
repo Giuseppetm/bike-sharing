@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import dati.BiciclettaDAOPostgres;
 import dati.NoleggioDAOPostgres;
+import dati.TotemDAOPostgres;
 import dominio.Abbonamento;
 import dominio.Noleggio;
 import dominio.TipoBicicletta;
@@ -44,8 +45,17 @@ public class EffettuaUnNoleggioGUIController {
     	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
     	BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
     	
+    	if (postazioneTotemChoiceBox.getValue() == null || tipoBiciclettaChoiceBox.getValue() == null) {
+    		Alert a = new Alert(AlertType.ERROR);
+    		a.setContentText("Seleziona il totem da cui prelevare la bicicletta e il tipo di bicicletta.");
+    		a.show();
+    		return;
+    	}
+    	
+    	int posizioneBicicletta = biciclettaDao.getPosizioneNellaPostazione(postazioneTotemChoiceBox.getValue(), tipoBiciclettaChoiceBox.getValue());
+    	
     	try {
-    		noleggioDao.iniziaNoleggio(this.abbonamento, null, null);
+    		noleggioDao.iniziaNoleggio(this.abbonamento, postazioneTotemChoiceBox.getValue(), tipoBiciclettaChoiceBox.getValue());
     	} catch (Exception e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());
@@ -54,7 +64,6 @@ public class EffettuaUnNoleggioGUIController {
     	}
     	
     	Noleggio noleggioInCorso = noleggioDao.getNoleggioInCorso(this.abbonamento);
-    	int posizioneBicicletta = biciclettaDao.getPosizioneInRastrelliera(noleggioInCorso.getBicicletta());
     	Alert a = new Alert(AlertType.INFORMATION);
 		a.setContentText("Il noleggio è stato creato con successo! La bicicletta sbloccata è presente nella morsa numero: " + posizioneBicicletta + "; Ora di inizio noleggio: " + noleggioInCorso.getOrarioInizioNoleggio());
 		a.showAndWait();
@@ -87,5 +96,11 @@ public class EffettuaUnNoleggioGUIController {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    public void initialize() {
+    	TotemDAOPostgres totemDao = new TotemDAOPostgres();
+    	tipoBiciclettaChoiceBox.getItems().setAll(TipoBicicletta.values());
+    	postazioneTotemChoiceBox.getItems().setAll(totemDao.getListaTotem());
     }
 }

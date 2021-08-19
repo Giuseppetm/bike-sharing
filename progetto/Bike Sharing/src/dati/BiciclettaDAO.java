@@ -19,5 +19,6 @@ public interface BiciclettaDAO {
 	
 	public void riparaBicicletta(Bicicletta bicicletta) throws IllegalStateException;
 	
-	public int getPosizioneInRastrelliera(Bicicletta bicicletta) throws IllegalStateException;
+	/* Serve a calcolare la posizione della bicicletta che verrà poi noleggiata. */
+	public int getPosizioneNellaPostazione(Totem totem, TipoBicicletta bicicletta) throws IllegalStateException;
 }

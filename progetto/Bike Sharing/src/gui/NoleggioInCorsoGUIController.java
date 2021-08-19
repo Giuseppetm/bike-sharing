@@ -2,7 +2,9 @@ package gui;
 
 import java.io.IOException;
 
+import dati.BiciclettaDAOPostgres;
 import dati.NoleggioDAOPostgres;
+import dati.TotemDAOPostgres;
 import dominio.Abbonamento;
 import dominio.Noleggio;
 import dominio.Totem;
@@ -41,10 +43,19 @@ public class NoleggioInCorsoGUIController {
     @FXML
     public void terminaNoleggio(ActionEvent event) {
     	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
+    	BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
     	Noleggio noleggioInCorso = noleggioDao.getNoleggioInCorso(this.abbonamento);
     	
+    	if (postazioneTotemChoiceBox.getValue() == null) {
+    		Alert a = new Alert(AlertType.ERROR);
+    		a.setContentText("Seleziona il totem da cui prelevare la bicicletta e il tipo di bicicletta.");
+    		a.show();
+    		return;
+    	}
+    	
     	try {
-    		noleggioDao.finisciNoleggio(this.abbonamento, null);	
+    		noleggioDao.finisciNoleggio(this.abbonamento, postazioneTotemChoiceBox.getValue());	
+    		if (segnalaDanniBiciclettaCheckBox.isSelected()) biciclettaDao.comunicaDanni(noleggioInCorso.getBicicletta());
     	} catch(Exception e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());
@@ -85,5 +96,10 @@ public class NoleggioInCorsoGUIController {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    public void initialize() {
+    	TotemDAOPostgres totemDao = new TotemDAOPostgres();
+    	postazioneTotemChoiceBox.getItems().setAll(totemDao.getListaTotem());
     }
 }

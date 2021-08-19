@@ -14,9 +14,9 @@ public class CartaDiCredito {
 		if (scadenza == null) throw new NullPointerException("La scadenza della carta di credito non puÚ essere null.");
 		if (cvv == null) throw new NullPointerException("Il cvv della carta di credito non puÚ essere null.");
 		if (scadenza.split("/", 2).length != 2) throw new IllegalArgumentException("Il formato della data di scadenza inserita non Ë corretto.");
-		if (!CartaDiCredito.controllaValidit‡Numero(numero)) throw new IllegalArgumentException("Il numero inserito non Ë valido.");
-		if (!CartaDiCredito.controllaValidit‡Scadenza(scadenza)) throw new IllegalArgumentException("La data di scadenza inserita Ë precedente alla data attuale.");
-		if (!CartaDiCredito.controllaValidit‡Cvv(cvv)) throw new IllegalArgumentException("Il cvv deve essere un numero di 3 cifre.");
+		if (!CartaDiCredito.controllaValidit‡Numero(numero)) throw new IllegalArgumentException("Il numero della carta di credito inserito non Ë valido.");
+		if (!CartaDiCredito.controllaValidit‡Scadenza(scadenza)) throw new IllegalArgumentException("La data di scadenza della carta di credito inserita Ë precedente alla data attuale.");
+		if (!CartaDiCredito.controllaValidit‡Cvv(cvv)) throw new IllegalArgumentException("Il cvv della carta di credito deve essere un numero di 3 cifre.");
 		this.numero = numero;
 		this.scadenza = scadenza;
 		this.cvv = cvv;
