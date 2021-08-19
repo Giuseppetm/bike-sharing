@@ -922,7 +922,7 @@
 									"font": "Arial;13;0",
 									"left": 574.5,
 									"top": 164.5,
-									"width": 184.078125,
+									"width": 183,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7Bx1PBzEBC1M="
@@ -1770,7 +1770,7 @@
 									"font": "Arial;13;0",
 									"left": 578.5,
 									"top": 287.5,
-									"width": 241.86083984375,
+									"width": 241,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7ByBWaTNONMs="
@@ -2335,7 +2335,7 @@
 									"font": "Arial;13;0",
 									"left": 941.5,
 									"top": 167.5,
-									"width": 180.49169921875,
+									"width": 180,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7ByJebzVTcYY="
@@ -2900,7 +2900,7 @@
 									"font": "Arial;13;0",
 									"left": 681,
 									"top": 359.5,
-									"width": 158.80810546875,
+									"width": 158,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7Bydd4jiyi6Q="
@@ -3099,7 +3099,7 @@
 									"font": "Arial;13;0",
 									"left": 645.5,
 									"top": 556.5,
-									"width": 180.4853515625,
+									"width": 180,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7ByfFGDl6Un0="
@@ -3333,7 +3333,7 @@
 									"font": "Arial;13;0",
 									"left": 607.5,
 									"top": 455.5,
-									"width": 229.603515625,
+									"width": 229,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7ByhQJDtwJN4="
@@ -3712,7 +3712,7 @@
 									"font": "Arial;13;0",
 									"left": 648.5,
 									"top": 868.5,
-									"width": 117.65625,
+									"width": 117,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7Byv8BEljKpQ="
@@ -3911,7 +3911,7 @@
 									"font": "Arial;13;0",
 									"left": 570,
 									"top": 796.5,
-									"width": 125.5908203125,
+									"width": 125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7ByxwKEphl+c="
@@ -6395,7 +6395,7 @@
 									"font": "Arial;13;0",
 									"left": 1001,
 									"top": 564.5,
-									"width": 80.07177734375,
+									"width": 79,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7B0fYR6kwSew="
@@ -6955,7 +6955,7 @@
 									"font": "Arial;13;0",
 									"left": 567,
 									"top": 676.5,
-									"width": 111.1181640625,
+									"width": 111,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7B0u/hq9AD/s="
@@ -7151,7 +7151,7 @@
 									"font": "Arial;13;0",
 									"left": 764,
 									"top": 676.5,
-									"width": 210.98583984375,
+									"width": 210,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7B0v+O7CaSTo="
@@ -7535,7 +7535,7 @@
 									"font": "Arial;13;0",
 									"left": 774.5,
 									"top": 796.5,
-									"width": 108.25537109375,
+									"width": 108,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7NZ97MQIBfmg="
@@ -7825,7 +7825,7 @@
 									"font": "Arial;13;0",
 									"left": 916,
 									"top": 844.5,
-									"width": 135.72802734375,
+									"width": 135,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7TjTytrLkGcY="
@@ -8113,7 +8113,7 @@
 									"font": "Arial;13;0",
 									"left": 606,
 									"top": 1004.5,
-									"width": 143.64990234375,
+									"width": 143,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7UEw6qdHWFmE="
@@ -26792,7 +26792,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF7WLWN07tB8kM="
 											},
-											"name": "CartaDiCredito carta"
+											"name": "CartaDiCredito carta",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -26800,7 +26801,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF7WLWN07tB8kM="
 											},
-											"name": "double denaro"
+											"name": "double denaro",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",

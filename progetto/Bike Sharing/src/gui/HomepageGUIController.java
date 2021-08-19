@@ -1,6 +1,18 @@
 package gui;
 
+import java.io.IOException;
+import java.util.NoSuchElementException;
+
+import dati.AbbonamentoDAOPostgres;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,9 +25,59 @@ public class HomepageGUIController {
     private PasswordField passwordField;
 
     @FXML
-    private Button LoginButton;
+    private Button loginButton;
     
     @FXML
-    private Button RegistrazioneButton;
+    private Button registrazioneButton;
+    
+    @FXML
+    public void effettuaLogin(ActionEvent event) {
+    	AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
+    	String codiceAbbonamento = codiceAbbonamentoField.getText();
+    	String passwordAbbonamento = passwordField.getText();
+    	
+    	if (codiceAbbonamento.isBlank() || passwordAbbonamento.isBlank()) {
+    		Alert a = new Alert(AlertType.ERROR);
+    		a.setContentText("Inserire il codice utente e la password.");
+    		a.show();
+    		return;
+    	}
+    	
+    	try { abbonamentoDao.effettuaLogin(codiceAbbonamento, passwordAbbonamento); }
+    	catch (IllegalStateException e) {
+    		Alert a = new Alert(AlertType.ERROR);
+    		a.setContentText(e.getMessage());
+    		a.show();
+    		return;
+    	} catch (NoSuchElementException e) {
+    		Alert a = new Alert(AlertType.ERROR);
+    		a.setContentText(e.getMessage());
+    		a.show();
+    		return;
+    	}
+    	
+    	try {
+			Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("SchermataPrincipale.fxml"));
+			Scene scene = new Scene(mainChoiceParent);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    @FXML
+    public void goToRegistrazione(ActionEvent event) {
+    	try {
+			Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("Registrazione.fxml"));
+			Scene scene = new Scene(mainChoiceParent);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+    }
     
 }

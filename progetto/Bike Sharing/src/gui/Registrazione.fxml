@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RegistrazioneGUIController">
+   <children>
+      <VBox prefHeight="450.0" prefWidth="242.0" style="-fx-background-color: #D3BBDD;" />
+      <Pane layoutX="346.0" layoutY="28.0" prefHeight="395.0" prefWidth="427.0">
+         <children>
+            <Label layoutY="14.0" prefHeight="39.0" prefWidth="308.0" text="Effettua la registrazione" textFill="#145da0">
+               <font>
+                  <Font name="Malgun Gothic Bold" size="26.0" />
+               </font>
+            </Label>
+            <GridPane layoutY="66.0" prefHeight="266.0" prefWidth="427.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="189.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="238.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="26.0" prefWidth="177.0" text="Tipo di abbonamento:">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="26.0" prefWidth="177.0" text="Password:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label prefHeight="26.0" prefWidth="177.0" text="Studente:" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="26.0" prefWidth="177.0" text="Numero carta di credito:" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="26.0" prefWidth="177.0" text="Scadenza carta di credito:" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="26.0" prefWidth="177.0" text="CVV carta di credito:" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="1" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <GridPane prefHeight="62.0" prefWidth="245.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="115.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="123.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                              <ChoiceBox prefHeight="25.0" prefWidth="125.0" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField prefHeight="25.0" prefWidth="28.0" style="-fx-max-width: 50;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+            <Button fx:id="registrazioneButton" alignment="CENTER" contentDisplay="CENTER" layoutX="148.0" layoutY="346.0" mnemonicParsing="false" onAction="#effettuaRegistrazione" prefHeight="44.0" prefWidth="132.0" text="Registrati">
+               <font>
+                  <Font name="Malgun Gothic" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <ImageView fitHeight="302.0" fitWidth="308.0" layoutX="14.0" layoutY="74.0">
+         <image>
+            <Image url="@../../../images/logos/logo2.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backToHomepageButton" layoutX="654.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomepage" prefHeight="17.0" prefWidth="132.0" text="Torna alla homepage">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</Pane>

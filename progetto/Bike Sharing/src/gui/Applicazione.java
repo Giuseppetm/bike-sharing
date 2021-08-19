@@ -1,5 +1,6 @@
 package gui;
 
+import dati.ConnessioneDb;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -14,6 +15,14 @@ public class Applicazione extends Application {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+	        ConnessioneDb db = ConnessioneDb.getIstance();
+	        try {
+	        	db.connetti();
+	        	System.out.println("@@@ Connesso al database PostgreSQL! @@@\n");
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	        }
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
