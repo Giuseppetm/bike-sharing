@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import dati.AbbonamentoDAOPostgres;
+import dominio.Abbonamento;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -33,6 +34,7 @@ public class HomepageGUIController {
     @FXML
     public void effettuaLogin(ActionEvent event) {
     	AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
+    	Abbonamento abbonamento = null;
     	String codiceAbbonamento = codiceAbbonamentoField.getText();
     	String passwordAbbonamento = passwordField.getText();
     	
@@ -43,7 +45,7 @@ public class HomepageGUIController {
     		return;
     	}
     	
-    	try { abbonamentoDao.effettuaLogin(codiceAbbonamento, passwordAbbonamento); }
+    	try { abbonamento = abbonamentoDao.effettuaLogin(codiceAbbonamento, passwordAbbonamento); }
     	catch (IllegalStateException e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());
@@ -57,8 +59,11 @@ public class HomepageGUIController {
     	}
     	
     	try {
-			Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("SchermataPrincipale.fxml"));
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("SchermataPrincipale.fxml"));
+			Parent mainChoiceParent = loader.load();
 			Scene scene = new Scene(mainChoiceParent);
+			SchermataPrincipaleGUIController schermataPrincipaleController = (SchermataPrincipaleGUIController) loader.getController();
+			schermataPrincipaleController.setAbbonamento(abbonamento);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
 			window.show();

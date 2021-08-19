@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 
+import dominio.Abbonamento;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -14,6 +15,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class StrumentiAmministrativiGUIController {
+	private Abbonamento abbonamento;
+	
+	public void setAbbonamento(Abbonamento abbonamento) {
+		this.abbonamento = abbonamento;
+	}
+	
     @FXML
     private Button backToSchermataPrincipaleButton;
     
@@ -25,8 +32,11 @@ public class StrumentiAmministrativiGUIController {
     @FXML
     public void goToSchermataPrincipale(ActionEvent event) {
     	try {
-			Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("SchermataPrincipale.fxml"));
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("SchermataPrincipale.fxml"));
+			Parent mainChoiceParent = loader.load();
 			Scene scene = new Scene(mainChoiceParent);
+			SchermataPrincipaleGUIController schermataPrincipaleController = (SchermataPrincipaleGUIController) loader.getController();
+			schermataPrincipaleController.setAbbonamento(abbonamento);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
 			window.show();

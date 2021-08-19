@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 
+import dati.NoleggioDAOPostgres;
 import dominio.Abbonamento;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -11,11 +12,13 @@ import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 public class SchermataPrincipaleGUIController {
 	private Abbonamento abbonamento;
+	
+    public void setAbbonamento(Abbonamento abbonamento) {
+    	this.abbonamento = abbonamento;
+    }
 	
     @FXML
     private Button noleggiButton;
@@ -25,14 +28,9 @@ public class SchermataPrincipaleGUIController {
     
     @FXML
     private Button logoutButton;
-    
-    public void setAbbonamento(Abbonamento abbonamento) {
-    	this.abbonamento = abbonamento;
-    }
-    
+
     @FXML
     public void effettuaLogout(ActionEvent event) {
-    	// Gestire il nullamento del riferimento all'abbonamento e tutto il resto ?? penso non serva
     	try {
 			Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
 			Scene scene = new Scene(mainChoiceParent);
@@ -46,7 +44,35 @@ public class SchermataPrincipaleGUIController {
     
     @FXML
     public void goToNoleggi(ActionEvent event) {
-    	// Da gestire se mandare in finiscinoleggio o effettuanoleggio
+    	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
+    	
+    	if (noleggioDao.hasNoleggioInCorso(this.abbonamento)) {
+        	try {
+        		FXMLLoader loader = new FXMLLoader(getClass().getResource("NoleggioInCorso.fxml"));
+    			Parent mainChoiceParent = loader.load();
+    			Scene scene = new Scene(mainChoiceParent);
+    			NoleggioInCorsoGUIController noleggioInCorsoController = (NoleggioInCorsoGUIController) loader.getController();
+    			noleggioInCorsoController.setAbbonamento(abbonamento);
+    			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+    			window.setScene(scene);
+    			window.show();
+    		} catch(IOException e) {
+    			e.printStackTrace();
+    		}
+    	} else {
+        	try {
+        		FXMLLoader loader = new FXMLLoader(getClass().getResource("EffettuaUnNoleggio.fxml"));
+    			Parent mainChoiceParent = loader.load();
+    			Scene scene = new Scene(mainChoiceParent);
+    			EffettuaUnNoleggioGUIController effettuaUnNoleggioController = (EffettuaUnNoleggioGUIController) loader.getController();
+    			effettuaUnNoleggioController.setAbbonamento(abbonamento);
+    			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+    			window.setScene(scene);
+    			window.show();
+    		} catch(IOException e) {
+    			e.printStackTrace();
+    		}
+    	}
     }
     
     @FXML
