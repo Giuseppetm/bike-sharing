@@ -33,25 +33,80 @@ public class StrumentiAmministrativiGUIController {
     private Button backToSchermataPrincipaleButton;
     
     @FXML
-    private Button creaTotemButton, eliminaTotemButton, creaMorsaButton, eliminaMorsaButton, inserisciBiciclettaButton, eliminaBiciclettaButton, riparaBiciclettaButton;
+    private Button creaTotemButton; 
+    
+    @FXML
+    private Button eliminaTotemButton;
+    
+    @FXML
+    private Button creaMorsaButton;
+    
+    @FXML
+    private Button eliminaMorsaButton;
+    
+    @FXML
+    private Button inserisciBiciclettaButton;
+    
+    @FXML
+    private Button eliminaBiciclettaButton; 
+    
+    @FXML
+    private Button riparaBiciclettaButton;
     
     @FXML
     private TextField indirizzoTotemTextField;
     
     @FXML
-    private ComboBox<Totem> indirizzoEliminazioneTotemComboBox, indirizzoTotemCreaMorsaComboBox, indirizzoTotemEliminaMorsaComboBox, indirizzoTotemInserisciBiciciclettaComboBox, indirizzoTotemEliminaBiciclettaComboBox;
+    private ComboBox<Totem> indirizzoEliminazioneTotemComboBox;
     
     @FXML
-    private ComboBox<TipoMorsa> tipoMorsaCreaMorsaComboBox, tipoMorsaEliminaMorsaComboBox;
+    private ComboBox<Totem> indirizzoTotemCreaMorsaComboBox;
     
     @FXML
-    private ComboBox<TipoBicicletta> tipoBiciclettaInserisciBiciclettaComboBox, tipoBiciclettaEliminaBiciclettaComboBox;
+    private ComboBox<Totem> indirizzoTotemEliminaMorsaComboBox; 
+    
+    @FXML
+    private ComboBox<Totem> indirizzoTotemInserisciBiciciclettaComboBox;
+    
+    @FXML
+    private ComboBox<Totem> indirizzoTotemEliminaBiciclettaComboBox;
+    
+    @FXML
+    private ComboBox<TipoMorsa> tipoMorsaCreaMorsaComboBox;
+    
+    @FXML
+    private ComboBox<TipoMorsa> tipoMorsaEliminaMorsaComboBox;
+    
+    @FXML
+    private ComboBox<TipoBicicletta> tipoBiciclettaInserisciBiciclettaComboBox;
+    
+    @FXML
+    private ComboBox<TipoBicicletta> tipoBiciclettaEliminaBiciclettaComboBox;
     
     @FXML
     private ComboBox<Bicicletta> riparaBiciclettaComboBox;
     
     @FXML
-    private Label abbonamentiCreati, abbonamentiAttivi, abbonamentiSospesi, noleggiEffettuati, bicicletteDanneggiate, totemPiùUtilizzato, numeroTotem;
+    private Label abbonamentiCreati;
+    
+    
+    @FXML
+    private Label abbonamentiAttivi;
+    
+    @FXML
+    private Label abbonamentiSospesi; 
+    
+    @FXML
+    private Label noleggiEffettuati; 
+    
+    @FXML
+    private Label bicicletteDanneggiate; 
+    
+    @FXML
+    private Label totemPiùUtilizzato; 
+    
+    @FXML
+    private Label numeroTotem;
     
     @FXML
     public void creaPostazioneTotem(ActionEvent event) {
@@ -95,7 +150,7 @@ public class StrumentiAmministrativiGUIController {
 			Parent mainChoiceParent = loader.load();
 			Scene scene = new Scene(mainChoiceParent);
 			SchermataPrincipaleGUIController schermataPrincipaleController = (SchermataPrincipaleGUIController) loader.getController();
-			schermataPrincipaleController.setAbbonamento(abbonamento);
+			schermataPrincipaleController.setAbbonamento(this.abbonamento);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
 			window.show();
@@ -104,7 +159,7 @@ public class StrumentiAmministrativiGUIController {
 		}
     }
     
-    void initialized() {
+    public void initialize() {
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
     	BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
     	DatiStatisticiDAOPostgres datiStatisticiDao = new DatiStatisticiDAOPostgres();

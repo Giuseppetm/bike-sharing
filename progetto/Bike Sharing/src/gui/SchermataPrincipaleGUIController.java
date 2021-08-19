@@ -78,8 +78,11 @@ public class SchermataPrincipaleGUIController {
     @FXML
     public void goToStrumentiAmministrativi(ActionEvent event) {
     	try {
-			Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("StrumentiAmministrativi.fxml"));
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("StrumentiAmministrativi.fxml"));
+			Parent mainChoiceParent = loader.load();
 			Scene scene = new Scene(mainChoiceParent);
+			StrumentiAmministrativiGUIController strumentiAmministrativiController = (StrumentiAmministrativiGUIController) loader.getController();
+			strumentiAmministrativiController.setAbbonamento(abbonamento);
 			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 			window.setScene(scene);
 			window.show();

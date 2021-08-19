@@ -214,7 +214,7 @@
                   <Font name="Malgun Gothic" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="totemPiùUtilizzato" layoutX="167.0" layoutY="540.0" prefHeight="20.0" prefWidth="42.0" text="N/A">
+            <Label fx:id="totemPiùUtilizzato" layoutX="167.0" layoutY="540.0" prefHeight="20.0" prefWidth="356.0" text="N/A">
                <font>
                   <Font name="Malgun Gothic" size="14.0" />
                </font>
@@ -229,12 +229,12 @@
             <ComboBox fx:id="indirizzoTotemEliminaBiciclettaComboBox" layoutX="298.0" layoutY="270.0" prefHeight="5.0" prefWidth="89.0" promptText="Indirizzo" />
             <ComboBox fx:id="tipoBiciclettaEliminaBiciclettaComboBox" layoutX="393.0" layoutY="270.0" prefHeight="25.0" prefWidth="75.0" promptText="Tipo" />
             <ComboBox fx:id="riparaBiciclettaComboBox" layoutX="298.0" layoutY="310.0" prefHeight="25.0" prefWidth="171.0" promptText="Seleziona una bicicletta" />
-            <Label layoutX="242.0" layoutY="531.0" prefHeight="38.0" prefWidth="131.0" text="Numero totem:">
+            <Label layoutX="7.0" layoutY="581.0" prefHeight="38.0" prefWidth="131.0" text="Numero totem:">
                <font>
                   <Font name="Malgun Gothic" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="numeroTotem" layoutX="372.0" layoutY="540.0" prefHeight="20.0" prefWidth="42.0" text="N/A">
+            <Label fx:id="numeroTotem" layoutX="137.0" layoutY="590.0" prefHeight="20.0" prefWidth="42.0" text="N/A">
                <font>
                   <Font name="Malgun Gothic" size="14.0" />
                </font>
