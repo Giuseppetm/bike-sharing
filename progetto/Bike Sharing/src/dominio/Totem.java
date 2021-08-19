@@ -120,6 +120,13 @@ public class Totem {
 		return this.morse.size() - i;
 	}
 	
+	/* Questo metodo serve a calcolare la bicicletta che verrà successivamente noleggiata, per scopi legati alla posizione nella postazione con totem. */
+	public Bicicletta getBicicletta(TipoBicicletta tipoBicicletta) {
+		for (Morsa m : this.morse)
+			if (m.occupata() && m.getBicicletta().getTipo() == tipoBicicletta) return m.getBicicletta();
+		throw new NoSuchElementException("Non ci sono biciclette di tipo " + tipoBicicletta + " disponibili in questa postazione.");
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();

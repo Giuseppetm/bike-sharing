@@ -161,38 +161,20 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
 	}
 	
 	@Override
-	public int getPosizioneNellaPostazione(Totem totem, TipoBicicletta tipoBicicletta) throws IllegalStateException {
-		System.out.println("Calcolo la posizione della bicicletta di tipo" + tipoBicicletta + " che verrà noleggiata..");
+	public int getPosizioneNellaPostazione(Totem totem, Bicicletta bicicletta) throws IllegalStateException {
+		System.out.println("Calcolo la posizione della bicicletta di tipo " + bicicletta.getTipo() + " che verrà noleggiata..");
 		Connection connessione = this.connessioneDb.getConnessione();
 		
 		try {
-			PreparedStatement statement = connessione.prepareStatement("SELECT id FROM bicicletta WHERE tipo = ?");
-			statement.setString(1, tipoBicicletta.toString());
+			PreparedStatement statement = connessione.prepareStatement("SELECT posizione FROM morsa WHERE bicicletta = ?");
+			statement.setString(1, bicicletta.getId());
 			ResultSet resultSet = statement.executeQuery();
 
-			String biciclettaID = null;
-			if (resultSet.next()) { 
-				biciclettaID = resultSet.getString(1); 
-			} else {
-				throw new IllegalStateException("Non ci sono biciclette di tipo " + tipoBicicletta + " da poter noleggiare in questa postazione.");
-			}
-			
-			if (biciclettaID != null) {
-				statement = connessione.prepareStatement("SELECT posizione FROM morsa WHERE bicicletta = ?");
-				statement.setString(1, biciclettaID);
-				
-				if (resultSet.next()) { 
-					return resultSet.getInt(1); 
-				}
-			} else {
-				throw new IllegalStateException("Non ci sono biciclette di tipo " + tipoBicicletta + " da poter noleggiare in questa postazione.");
-			}
-			
-			
+			if (resultSet.next()) { return resultSet.getInt(1); }
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		throw new IllegalStateException("Non ci sono biciclette di tipo " + tipoBicicletta + " da poter noleggiare in questa postazione.");
+		throw new NoSuchElementException("La bicicletta in questione non si trova in questa postazione con totem.");
 	}
 }

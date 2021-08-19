@@ -100,7 +100,7 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
 	}
 
 	@Override
-	public void finisciNoleggio(Abbonamento abbonamento, Totem totem) throws IllegalStateException {
+	public Noleggio finisciNoleggio(Abbonamento abbonamento, Totem totem) throws IllegalStateException {
 		System.out.println("Registro la fine del noleggio legato all'abbonamento con codice: " + abbonamento.getCodice());
 		Connection connessione = this.connessioneDb.getConnessione();
 		BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
@@ -131,6 +131,7 @@ public class NoleggioDAOPostgres implements NoleggioDAO {
 		AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
 		
 		if (durataNoleggio > 120) abbonamentoDao.ammonisciAbbonamento(abbonamento); // Qui viene gestita anche l'eventuale sospensione
+		return noleggioInCorso;
 	}
 	
 	@Override

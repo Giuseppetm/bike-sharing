@@ -44,7 +44,7 @@ public class NoleggioInCorsoGUIController {
     public void terminaNoleggio(ActionEvent event) {
     	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
     	BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
-    	Noleggio noleggioInCorso = noleggioDao.getNoleggioInCorso(this.abbonamento);
+    	Noleggio noleggio = null;
     	
     	if (postazioneTotemChoiceBox.getValue() == null) {
     		Alert a = new Alert(AlertType.ERROR);
@@ -54,8 +54,9 @@ public class NoleggioInCorsoGUIController {
     	}
     	
     	try {
-    		noleggioDao.finisciNoleggio(this.abbonamento, postazioneTotemChoiceBox.getValue());	
-    		if (segnalaDanniBiciclettaCheckBox.isSelected()) biciclettaDao.comunicaDanni(noleggioInCorso.getBicicletta());
+    		noleggio = noleggioDao.finisciNoleggio(this.abbonamento, postazioneTotemChoiceBox.getValue());	
+    		if (noleggio.getBicicletta().isDanneggiata()) segnalaDanniBiciclettaCheckBox.setDisable(true);
+    		else if (segnalaDanniBiciclettaCheckBox.isSelected()) biciclettaDao.comunicaDanni(noleggio.getBicicletta());
     	} catch(Exception e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());
@@ -63,9 +64,8 @@ public class NoleggioInCorsoGUIController {
     		return;
     	}
     	
-    	long durataNoleggio = noleggioInCorso.getDurataNoleggio();
     	Alert a = new Alert(AlertType.INFORMATION);
-		a.setContentText("Il noleggio è terminato correttamente! Durata in minuti: " + durataNoleggio + "; Prezzo complessivo: " + noleggioInCorso.getBicicletta().calcolaCosto((int)durataNoleggio, abbonamento.isStudente()));
+		a.setContentText("Il noleggio è terminato correttamente! Durata in minuti: " + noleggio.getDurataNoleggio() + "; Prezzo complessivo: " + noleggio.getBicicletta().calcolaCosto((int) noleggio.getDurataNoleggio(), abbonamento.isStudente()));
 		a.showAndWait();
     	
     	try {

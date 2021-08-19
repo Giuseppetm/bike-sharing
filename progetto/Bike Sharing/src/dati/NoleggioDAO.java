@@ -13,7 +13,7 @@ public interface NoleggioDAO {
 	
 	public void iniziaNoleggio(Abbonamento abbonamento, Totem totem, TipoBicicletta tipoBicicletta) throws IllegalStateException;
 	
-	public void finisciNoleggio(Abbonamento abbonamento, Totem totem) throws IllegalStateException;
+	public Noleggio finisciNoleggio(Abbonamento abbonamento, Totem totem) throws IllegalStateException;
 	
 	public Noleggio getNoleggioInCorso(Abbonamento abbonamento) throws NoSuchElementException;
 	

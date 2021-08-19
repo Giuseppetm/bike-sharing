@@ -6,6 +6,7 @@ import dati.BiciclettaDAOPostgres;
 import dati.NoleggioDAOPostgres;
 import dati.TotemDAOPostgres;
 import dominio.Abbonamento;
+import dominio.Bicicletta;
 import dominio.Noleggio;
 import dominio.TipoBicicletta;
 import dominio.Totem;
@@ -52,7 +53,11 @@ public class EffettuaUnNoleggioGUIController {
     		return;
     	}
     	
-    	int posizioneBicicletta = biciclettaDao.getPosizioneNellaPostazione(postazioneTotemChoiceBox.getValue(), tipoBiciclettaChoiceBox.getValue());
+    	int posizioneBicicletta = 0;
+    	try {
+	    	Bicicletta bicicletta = postazioneTotemChoiceBox.getValue().getBicicletta(tipoBiciclettaChoiceBox.getValue());
+	    	posizioneBicicletta = biciclettaDao.getPosizioneNellaPostazione(postazioneTotemChoiceBox.getValue(), bicicletta);
+    	} catch (Exception e) { /* No need to handle this specific exception */ }
     	
     	try {
     		noleggioDao.iniziaNoleggio(this.abbonamento, postazioneTotemChoiceBox.getValue(), tipoBiciclettaChoiceBox.getValue());

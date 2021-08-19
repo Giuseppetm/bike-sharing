@@ -254,6 +254,7 @@ public class Main {
         for (Noleggio noleggio : noleggi) System.out.println(noleggio + "\n");
         */
         
+        System.out.println(biciclettaDao.getPosizioneNellaPostazione(totems.get(0), TipoBicicletta.NORMALE));
         
         
         
