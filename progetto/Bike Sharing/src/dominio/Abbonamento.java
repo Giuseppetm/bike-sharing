@@ -21,7 +21,7 @@ public class Abbonamento {
 	
 	public Abbonamento(String password, TipoAbbonamento tipo, CartaDiCredito carta, boolean studente) throws NullPointerException, IllegalArgumentException {
 		if (password == null || tipo == null || carta == null) throw new NullPointerException("I parametri non possono essere null.");
-		if (password.length() > 20) throw new IllegalArgumentException("La lunghezza della password non può essere maggiore di 20 caratteri.");
+		if (password.length() > 20 || password.length() < 5) throw new IllegalArgumentException("La lunghezza della password non può essere maggiore di 20 caratteri e minore di 5 caratteri.");
 
 		this.codice = UUID.randomUUID().toString();
 		this.password = password;

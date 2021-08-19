@@ -18,4 +18,6 @@ public interface BiciclettaDAO {
 	public void comunicaDanni(Bicicletta bicicletta);
 	
 	public void riparaBicicletta(Bicicletta bicicletta) throws IllegalStateException;
+	
+	public int getPosizioneInRastrelliera(Bicicletta bicicletta) throws IllegalStateException;
 }

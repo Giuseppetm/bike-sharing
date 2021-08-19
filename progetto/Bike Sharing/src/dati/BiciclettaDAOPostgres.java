@@ -2,6 +2,7 @@ package dati;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
@@ -157,5 +158,25 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public int getPosizioneInRastrelliera(Bicicletta bicicletta) throws IllegalStateException {
+		System.out.println("Calcolo la posizione nella postazione della bicicletta con id " + bicicletta.getId());
+		Connection connessione = this.connessioneDb.getConnessione();
+		
+		try {
+			PreparedStatement statement = connessione.prepareStatement("SELECT posizione FROM morsa WHERE bicicletta = ?");
+			statement.setString(1, bicicletta.getId());
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		throw new IllegalStateException("Questa bicicletta non è presente in una rastrelliera di una postazione con totem.");
 	}
 }

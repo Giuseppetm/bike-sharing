@@ -227,6 +227,8 @@ public class Main {
         
         BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
         
+        //System.out.println(biciclettaDao.getPosizioneInRastrelliera(new Bicicletta("ff545fb7-1b95-47d2-b414-e5c7e3eebe48", TipoBicicletta.ELETTRICA, false)));
+        
         //biciclettaDao.aggiungiBicicletta(totems.get(0), TipoBicicletta.ELETTRICA);
         //biciclettaDao.aggiungiBicicletta(totems.get(0), TipoBicicletta.NORMALE);
         //biciclettaDao.aggiungiBicicletta(totems.get(1), TipoBicicletta.NORMALE);
