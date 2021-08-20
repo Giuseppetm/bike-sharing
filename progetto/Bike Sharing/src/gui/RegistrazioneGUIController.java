@@ -104,6 +104,9 @@ public class RegistrazioneGUIController {
 	    	Alert a = new Alert(AlertType.INFORMATION);
 			a.setContentText("Il nuovo abbonamento è stato creato con successo. Ecco il tuo codice utente, che dovrai ricordare per effettuare il login nel sistema: " + abbonamento.getCodice());
 			a.showAndWait();
+	    	a = new Alert(AlertType.INFORMATION);
+			a.setContentText("Ricorda che hai fino al giorno " + abbonamento.getDataScadenzaValidità() + " per utilizzare l'abbonamento.");
+			a.showAndWait();
 		} catch (Exception e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());

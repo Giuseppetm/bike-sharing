@@ -26,6 +26,12 @@ public class NoleggioInCorsoGUIController {
 	
 	public void setAbbonamento(Abbonamento abbonamento) {
 		this.abbonamento = abbonamento;
+    	/* In questo modo evito che venga segnalato nuovamente che la bicicletta è danneggiata */
+		NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
+		if (noleggioDao.getNoleggioInCorso(abbonamento).getBicicletta().isDanneggiata()) {
+			segnalaDanniBiciclettaCheckBox.setSelected(true);
+			segnalaDanniBiciclettaCheckBox.setDisable(true);
+		}
 	}
 	
     @FXML
@@ -54,9 +60,8 @@ public class NoleggioInCorsoGUIController {
     	}
     	
     	try {
-    		noleggio = noleggioDao.finisciNoleggio(this.abbonamento, postazioneTotemChoiceBox.getValue());	
-    		if (noleggio.getBicicletta().isDanneggiata()) segnalaDanniBiciclettaCheckBox.setDisable(true);
-    		else if (segnalaDanniBiciclettaCheckBox.isSelected()) biciclettaDao.comunicaDanni(noleggio.getBicicletta());
+    		noleggio = noleggioDao.finisciNoleggio(this.abbonamento, postazioneTotemChoiceBox.getValue());
+    		if (segnalaDanniBiciclettaCheckBox.isSelected()) biciclettaDao.comunicaDanni(noleggio.getBicicletta());
     	} catch(Exception e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());

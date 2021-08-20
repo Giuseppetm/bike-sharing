@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import dati.NoleggioDAOPostgres;
 import dominio.Abbonamento;
+import dominio.TipoAbbonamento;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -18,6 +19,7 @@ public class SchermataPrincipaleGUIController {
 	
     public void setAbbonamento(Abbonamento abbonamento) {
     	this.abbonamento = abbonamento;
+    	if (this.abbonamento.getTipo() != TipoAbbonamento.PERSONALE_SERVIZIO) strumentiAmministrativiButton.setDisable(true);
     }
 	
     @FXML

@@ -41,7 +41,6 @@ public class Bicicletta {
 		return this.danneggiata;
 	}
 	
-	// Da controllare, teoricamente tu noleggi e poi in base ai minuti ti viene addebitato il costo quindi è corretto credo
 	public double calcolaCosto(int minuti, boolean studente) throws IllegalArgumentException {
 		if (minuti < 0) throw new IllegalArgumentException("I minuti di noleggio non possono essere negativi.");
 		

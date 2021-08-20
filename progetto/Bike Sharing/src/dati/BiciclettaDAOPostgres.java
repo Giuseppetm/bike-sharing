@@ -112,6 +112,12 @@ public class BiciclettaDAOPostgres implements BiciclettaDAO {
 			statement.executeUpdate();
 			statement.close();
 			
+			statement = connessione.prepareStatement("UPDATE noleggio SET bicicletta = NULL WHERE bicicletta = ?");
+			statement.setString(1, bicicletta.getId());
+			
+			statement.executeUpdate();
+			statement.close();
+			
 			statement = connessione.prepareStatement("DELETE FROM bicicletta WHERE id = ?");
 			statement.setString(1, bicicletta.getId());
 			

@@ -38,7 +38,7 @@ public class DatiStatisticiDAOPostgres implements DatiStatisticiDAO {
 		
 		try {
 			Statement statement = connessione.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM abbonamento WHERE datainizio IS NOT NULL");
+			ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM abbonamento WHERE datainizio IS NOT NULL AND sospeso = false");
 			while (resultSet.next())
 				numeroAbbonamentiAttivi = resultSet.getInt(1);
 		} catch (SQLException e) {
