@@ -26,7 +26,7 @@ public class NoleggioInCorsoGUIController {
 	
 	public void setAbbonamento(Abbonamento abbonamento) {
 		this.abbonamento = abbonamento;
-    	/* In questo modo evito che venga segnalato nuovamente che la bicicletta è danneggiata */
+    	/* In questo modo viene evitato che venga segnalato nuovamente che la bicicletta è danneggiata */
 		NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
 		if (noleggioDao.getNoleggioInCorso(abbonamento).getBicicletta().isDanneggiata()) {
 			segnalaDanniBiciclettaCheckBox.setSelected(true);
