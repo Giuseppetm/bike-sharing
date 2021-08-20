@@ -1,6 +1,14 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+package test;
 
-class TotemTest {
+import java.time.LocalDate;
+
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+
+import dominio.Abbonamento;
+import dominio.CartaDiCredito;
+import dominio.TipoAbbonamento;
+
+public class TotemTest {
 	
 }
