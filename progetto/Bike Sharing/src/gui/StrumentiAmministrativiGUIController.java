@@ -257,7 +257,7 @@ public class StrumentiAmministrativiGUIController {
     }
     
     @FXML
-    public void eliminaBiciclettaPostazione() {
+    public void eliminaBiciclettaPostazione(ActionEvent event) {
     	Totem totem = indirizzoTotemEliminaBiciclettaComboBox.getValue();
     	TipoBicicletta tipoBicicletta = tipoBiciclettaEliminaBiciclettaComboBox.getValue();
     	
@@ -287,7 +287,7 @@ public class StrumentiAmministrativiGUIController {
     }
     
     @FXML
-    public void riparaBiciclettaDanneggiata() {
+    public void riparaBiciclettaDanneggiata(ActionEvent event) {
     	Bicicletta bicicletta = riparaBiciclettaComboBox.getValue();
     	
     	if (bicicletta == null) {

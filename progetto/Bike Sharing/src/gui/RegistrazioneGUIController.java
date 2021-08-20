@@ -42,10 +42,10 @@ public class RegistrazioneGUIController {
 	@FXML
 	private TextField numeroCartaTextField;
 	
-	@FXML // to-do: adjust this
+	@FXML
 	private ChoiceBox<String> meseScadenzaCartaChoiceBox;
 	
-	@FXML // to-do: adjust this
+	@FXML
 	private ChoiceBox<String> annoScadenzaCartaChoiceBox;
 	
 	@FXML
