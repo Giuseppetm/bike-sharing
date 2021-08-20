@@ -1,8 +1,6 @@
 package dominio;
 import java.util.UUID;
 
-// To-do: invariante (id univoci immagino)
-
 public class Bicicletta {
 	private String id; 
 	private TipoBicicletta tipo;

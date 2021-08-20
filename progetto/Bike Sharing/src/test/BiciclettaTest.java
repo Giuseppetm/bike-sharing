@@ -1,18 +1,10 @@
 package test;
 
-import java.time.LocalDate;
-
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import dominio.Abbonamento;
 import dominio.Bicicletta;
-import dominio.CartaDiCredito;
-import dominio.Morsa;
-import dominio.TipoAbbonamento;
 import dominio.TipoBicicletta;
-import dominio.TipoMorsa;
-import dominio.Totem;
 
 public class BiciclettaTest {
 	/* Questo test verifica che una bicicletta segnalata come danneggiata lo diventi effettivamente */

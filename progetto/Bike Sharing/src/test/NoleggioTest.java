@@ -7,8 +7,33 @@ import org.junit.jupiter.api.Assertions;
 
 import dominio.Abbonamento;
 import dominio.CartaDiCredito;
+import dominio.Morsa;
 import dominio.TipoAbbonamento;
+import dominio.TipoMorsa;
 
 public class NoleggioTest {
+	/* Questo test verifica che  */
+	@Test
+	public void dennis() {
+	}
 	
+	/* Questo test verifica che  */
+	@Test
+	public void dennis() {
+	}
+	
+	/* Questo test verifica che  */
+	@Test
+	public void dennis() {
+	}
+	
+	/* Questo test verifica che  */
+	@Test
+	public void dennis() {
+	}
+	
+	/* Questo test verifica che  */
+	@Test
+	public void dennis() {
+	}
 }
