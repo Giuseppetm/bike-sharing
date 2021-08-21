@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/*@
+* @invariant (\forall Totem t1, t2; \created(t1) && \created(t2); t1 != t2 ==> !(t1.id.equals(t2.id)));
+@*/
 public class Totem {
 	private String id;
 	private String indirizzo;

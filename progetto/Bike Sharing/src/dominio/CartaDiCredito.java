@@ -4,6 +4,10 @@ import servizi.Banca;
 
 import java.time.LocalDate;
 
+/*@
+ * @invariant numero.length == 16;
+ * @invariant cvv.length == 3;
+ @*/
 public class CartaDiCredito {
 	private String numero;
 	private String scadenza;

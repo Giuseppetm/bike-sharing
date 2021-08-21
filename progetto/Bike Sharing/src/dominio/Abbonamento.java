@@ -5,6 +5,11 @@ import servizi.Ateneo;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/*@
+ * @invariant (\forall Abbonamento abb1, abb2; \created(abb1) && \created(abb2); abb1 != abb2 ==> !(abb1.codice.equals(abb2.codice)));
+ * @invariant tipo == #ANNUALE || tipo == #SETTIMANALE || tipo == #GIORNALIERO || tipo == #PERSONALE_SERVIZIO;
+ * @invariant ammonizioni >=0
+ @*/
 public class Abbonamento {
 	private TipoAbbonamento tipo;
 	private String codice;
@@ -81,12 +86,19 @@ public class Abbonamento {
 		return this.carta;
 	}
 
+	/*@
+	* @requires dataInizio == null
+	* @ensures dataInizio = LocalDate.now();
+	@*/
 	public void attivaAbbonamento() {
 		if (this.dataInizio != null) throw new IllegalStateException("L'abbonamento è stato già attivato.");
 		this.dataInizio = LocalDate.now();
 		this.ammonizioni = 0; // Ha più senso inizializzare qui le ammonizioni
 	}
 	
+	/*@
+	* @ensures ammonizioni = \old(ammonizioni) + 1
+	@*/
 	public void aggiungiAmmonizione() {
 		this.ammonizioni++;
 	}

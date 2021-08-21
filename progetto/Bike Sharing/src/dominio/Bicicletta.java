@@ -1,6 +1,9 @@
 package dominio;
 import java.util.UUID;
 
+/*@
+* @invariant (\forall Bicicletta bici1, bici2; \created(bici1) && \created(bici2); bici1 != bici2 ==> !(bici1.id.equals(bici2.id)));
+@*/
 public class Bicicletta {
 	private String id; 
 	private TipoBicicletta tipo;
