@@ -12,8 +12,8 @@ Il progetto consiste nella realizzazione di un sistema di bike sharing. \
 - [x] Diagramma dei casi d'uso
 - [x] Descrizione degli scenari
 - [x] Diagramma delle classi
-- [ ] Diagrammi di sequenza
-- [ ] Diagrammi di attività
+- [x] Diagrammi di sequenza
+- [x] Diagrammi di attività
 - [x] Macchine di stato
 - [ ] Diagramma dei componenti
 
