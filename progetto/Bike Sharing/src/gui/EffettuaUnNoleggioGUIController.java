@@ -106,6 +106,10 @@ public class EffettuaUnNoleggioGUIController {
     public void initialize() {
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
     	tipoBiciclettaChoiceBox.getItems().setAll(TipoBicicletta.values());
-    	postazioneTotemChoiceBox.getItems().setAll(totemDao.getListaTotem());
+    	try { postazioneTotemChoiceBox.getItems().setAll(totemDao.getListaTotem()); } catch (Exception e) {
+        	Alert a = new Alert(AlertType.INFORMATION);
+    		a.setContentText("Attenzione: non ci sono ancora postazioni con totem registrate nel sistema.");
+    		a.showAndWait();
+    	}
     }
 }

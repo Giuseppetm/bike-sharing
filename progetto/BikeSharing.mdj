@@ -29183,7 +29183,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7ZAt/oBkEplo="
 									},
-									"name": "Totem totem"
+									"name": "Totem totem",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -29191,7 +29192,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7ZAt/oBkEplo="
 									},
-									"name": "Bicicletta bicicletta"
+									"name": "Bicicletta bicicletta",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -30401,7 +30403,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF7ZAapisL0iyk="
 											},
-											"name": "ActionEvent event"
+											"name": "ActionEvent event",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -30484,7 +30487,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF7ZAeOC8oebkQ="
 											},
-											"name": "ActionEvent event"
+											"name": "ActionEvent event",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -30638,7 +30642,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF7Y+1M8sYOtUs="
 											},
-											"name": "ActionEvent event"
+											"name": "ActionEvent event",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -30962,7 +30967,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF7Y/VuZiPc/uM="
 											},
-											"name": "ActionEvent event"
+											"name": "ActionEvent event",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",
@@ -31090,7 +31096,8 @@
 											"_parent": {
 												"$ref": "AAAAAAF7Y/iwfWEd308="
 											},
-											"name": "ActionEvent event"
+											"name": "ActionEvent event",
+											"type": ""
 										},
 										{
 											"_type": "UMLParameter",

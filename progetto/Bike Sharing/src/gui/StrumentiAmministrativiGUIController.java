@@ -334,16 +334,26 @@ public class StrumentiAmministrativiGUIController {
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
     	BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
     	DatiStatisticiDAOPostgres datiStatisticiDao = new DatiStatisticiDAOPostgres();
-    	indirizzoEliminazioneTotemComboBox.getItems().setAll(totemDao.getListaTotem());
-    	indirizzoTotemCreaMorsaComboBox.getItems().setAll(totemDao.getListaTotem());
-    	indirizzoTotemEliminaMorsaComboBox.getItems().setAll(totemDao.getListaTotem());
-    	indirizzoTotemInserisciBiciciclettaComboBox.getItems().setAll(totemDao.getListaTotem());
-    	indirizzoTotemEliminaBiciclettaComboBox.getItems().setAll(totemDao.getListaTotem());
+    	
+    	try { 
+    		indirizzoEliminazioneTotemComboBox.getItems().setAll(totemDao.getListaTotem()); 
+        	indirizzoTotemCreaMorsaComboBox.getItems().setAll(totemDao.getListaTotem());
+        	indirizzoTotemEliminaMorsaComboBox.getItems().setAll(totemDao.getListaTotem());
+        	indirizzoTotemInserisciBiciciclettaComboBox.getItems().setAll(totemDao.getListaTotem());
+        	indirizzoTotemEliminaBiciclettaComboBox.getItems().setAll(totemDao.getListaTotem());
+    	} catch (Exception e) {
+        	Alert a = new Alert(AlertType.INFORMATION);
+    		a.setContentText("Attenzione: non ci sono ancora postazioni con totem registrate nel sistema.");
+    		a.showAndWait();
+    	}
+
     	tipoBiciclettaInserisciBiciclettaComboBox.getItems().setAll(TipoBicicletta.values());
     	tipoBiciclettaEliminaBiciclettaComboBox.getItems().setAll(TipoBicicletta.values());
     	tipoMorsaCreaMorsaComboBox.getItems().setAll(TipoMorsa.values());
     	tipoMorsaEliminaMorsaComboBox.getItems().setAll(TipoMorsa.values());
-    	riparaBiciclettaComboBox.getItems().setAll(biciclettaDao.getBicicletteDanneggiate());
+    	
+    	try { riparaBiciclettaComboBox.getItems().setAll(biciclettaDao.getBicicletteDanneggiate()); } catch (Exception e) {}
+    	
     	
     	abbonamentiCreati.setText(Integer.toString(datiStatisticiDao.getNumeroAbbonamenti()));
     	abbonamentiAttivi.setText(Integer.toString(datiStatisticiDao.getNumeroAbbonamentiAttivi()));

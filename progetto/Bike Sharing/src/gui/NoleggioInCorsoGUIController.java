@@ -50,6 +50,7 @@ public class NoleggioInCorsoGUIController {
     public void terminaNoleggio(ActionEvent event) {
     	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
     	BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();
+    	int numeroAmmonizioniPreTermine = this.abbonamento.getAmmonizioni();
     	Noleggio noleggio = null;
     	
     	if (postazioneTotemChoiceBox.getValue() == null) {
@@ -72,6 +73,28 @@ public class NoleggioInCorsoGUIController {
     	Alert a = new Alert(AlertType.INFORMATION);
 		a.setContentText("Il noleggio è terminato correttamente! Durata in minuti: " + noleggio.getDurataNoleggio() + "; Prezzo complessivo: " + noleggio.getBicicletta().calcolaCosto((int) noleggio.getDurataNoleggio(), abbonamento.isStudente()));
 		a.showAndWait();
+		
+		if (this.abbonamento.isSospeso()) {
+	    	a = new Alert(AlertType.INFORMATION);
+			a.setContentText("Attenzione! Hai ricevuto 3 ammonizioni: l'abbonamento è stato sospeso.");
+			a.showAndWait();
+	    	try {
+				Parent mainChoiceParent = FXMLLoader.load(getClass().getResource("Homepage.fxml"));
+				Scene scene = new Scene(mainChoiceParent);
+				Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+				window.setScene(scene);
+				window.show();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		int numeroAmmonizioniPostTermine = this.abbonamento.getAmmonizioni();
+		if (numeroAmmonizioniPreTermine != numeroAmmonizioniPostTermine) {
+	    	a = new Alert(AlertType.INFORMATION);
+			a.setContentText("Attenzione! Hai ricevuto un'ammonizione. Ora hai " + this.abbonamento.getAmmonizioni() + " ammonizioni associate al tuo abbonamento.");
+			a.showAndWait();
+		}
     	
     	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource("SchermataPrincipale.fxml"));
@@ -105,6 +128,6 @@ public class NoleggioInCorsoGUIController {
     
     public void initialize() {
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
-    	postazioneTotemChoiceBox.getItems().setAll(totemDao.getListaTotem());
+    	try { postazioneTotemChoiceBox.getItems().setAll(totemDao.getListaTotem()); } catch (Exception e) {}
     }
 }
