@@ -64,7 +64,6 @@ public class RegistrazioneGUIController {
     		return;
 		}
 		
-		// To-do: verifica se ci vuole il == null o il isBlank() nei choiceBox
 		if (numeroCartaTextField.getText().isBlank() || meseScadenzaCartaChoiceBox.getValue() == null || annoScadenzaCartaChoiceBox.getValue() == null) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText("Compila tutti i campi riguardanti i dati della carta di credito.");

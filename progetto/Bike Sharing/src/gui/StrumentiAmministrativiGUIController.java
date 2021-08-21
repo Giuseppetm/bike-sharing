@@ -151,7 +151,7 @@ public class StrumentiAmministrativiGUIController {
     	
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
     	try {
-    	totemDao.rimuoviTotem(totem);
+    		totemDao.rimuoviTotem(totem);
     	} catch (Exception e) {
     		Alert a = new Alert(AlertType.ERROR);
     		a.setContentText(e.getMessage());
