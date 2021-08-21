@@ -1,4 +1,4 @@
-<img src="progetto/images/logos/logo2.png" width="200" height="200" align="right" />
+<img src="progetto/images/logos/logo2.png" width="150" height="150" align="right" />
 
 # Progetto Bike Sharing (Sweng 2020-2021)
 Il progetto consiste nella realizzazione di un sistema di bike sharing. \
