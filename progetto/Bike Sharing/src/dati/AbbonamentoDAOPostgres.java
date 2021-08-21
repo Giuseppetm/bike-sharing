@@ -30,7 +30,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 		
         try {
         	Statement statement = connessione.createStatement();
-        	ResultSet resultSet = statement.executeQuery("SELECT abb.codice, abb.password, abb.tipo, abb.studente, abb.sospeso, abb.dataacquisto, abb.datainizio, abb.datascadenzavalidità, abb.ammonizioni, carta.numero, carta.scadenza, carta.cvv "
+        	ResultSet resultSet = statement.executeQuery("SELECT abb.codice, abb.password, abb.tipo, abb.studente, abb.sospeso, abb.dataacquisto, abb.datainizio, abb.datascadenzavalidita, abb.ammonizioni, carta.numero, carta.scadenza, carta.cvv "
 					+ "FROM abbonamento AS abb JOIN cartadicredito AS carta ON abb.cartadicredito = carta.numero");
         	
         	while (resultSet.next()) {
@@ -112,7 +112,7 @@ public class AbbonamentoDAOPostgres implements AbbonamentoDAO {
 		Connection connessione = this.connessioneDb.getConnessione();
 		
 		try {
-			String queryLoginAbbonamento = "SELECT abb.codice, abb.password, abb.tipo, abb.studente, abb.sospeso, abb.dataacquisto, abb.datainizio, abb.datascadenzavalidità, abb.ammonizioni, carta.numero, carta.scadenza, carta.cvv "
+			String queryLoginAbbonamento = "SELECT abb.codice, abb.password, abb.tipo, abb.studente, abb.sospeso, abb.dataacquisto, abb.datainizio, abb.datascadenzavalidita, abb.ammonizioni, carta.numero, carta.scadenza, carta.cvv "
 					+ "FROM abbonamento AS abb JOIN cartadicredito AS carta ON abb.cartadicredito = carta.numero "
 					+ "WHERE abb.codice = ? AND abb.password = ?";
 			
