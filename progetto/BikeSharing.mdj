@@ -40750,6 +40750,40 @@
 					]
 				}
 			]
+		},
+		{
+			"_type": "UMLActivity",
+			"_id": "AAAAAAF7aEISQfrw7YM=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Diagrammi delle attività",
+			"ownedElements": [
+				{
+					"_type": "UMLActivityDiagram",
+					"_id": "AAAAAAF7aEISQ/rxTWc=",
+					"_parent": {
+						"$ref": "AAAAAAF7aEISQfrw7YM="
+					},
+					"name": "Registrazione abbonamento"
+				},
+				{
+					"_type": "UMLActivityDiagram",
+					"_id": "AAAAAAF7aEUviPtyGy0=",
+					"_parent": {
+						"$ref": "AAAAAAF7aEISQfrw7YM="
+					},
+					"name": "Inizio di un noleggio"
+				},
+				{
+					"_type": "UMLActivityDiagram",
+					"_id": "AAAAAAF7aEWDrfvF8JM=",
+					"_parent": {
+						"$ref": "AAAAAAF7aEISQfrw7YM="
+					},
+					"name": "Termine di un noleggio"
+				}
+			]
 		}
 	],
 	"author": "Giuseppe Del Campo"

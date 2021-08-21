@@ -23,6 +23,6 @@ Il progetto consiste nella realizzazione di un sistema di bike sharing. \
 - [x] Gestione dei dati persistenti
 - [x] Descrizione dell'interfaccia grafica
 - [ ] Diagramma di deployment
-- [ ] Vincoli
+- [x] Vincoli
 - [x] Testing
 - [x] Note di installazione e utilizzo: in corso
