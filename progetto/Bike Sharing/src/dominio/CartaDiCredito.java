@@ -43,7 +43,7 @@ public class CartaDiCredito {
 		System.out.println("Pagati " + denaro + "Ä tramite carta con numero " + this.numero);
 	}
 	
-	/* Questa funzione controlla se il numero inserito riguardante la carta di credito Ë valido. */
+	/* Questo metodo controlla se il numero inserito riguardante la carta di credito Ë valido. */
 	static public boolean controllaValidit‡Numero(String numero) {
 		int[] ints = new int[numero.length()];
 		for (int i = 0; i < numero.length(); i++) {
@@ -65,7 +65,7 @@ public class CartaDiCredito {
 		else return false;
 	}
 	
-	/* Questa funzione verifica se la carta di credito Ë scaduta. */
+	/* Questo metodo verifica se la carta di credito Ë scaduta. */
 	static public boolean controllaValidit‡Scadenza(String scadenza) {
 		String s[] = scadenza.split("/", 2);
 		int month = Integer.parseInt(s[0]);
@@ -77,7 +77,7 @@ public class CartaDiCredito {
 		return true;
 	}
 	
-	/* Questa funzione verifica se il cvv Ë di 3 cifre ed Ë effettivamente un intero. */
+	/* Questo metodo verifica se il cvv Ë di 3 cifre ed Ë effettivamente un intero. */
 	static public boolean controllaValidit‡Cvv(String cvv) {
 		if (cvv.length() != 3) return false;
 		try {

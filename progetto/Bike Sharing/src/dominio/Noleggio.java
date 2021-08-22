@@ -64,7 +64,7 @@ public class Noleggio {
 		return this.orarioFineNoleggio;
 	}
 	
-	/* Durata del noleggio in minuti per poter poi calcolarne il costo complessivo */
+	/* Questo metodo calcola la durata del noleggio in minuti. */
 	public long getDurataNoleggio() throws IllegalStateException { 
 		if (this.orarioFineNoleggio == null) throw new IllegalStateException("Il noleggio non è ancora terminato (orarioFineNoleggio = null), di conseguenza non è possibile ottenerne la durata.");
 		long durata = TimeUnit.MILLISECONDS.toSeconds(this.orarioFineNoleggio.getTime() - this.orarioInizioNoleggio.getTime()) / 60;
