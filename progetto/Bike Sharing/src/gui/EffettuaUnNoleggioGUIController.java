@@ -41,6 +41,10 @@ public class EffettuaUnNoleggioGUIController {
     @FXML
     private ChoiceBox<Totem> postazioneTotemChoiceBox;
     
+    /**
+     * Questo metodo permette di effettuare un noleggio; in caso di successo, 
+     * l'utente viene riportato alla schermata principale.
+     */
     @FXML
     public void effettuaNoleggio(ActionEvent event) {
     	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
@@ -87,6 +91,9 @@ public class EffettuaUnNoleggioGUIController {
 		}
     }
     
+    /**
+     * Questo metodo permette di cambiare scena e tornare alla schermata principale.
+     */
     @FXML
     public void goToSchermataPrincipale(ActionEvent event) {
     	try {
@@ -103,6 +110,9 @@ public class EffettuaUnNoleggioGUIController {
 		}
     }
     
+    /**
+     * Questo metodo inizializza i vari ChoiceBox con i valori necessari.
+     */
     public void initialize() {
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
     	tipoBiciclettaChoiceBox.getItems().setAll(TipoBicicletta.values());

@@ -23,7 +23,7 @@ public class MorsaDAOPostgres implements MorsaDAO {
 	
 	@Override
 	public List<Morsa> getMorse(Totem totem) throws NoSuchElementException {
-		// Qui devo fare un join con la bicicletta per inizializzare anche loro nelle morse
+		// Join con la bicicletta per inizializzare anche loro nelle morse
 		Connection connessione = this.connessioneDb.getConnessione();
 		List<Morsa> morse = new ArrayList<Morsa>();
 		

@@ -6,11 +6,15 @@ import java.util.NoSuchElementException;
 import dominio.Totem;
 
 public interface TotemDAO {
-	public List<Totem> getListaTotem() throws NoSuchElementException; // Questo mi serve per visualizzare tutte le postazioni disponibili poi, e per effettuare operazioni su uno in particolare
+	/* Questo metodo serve per prelevare tutte le postazioni con totem disponibili. */
+	public List<Totem> getListaTotem() throws NoSuchElementException;
 	
-	public List<String> getListaTotemID() throws NoSuchElementException; // L'ho usato per debuggare inizialmente
+	/* Questo metodo preleva la lista di ID dei totem attualmente esistenti; usato per il debug iniziale. */
+	public List<String> getListaTotemID() throws NoSuchElementException; 
 	
+	/* Questo metodo registra nel database un totem appena inizializzato e quindi senza morse e biciclette collegate. */
 	public void aggiungiTotem(Totem totem);
 	
+	/* Questo metodo rimuove un totem dal sistema. */
 	public void rimuoviTotem(Totem totem);
 }

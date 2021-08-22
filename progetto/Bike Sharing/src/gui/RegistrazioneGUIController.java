@@ -51,6 +51,10 @@ public class RegistrazioneGUIController {
 	@FXML
 	private TextField cvvCartaTextField;
 	
+	/**
+	 * Questo metodo permette di effettuare la registrazione; nel caso di successo,
+	 * l'utente viene riportato alla homepage per poter poi effettuare il login.
+	 */
 	@FXML
 	public void effettuaRegistrazione(ActionEvent event) {
 		AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
@@ -124,6 +128,9 @@ public class RegistrazioneGUIController {
 		}
 	}
 	
+	/**
+	 * Questo metodo permette di cambiare scena e ritornare alla homepage.
+	 */
 	@FXML
 	public void backToHomepage(ActionEvent event) {
     	try {
@@ -137,6 +144,9 @@ public class RegistrazioneGUIController {
 		}
 	}
 	
+	/**
+	 * Questo metodo inizializza i vari ChoiceBox che sono necessari per effettuare la registrazione.
+	 */
 	public void initialize() {
 		tipoAbbonamentoChoiceBox.getItems().setAll(TipoAbbonamento.values());
     	for(int i = 1; i <= 12; i++) meseScadenzaCartaChoiceBox.getItems().add(String.format("%02d", i));

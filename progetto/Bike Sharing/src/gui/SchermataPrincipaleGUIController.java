@@ -19,6 +19,7 @@ public class SchermataPrincipaleGUIController {
 	
     public void setAbbonamento(Abbonamento abbonamento) {
     	this.abbonamento = abbonamento;
+    	/* Nel caso l'utente non sia del tipo personale di servizio non potrà cliccare sul pulsante apposito per gli strumenti amministrativi. */
     	if (this.abbonamento.getTipo() != TipoAbbonamento.PERSONALE_SERVIZIO) strumentiAmministrativiButton.setDisable(true);
     }
 	
@@ -31,6 +32,10 @@ public class SchermataPrincipaleGUIController {
     @FXML
     private Button logoutButton;
 
+    /**
+     * Questo metodo permette di effettuare il logout e riportare quindi
+     * l'utente alla schermata della homepage.
+     */
     @FXML
     public void effettuaLogout(ActionEvent event) {
     	try {
@@ -44,6 +49,10 @@ public class SchermataPrincipaleGUIController {
 		}
     }
     
+    /**
+     * Questo metodo, a seconda se l'utente ha o meno un noleggio in corso, porta rispettivamente
+     * alla schermata per concludere il noleggio, oppure a quella per effettuarne uno nuovo.
+     */
     @FXML
     public void goToNoleggi(ActionEvent event) {
     	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
@@ -77,6 +86,9 @@ public class SchermataPrincipaleGUIController {
     	}
     }
     
+    /**
+     * Questo metodo cambia la scena attuale e porta l'utente alla schermata degli strumenti amministrativi.
+     */
     @FXML
     public void goToStrumentiAmministrativi(ActionEvent event) {
     	try {

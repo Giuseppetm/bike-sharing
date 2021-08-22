@@ -46,6 +46,12 @@ public class NoleggioInCorsoGUIController {
     @FXML
     private Button terminaNoleggioButton;
     
+    /**
+     * Questo metodo permette di terminare un noleggio; nel caso l'utente raggiunga
+     * 3 ammonizioni sarà riportato alla homepage e non potrà rieffettuare il login dato che 
+     * l'abbonamento risulterà sospeso. In caso contrario, sarà semplicemente riportato
+     * alla schermata principale.
+     */
     @FXML
     public void terminaNoleggio(ActionEvent event) {
     	NoleggioDAOPostgres noleggioDao = new NoleggioDAOPostgres();
@@ -110,6 +116,9 @@ public class NoleggioInCorsoGUIController {
 		}
     }
     
+    /**
+     * Questo metodo permette di cambiare scena e tornare alla schermata principale.
+     */
     @FXML
     public void goToSchermataPrincipale(ActionEvent event) {
     	try {
@@ -126,6 +135,9 @@ public class NoleggioInCorsoGUIController {
 		}
     }
     
+    /**
+     * Questo metodo inizializza i vari ChoiceBox necessari per effettuare la terminazione del noleggio.
+     */
     public void initialize() {
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
     	try { postazioneTotemChoiceBox.getItems().setAll(totemDao.getListaTotem()); } catch (Exception e) {}

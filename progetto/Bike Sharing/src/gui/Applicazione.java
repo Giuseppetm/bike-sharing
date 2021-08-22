@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 public class Applicazione extends Application {
+	/**
+	 * Questo metodo permette di inizializzare l'interfaccia grafica del sistema di Bike Sharing e la connessione con il Database PostgreSQL. 
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {

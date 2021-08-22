@@ -31,6 +31,10 @@ public class HomepageGUIController {
     @FXML
     private Button registrazioneButton;
     
+    /**
+     * Questo metodo permette di verificare i dati inseriti nei campi per il login, 
+     * e in caso di autenticazione avvenuta con successo porta l'utente alla schermata principale.
+     */
     @FXML
     public void effettuaLogin(ActionEvent event) {
     	AbbonamentoDAOPostgres abbonamentoDao = new AbbonamentoDAOPostgres();
@@ -72,6 +76,9 @@ public class HomepageGUIController {
 		}
     }
     
+    /**
+     * Questo metodo permette di cambiare scena e visualizzare la schermata di registrazione.
+     */
     @FXML
     public void goToRegistrazione(ActionEvent event) {
     	try {

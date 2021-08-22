@@ -110,6 +110,9 @@ public class StrumentiAmministrativiGUIController {
     @FXML
     private Label numeroTotem;
     
+    /**
+     * Premendo il pulsante apposito questo metodo permette di creare una nuova postazione con totem.
+     */
     @FXML
     public void creaPostazioneTotem(ActionEvent event) {
     	String indirizzoTotem = indirizzoTotemTextField.getText();
@@ -138,6 +141,9 @@ public class StrumentiAmministrativiGUIController {
     	this.initialize(); /* Per aggiornare la lista dei contenuti dei ChoiceBox */
     }
     
+    /**
+     * Premendo il pulsante apposito questo metodo permette di eliminare una postazione con totem.
+     */
     @FXML
     public void eliminaPostazioneTotem(ActionEvent event) {
     	Totem totem = indirizzoEliminazioneTotemComboBox.getValue();
@@ -166,6 +172,9 @@ public class StrumentiAmministrativiGUIController {
     	this.initialize(); /* Per aggiornare la lista dei contenuti dei ChoiceBox */
     }
     
+    /**
+     * Premendo il pulsante apposito questo metodo permette di creare una morsa in una postazione con totem.
+     */
     @FXML
     public void creaMorsaPostazione(ActionEvent event) {
     	Totem totem = indirizzoTotemCreaMorsaComboBox.getValue();
@@ -196,6 +205,9 @@ public class StrumentiAmministrativiGUIController {
     	this.initialize(); /* Per aggiornare la lista dei contenuti dei ChoiceBox */
     }
     
+    /**
+     * Premendo il pulsante apposito questo metodo permette di eliminare una morsa da una postazione con totem.
+     */
     @FXML
     public void eliminaMorsaPostazione(ActionEvent event) {
     	Totem totem = indirizzoTotemEliminaMorsaComboBox.getValue();
@@ -226,6 +238,9 @@ public class StrumentiAmministrativiGUIController {
     	this.initialize(); /* Per aggiornare la lista dei contenuti dei ChoiceBox */
     }
     
+    /**
+     * Premendo il pulsante apposito questo metodo permette di inserire una bicicletta in una postazione con totem.
+     */
     @FXML
     public void inserisciBiciclettaPostazione(ActionEvent event) {
     	Totem totem = indirizzoTotemInserisciBiciciclettaComboBox.getValue();
@@ -256,6 +271,9 @@ public class StrumentiAmministrativiGUIController {
     	this.initialize(); /* Per aggiornare la lista dei contenuti dei ChoiceBox */
     }
     
+    /**
+     * Premendo il pulsante apposito questo metodo permette di eliminare una bicicletta da una postazione con totem.
+     */
     @FXML
     public void eliminaBiciclettaPostazione(ActionEvent event) {
     	Totem totem = indirizzoTotemEliminaBiciclettaComboBox.getValue();
@@ -286,6 +304,9 @@ public class StrumentiAmministrativiGUIController {
     	this.initialize(); /* Per aggiornare la lista dei contenuti dei ChoiceBox */
     }
     
+    /**
+     * Premendo il pulsante apposito questo metodo permette di riparare una bicicletta danneggiata.
+     */
     @FXML
     public void riparaBiciclettaDanneggiata(ActionEvent event) {
     	Bicicletta bicicletta = riparaBiciclettaComboBox.getValue();
@@ -314,6 +335,9 @@ public class StrumentiAmministrativiGUIController {
     	this.initialize(); /* Per aggiornare la lista dei contenuti dei ChoiceBox */
     }
     
+    /**
+     * Questo metodo permette di cambiare scena e portare l'utente nuovamente alla schermata principale.
+     */
     @FXML
     public void goToSchermataPrincipale(ActionEvent event) {
     	try {
@@ -330,6 +354,9 @@ public class StrumentiAmministrativiGUIController {
 		}
     }
     
+    /**
+     * Questo metodo serve a inizializzare tutti i componenti di cui è composta la scena.
+     */
     public void initialize() {
     	TotemDAOPostgres totemDao = new TotemDAOPostgres();
     	BiciclettaDAOPostgres biciclettaDao = new BiciclettaDAOPostgres();

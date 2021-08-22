@@ -19,7 +19,7 @@ public class TotemDAOPostgres implements TotemDAO {
 		this.connessioneDb = ConnessioneDb.getIstance();
 	}
 	
-	@Override /* Avere tutti i riferimenti del totem potrebbe essere molto utile */
+	@Override
 	public List<Totem> getListaTotem() throws NoSuchElementException {
 		System.out.println("Prelevo lista dei totem..\n");
 		List<Totem> totems = new ArrayList<Totem>();
@@ -70,8 +70,7 @@ public class TotemDAOPostgres implements TotemDAO {
 		
 		return totemIDList;
 	}
-	
-	/* Questo metodo registra nel database un totem appena inizializzato e quindi senza morse e biciclette collegate. */
+
 	@Override
 	public void aggiungiTotem(Totem totem) {
 		System.out.println("Aggiungo nuova postazione con totem; id: " + totem.getId() + ", indirizzo: " + totem.getIndirizzo());
